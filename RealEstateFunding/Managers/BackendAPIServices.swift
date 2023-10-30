@@ -10,11 +10,13 @@ import Foundation
 enum BackendAPIService {
     case login
     case register
+     case updateUser
     case forget_password
     case change_password
     case login_provider
      case getAll
     case getById
+     case getInvoice
     var baseURL: String {
       return "https://afehe-hwf.buzz/api"
     }
@@ -28,6 +30,8 @@ enum BackendAPIService {
             return "/login"
         case .register:
           return  "/password"
+        case .updateUser:
+          return  "/update"
         case .forget_password:
           return  "/forgotPassword"
         case .change_password:
@@ -36,26 +40,27 @@ enum BackendAPIService {
             return "/login"
         case .getAll:
             return "/client/property/getAll"
-
         case .getById:
             return "/client/property/getOne"
+        case .getInvoice:
+            return "client/payment/createInvoice"
         }
     }
     var method: HTTPMethod {
         switch self {
-        case .login, .register, .change_password, .forget_password, .login_provider:
+        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider:
             return .post
-        case .getAll, .getById:
+        case .getAll, .getById, .getInvoice:
             return .get
         }
     }
     
-    var headers: String {
-        ""
-    }
-    
-    var parameters: String {
-        ""
-    }
+//    var headers: String {
+//        ""
+//    }
+//    
+//    var parameters: String {
+//        ""
+//    }
     
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomTabBar: View {
     @State var selectedTab: Tabs = .properties
     @State var firstLaunch: Bool = false
-
+    
     
     var body: some View {
         ZStack{
@@ -22,10 +22,10 @@ struct CustomTabBar: View {
     }
     @ViewBuilder
     private var content: some View {
-//        ZStack{
-//            Color.white.ignoresSafeArea()
-//        
-        VStack{
+        //        ZStack{
+        //            Color.white.ignoresSafeArea()
+        //
+        VStack(spacing:0){
             Group {
                 switch selectedTab {
                 case .properties:
@@ -38,7 +38,8 @@ struct CustomTabBar: View {
                     ProfileView()
                 }
             }
-            
+            Divider()
+                .background(Color.gray)
             HStack(spacing: 0) {
                 ForEach(Tabs.allCases, id: \.self) { i in
                     Button {
@@ -59,18 +60,19 @@ struct CustomTabBar: View {
                 }
             }
             .background(Color.white)
+            
         }
-
+        
         
     }
     
 }
 
-struct TabBar_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            CustomTabBar()
-        }
+
+#Preview {
+    NavigationView {
+        CustomTabBar()
+            .environmentObject(AppViewModel())
     }
 }
 

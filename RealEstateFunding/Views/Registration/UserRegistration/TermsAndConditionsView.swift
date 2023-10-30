@@ -29,26 +29,26 @@ struct TermsAndConditionsView: View {
         ZStack{
             Color.white.ignoresSafeArea()
             VStack{
-                HStack{
-                    Button{
-                        
-                    } label: {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.black)
-//                            .padding()
-                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
-                            .frame(width:44, height:44)
-                    }
-                     Spacer()
-                    Button{
-                        
-                    } label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .foregroundColor(.red)
-                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
-                            .frame(width:44, height:44)
-                    }
-                }
+//                HStack{
+//                    Button{
+//                        
+//                    } label: {
+//                        Image(systemName: "arrow.left")
+//                            .foregroundColor(.black)
+////                            .padding()
+//                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
+//                            .frame(width:44, height:44)
+//                    }
+//                     Spacer()
+//                    Button{
+//                        
+//                    } label: {
+//                        Image(systemName: "rectangle.portrait.and.arrow.right")
+//                            .foregroundColor(.red)
+//                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
+//                            .frame(width:44, height:44)
+//                    }
+//                }
                 HStack{
                     Text("Terms and Conditions")
                         .font(.system(size: 28).weight(.bold))
@@ -86,7 +86,7 @@ struct TermsAndConditionsView: View {
                 }
                 Button {
                     withAnimation{
-                        vm.currentState = .investorTerms
+                        vm.currentState =  vm.currentState.next()
                     }
                 } label: {
                     Text("Accept")

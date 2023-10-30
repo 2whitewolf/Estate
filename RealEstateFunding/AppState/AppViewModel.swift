@@ -6,11 +6,24 @@
 //
 
 import Foundation
+import KeychainSwift
+import SwiftUI
+
 class AppViewModel: ObservableObject {
-    @Published var currentState: AppState = .app
+    @AppStorage("onBoarding") var presented: Bool = false
+    @Published var currentState: AppState = .onboarding //.registration // .onboarding
     @Published var registrationCompleted: Bool = false
+    @Published var user: User?
+    @Published var userToken: String = ""
+    let keychain = KeychainSwift()
+    
     init(){
-        
+        userToken = keychain.get("userToken") ?? ""
+        if presented {
+            currentState = .appStart
+        } else if !userToken.isEmpty {
+            currentState = .app
+        }
     }
     func login() {
     }

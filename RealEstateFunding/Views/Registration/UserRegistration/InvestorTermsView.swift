@@ -20,26 +20,26 @@ struct InvestorTermsView: View {
         ZStack{
             Color.white.ignoresSafeArea()
             VStack{
-                HStack{
-                    Button{
-                        
-                    } label: {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.black)
-//                            .padding()
-                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
-                            .frame(width:44, height:44)
-                    }
-                     Spacer()
-                    Button{
-                        
-                    } label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .foregroundColor(.red)
-                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
-                            .frame(width:44, height:44)
-                    }
-                }
+//                HStack{
+//                    Button{
+//                        
+//                    } label: {
+//                        Image(systemName: "arrow.left")
+//                            .foregroundColor(.black)
+////                            .padding()
+//                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
+//                            .frame(width:44, height:44)
+//                    }
+//                     Spacer()
+//                    Button{
+//                        
+//                    } label: {
+//                        Image(systemName: "rectangle.portrait.and.arrow.right")
+//                            .foregroundColor(.red)
+//                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
+//                            .frame(width:44, height:44)
+//                    }
+//                }
              
                         HStack{
                             Text("Investor Terms and Conditions")

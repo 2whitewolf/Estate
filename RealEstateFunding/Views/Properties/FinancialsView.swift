@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FinancialsView: View {
     @State private var selected = 0
+    @EnvironmentObject var vm: PropertiesViewModel
+    @State var opened: Bool = false
     
     var body: some View {
         VStack (alignment: .leading,spacing : 8){
@@ -20,26 +22,55 @@ struct FinancialsView: View {
                 Text("Return on Investment").tag(1)
             }
             .pickerStyle(.segmented)
-            if selected == 0 {
-                FinancialsCellView(title: "Property Price", second: "AED 1,595,518")
-                FinancialsCellView(title: "Investment needed (62%)", second: "AED 638,702.20")
-                FinancialsCellView(title: "Transaction fee (4%)", second: "AED 63,870.22")
-                FinancialsCellView(title: "[App Name] fee (2%)", second: "AED 31,510.48")
-                FinancialsCellView(title: "Investment cost", second: "AED 734,507.53")
-            } else {
-                FinancialsCellView(title: "Annual Gross ROI (at least 10%)", second: "AED 1,595,518")
-                FinancialsCellView(title: "Outgoings", second: "AED 638,702.20")
-                FinancialsCellView(title: "Net Income", second: "AED 63,870.22")
+            if let property = vm.propertyDetail {
+                if selected == 0 {
+                    FinancialsCellView(title: "Property Price", second: "AED " +  (property.price ?? ""))
+                    HStack{
+                        Text("Transaction Costs")
+                            .font(.system(size: 13))
+                        Button{
+                            withAnimation(.linear) {
+                                opened.toggle()
+                            }
+                        } label: {
+                            Image(systemName: opened ? "chevron.up" : "chevron.down" )
+                            
+                        }
+                         Spacer()
+                        Text("123456")
+                            .font(.system(size: 13).weight(.semibold))
+                    }
+                    .foregroundColor(.black)
+                    if opened {
+                        VStack(spacing : 8){
+                            FinancialsCellView(title: "DLD fee (4%)", second: "AED " + (property.dldFee?.rotate(2) ?? ""))
+                            FinancialsCellView(title: "DubX fee (4%)", second: "AED " + (property.dubXfee?.rotate(2) ?? ""))
+                            FinancialsCellView(title: "Registration fee (2%)", second: "AED " + "\(property.registrationFee ?? 0)")
+                        }
+                        .padding(.leading)
+                    }
+                    FinancialsCellView(title: "Investment cost", second: "")
+                } else {
+                    FinancialsCellView(title: "Annual Gross ROI (at least 10%)", second: "AED 1,595,518")
+                    FinancialsCellView(title: "Outgoings", second: "AED 638,702.20")
+                    FinancialsCellView(title: "Net Income", second: "AED 63,870.22")
+                }
             }
         }
         .modifier(CornerBackground())
+        .onAppear{
+            if isPreview {
+                vm.propertyDetail = samplePropertyDetail.data?.property
+            }
+        }
     }
+        
 }
 
-struct FinancialsView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
         FinancialsView()
-    }
+        .environmentObject(PropertiesViewModel())
+    
 }
 
 

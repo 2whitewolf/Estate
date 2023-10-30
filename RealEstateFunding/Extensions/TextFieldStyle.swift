@@ -11,7 +11,7 @@ struct ImageWithLineStroke: TextFieldStyle {
     var title: String
     var image: Image
     @State var isEditing: Bool = false
-    @State var color: Color  = Color.customGray
+    @State var color: Color  = Color.gray
     func _body(configuration: TextField<Self._Label>) -> some View {
         VStack(alignment: .leading, spacing: 4){
             Text(title)
@@ -33,7 +33,7 @@ struct ImageWithLineStroke: TextFieldStyle {
             }
             .padding()
             .background(RoundedRectangle(cornerRadius: 12)
-                .stroke(color, lineWidth: 1)
+                .stroke(color, lineWidth: 0.5)
             )
         }
     }

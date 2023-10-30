@@ -15,6 +15,7 @@ struct SignUpView: View {
     @EnvironmentObject var vm: RegistrationViewModel
     @State var email: String = ""
     @State var password: String = ""
+ 
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
@@ -62,6 +63,9 @@ struct SignUpView: View {
             .foregroundColor(.customGray)
             .padding(.horizontal,24)
         }
+        .sheet(isPresented: $vm.showingSheet) {
+            WebRepresent(url: vm.loginProviderUrl!)
+              }
     }
 }
 
@@ -91,7 +95,7 @@ extension SignUpView {
             Button{
 //                RegistrationViewScreen()
                 withAnimation{
-                    vm.currentState = .inputData
+                    vm.currentState =  vm.currentState.next()
                 }
                 
             } label: {
@@ -102,6 +106,11 @@ extension SignUpView {
                     .backgroundColor(.blue)
                     .cornerRadius(12)
             }
+            
+            
+            Button {
+                vm.loginWithApple()
+            } label: {
                 HStack{
                     Image(systemName: "apple.logo")
                         .foregroundColor(.black)
@@ -115,7 +124,10 @@ extension SignUpView {
                 .background(RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.black, lineWidth: 1)
                 )
-                
+            }
+            Button {
+                vm.loginWithGoogle()
+            } label: {
                 
                 HStack{
                     Image("googleLogo")
@@ -129,6 +141,7 @@ extension SignUpView {
                 .background(RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.black, lineWidth: 1)
                 )
+            }
             
         }
     }

@@ -15,6 +15,7 @@ struct RealEstateFundingApp: App {
                  AppMainState()
             }
             .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+            .navigationViewStyle(StackNavigationViewStyle())
         }
       
     }

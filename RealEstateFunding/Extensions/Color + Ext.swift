@@ -17,5 +17,4 @@ extension Color{
     static var lightGray: Color {
         .init("hexE5E5EA")
     }
-//     static 
 }

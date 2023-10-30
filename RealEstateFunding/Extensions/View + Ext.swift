@@ -40,16 +40,16 @@ public extension View {
     }
     
     func backgroundColor(_ color: Color) -> some View {
-        self.background {
+        self.background(view: {
             color
-        }
+        })
     }
     
     func backgroundColor(_ color: Color, edges: Edge.Set) -> some View {
-        self.background {
+        self.background(view: {
             color
                 .ignoresSafeArea(edges: edges)
-        }
+        })
     }
     
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {

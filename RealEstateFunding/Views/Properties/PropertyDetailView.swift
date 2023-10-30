@@ -7,23 +7,30 @@
 
 import SwiftUI
 import MapKit
+import SDWebImageSwiftUI
 
 struct PropertyDetailView: View {
     @Environment(\.presentationMode) var presentation
+    
+    @Environment(\.scenePhase) var scenePhase
+    
+    @EnvironmentObject var vm: PropertiesViewModel
+    @EnvironmentObject var appVM: AppViewModel
+    var id: Int
+
     var body: some View {
         ZStack(alignment: .bottom){
             Color.white.ignoresSafeArea()
             VStack{
                 ScrollView(showsIndicators: false) {
                     ZStack(alignment: .top){
-                        Image("propertyDetailImage")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity)
-                            .cornerRadius(52)
-                            .padding(.top,8)
-//                            .ignoresSafeArea()
-                        
+                        if let property = vm.propertyDetail {
+                            PropertyImageView(images: property.images ?? [] , alignment: .bottom)
+                                .frame(maxWidth: .infinity)
+                                .frame(height:400)
+                                .cornerRadius(52)
+                                .padding(.top,8)
+                        }
                         
                         HStack{
                             Button {
@@ -63,7 +70,7 @@ struct PropertyDetailView: View {
                     
                     InvestmentCalculatorView()
                     
-                     FinancialsView()
+                    FinancialsView()
                     
                     
                     PropertyLocationView(coordinate: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166868))
@@ -76,10 +83,15 @@ struct PropertyDetailView: View {
                             .foregroundColor(.black)
                         Spacer()
                     }
-                    
-                    PropertyCellView(image: "")
-                    PropertyCellView(image: "")
+                    if let  similars = vm.similar {
+                        VStack(spacing: 10) {
+                            ForEach(similars, id: \.id) { property in
+                                PropertyCellView(property: property, image: "")
+                            }
+                            
+                        }
                         .padding(.bottom,105)
+                    }
                 }
                 .ignoresSafeArea()
             }
@@ -88,9 +100,12 @@ struct PropertyDetailView: View {
             
             
             VStack{
-                 Divider()
-                Button{
-                    
+                Divider()
+                NavigationLink{
+                    InvestView()
+                        .environmentObject(vm)
+                        .environmentObject(appVM)
+                        
                 } label: {
                     Text("Invest")
                         .foregroundColor(.white)
@@ -104,96 +119,100 @@ struct PropertyDetailView: View {
                 .padding(8)
                 .padding(.bottom,30)
                 .padding(.horizontal)
-              
+                
                 
             }
             .background(Color.white)
             .ignoresSafeArea()
-
-           
+            
+            
         }
         .ignoresSafeArea()
+        .onAppear{
+            vm.getPropertyDetail(id: id)
+        }
+
     }
 }
 
-struct PropertyinfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        PropertyDetailView()
-    }
-}
 
 extension PropertyDetailView{
     private var investmentInfoTexts: some View {
         HStack{
-            Text("48% funded")
-                .padding(.vertical,4)
-                .padding(.horizontal,8)
-                .background(RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray, lineWidth: 0.5))
-            
-            Text("AED 495,471 needed")
-                .padding(.vertical,4)
-                .padding(.horizontal,8)
-                .background(RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray, lineWidth: 0.5))
-            
-            
-            Text("316 investors")
-                .padding(.vertical,4)
-                .padding(.horizontal,8)
-                .background(RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray, lineWidth: 0.5))
-            
-            
-        }
-        .font(.system(size: 11).weight(.medium))
-        .foregroundColor(.gray)
+            if let property = vm.propertyDetail {
+                
+                Text("\(property.funded ?? 0)% funded")
+                    .padding(.vertical,4)
+                    .padding(.horizontal,8)
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.gray, lineWidth: 0.5))
+                
+                Text("AED " + "\(property.needed ?? 0)" + " needed")
+                    .padding(.vertical,4)
+                    .padding(.horizontal,8)
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.gray, lineWidth: 0.5))
+                
+                
+                Text("\(property.investors ?? 0) investors")
+                    .padding(.vertical,4)
+                    .padding(.horizontal,8)
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.gray, lineWidth: 0.5))
+            }
+                
+            }
+            .font(.system(size: 11).weight(.medium))
+            .foregroundColor(.gray)
+        
     }
     
     private var propertyPriceView: some View {
         VStack(spacing: 8){
-            Text("Property Price")
-                .foregroundColor(.gray)
-                .font(.system(size: 15))
-            
-             Text("AED")
-                .font(.system(size: 15).weight(.semibold))
-                .foregroundColor(.blue)
-            + Text("1,595,518")
-                .foregroundColor(.blue)
-                .font(.system(size: 28).weight(.bold))
-            
-            ZStack(alignment: .leading){
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.lightGray)
-                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.blue)
-                    .frame(width: 50)
-            }
-            .frame(height: 4)
-            investmentInfoTexts
-            HStack{
-                HStack{
-                    Image("graphic_icon")
-                    VStack(alignment: .leading){
-                        Text("Annualised return")
-                            .font(.system(size: 13))
-                            .foregroundColor(.black)
-                         Text("10.98%")
-                            .foregroundColor(.blue)
-                            .font(.system(size: 17).weight(.semibold))
-                    }
+            if let property = vm.propertyDetail {
+                Text("Property Price")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 15))
+                
+                Text("AED")
+                    .font(.system(size: 15).weight(.semibold))
+                    .foregroundColor(.blue)
+                + Text(property.totalPrice ?? "")
+                    .foregroundColor(.blue)
+                    .font(.system(size: 28).weight(.bold))
+                
+                ZStack(alignment: .leading){
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.lightGray)
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.blue)
+                        .frame(width: 50)
                 }
-                 Spacer()
+                .frame(height: 4)
+                investmentInfoTexts
                 HStack{
-                    Image("calendar_withBack")
-                    VStack(alignment: .leading){
-                        Text("Investment Periiod")
-                            .font(.system(size: 13))
-                            .foregroundColor(.black)
-                         Text("1 Year")
-                            .foregroundColor(.blue)
-                            .font(.system(size: 17).weight(.semibold))
+                    HStack{
+                        Image("graphic_icon")
+                        VStack(alignment: .leading){
+                            Text("Annualised return")
+                                .font(.system(size: 13))
+                                .foregroundColor(.black)
+                            Text((property.annualProfit ?? "") + "%")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 17).weight(.semibold))
+                        }
+                    }
+                    Spacer()
+                    HStack{
+                        Image("calendar_withBack")
+                        VStack(alignment: .leading){
+                            Text("Investment Periiod")
+                                .font(.system(size: 13))
+                                .foregroundColor(.black)
+                            Text((property.period ?? "") + " Year")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 17).weight(.semibold))
+                        }
                     }
                 }
             }
@@ -203,25 +222,28 @@ extension PropertyDetailView{
     
     private var propertyDescription: some View {
         VStack(alignment: .leading){
-            Text("1 Bed in Old Town Downtown Dubai")
-                .foregroundColor(.black)
-                .font(.system(size: 20).weight(.semibold))
-            tegsView
-            
-            infoProfits
-
+            if let property = vm.propertyDetail {
+                Text("\(property.bed ?? 0) Bed in " + (property.location ?? ""))
+                    .foregroundColor(.black)
+                    .font(.system(size: 20).weight(.semibold))
+                tegsView
+                
+                infoProfits
+            }
         }
         .modifier(CornerBackground())
     }
     
     private var tegsView: some View {
         HStack(spacing: 8){
+            if let property = vm.propertyDetail {
             HStack{
                 Circle()
                     .fill(Color.blue)
                     .frame(width: 8)
-                 Text("New")
+                Text(property.type ?? "")
                     .font(.system(size: 11))
+                    .foregroundColor(.black)
             }
             .frame(height:21)
             .padding(.horizontal,8)
@@ -231,8 +253,9 @@ extension PropertyDetailView{
             
             HStack{
                 Text("AE".countryFlag)
-                 Text("Dubai")
+                Text("Dubai")
                     .font(.system(size: 11))
+                    .foregroundColor(.black)
             }
             .frame(height:21)
             .padding(.horizontal,8)
@@ -242,8 +265,9 @@ extension PropertyDetailView{
             HStack{
                 Image(systemName: "bed.double.fill")
                     .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
-                 Text("1 Bed")
+                Text("\(property.bed ?? 0) Bed")
                     .font(.system(size: 11))
+                    .foregroundColor(.black)
             }
             .frame(height:21)
             .padding(.horizontal,8)
@@ -253,64 +277,67 @@ extension PropertyDetailView{
             HStack{
                 Image("size")
                     .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
-                 Text("182 sq.ft")
+                Text("\(property.meter ?? 0) sq.ft")
                     .font(.system(size: 11))
+                    .foregroundColor(.black)
             }
             .frame(height:21)
             .padding(.horizontal,8)
             .background(Color(red: 0.95, green: 0.95, blue: 0.97))
             .cornerRadius(12)
-            Spacer()
-            
+//            Spacer()
+        }
         }
     }
     
     private var infoProfits: some View {
         VStack(alignment: .leading){
-            PropertyInfoDetailCellView(flag: "AE", title: "Downtown Dubai, Dubai", message: "An upscale community in the heart of the city. Home to the Buri Khalifa and Dubai Mall")
-            
-            PropertyInfoDetailCellView(image:Image("cup_image"), title: "Big Profits", message: "Off-Plan investing is the best way to make big profits")
-            
-            PropertyInfoDetailCellView(image: Image("shield_image"), title: "Safe Investing", message: "Safe investing regulated by the DFSA")
-            PropertyInfoDetailCellView(image: Image("graphic_image"), title: "10% Growth", message: "At least 10% growth ")
+            if let property = vm.propertyDetail {
+                PropertyInfoDetailCellView(flag: "AE", title: "Downtown Dubai, Dubai", message: "An upscale community in the heart of the city. Home to the Buri Khalifa and Dubai Mall")
+                
+                PropertyInfoDetailCellView(image:Image("cup_image"), title: "Big Profits", message: "Off-Plan investing is the best way to make big profits")
+                
+                PropertyInfoDetailCellView(image: Image("shield_image"), title: "Safe Investing", message: "Safe investing regulated by the DFSA")
+                PropertyInfoDetailCellView(image: Image("graphic_image"), title: "10% Growth", message: "At least 10% growth ")
+            }
         }
     }
     
     private var aboutPropertyView: some View {
         VStack(alignment:.leading, spacing: 8){
-            Text("About the property")
-                .foregroundColor(.black)
-                .font(.system(size: 20).weight(.semibold))
-            
-            Text("This apartment is offered at a price of AED 1,595,518, with a projected gross yield of 7.52% in the first year, and after deducting all expected running costs, the property offers its investors a projected net yield of 6.00% in the first year.")
-                .font(.system(size: 15))
-                .foregroundColor(.black)
-            
-            Text("show more")
-                .font(.system(size: 15))
-                .foregroundColor(.blue)
-            
-            
-            Text("Seller")
-                .font(.system(size: 17).weight(.semibold))
-                .foregroundColor(.black)
-                .padding(.top,8)
-            
-            Text("Sellername")
-                .font(.system(size: 15))
-                .foregroundColor(.black)
-            
-            Text("Seller")
-                .font(.system(size: 17).weight(.semibold))
-                .foregroundColor(.black)
-                .padding(.top,8)
-            
-            Text("Sellername")
-                .font(.system(size: 15))
-                .foregroundColor(.black)
-            
-            
-            
+            if let property = vm.propertyDetail {
+                Text("About the property")
+                    .foregroundColor(.black)
+                    .font(.system(size: 20).weight(.semibold))
+                
+                Text("This apartment is offered at a price of AED 1,595,518, with a projected gross yield of 7.52% in the first year, and after deducting all expected running costs, the property offers its investors a projected net yield of 6.00% in the first year.")
+                    .font(.system(size: 15))
+                    .foregroundColor(.black)
+                
+                Text("show more")
+                    .font(.system(size: 15))
+                    .foregroundColor(.blue)
+                
+                
+                Text("Seller")
+                    .font(.system(size: 17).weight(.semibold))
+                    .foregroundColor(.black)
+                    .padding(.top,8)
+                
+                Text("SellerName")
+                    .font(.system(size: 15))
+                    .foregroundColor(.black)
+                
+                Text("Developer")
+                    .font(.system(size: 17).weight(.semibold))
+                    .foregroundColor(.black)
+                    .padding(.top,8)
+                
+                Text(property.developerSpecsSubtitle ?? "")
+                    .font(.system(size: 15))
+                    .foregroundColor(.black)
+                
+            }
         }
         .modifier(CornerBackground())
     }
@@ -337,6 +364,7 @@ private struct PropertyInfoDetailCellView: View {
             VStack(alignment: .leading){
                 Text(title)
                     .font(.system(size: 15).weight(.semibold))
+                    .foregroundColor(.black)
                 Text(message)
                    .multilineTextAlignment(.leading)
                    .font(.system(size: 13))
@@ -345,4 +373,13 @@ private struct PropertyInfoDetailCellView: View {
             }
         }
     }
+}
+
+
+
+#Preview{
+//    PropertyImageView(images: sampleProp.images, alignment: .top)
+    PropertyDetailView(id: 25)
+        .environmentObject(PropertiesViewModel())
+        .environmentObject(AppViewModel())
 }

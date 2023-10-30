@@ -34,7 +34,7 @@ struct FillUserDataView: View {
             
                 Spacer()
                 Button {
-                    vm.currentState  = .from
+                    vm.currentState =  vm.currentState.next()
                 } label: {
                     Text("Next")
                         .foregroundColor(.white)

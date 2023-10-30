@@ -35,10 +35,10 @@ struct FavouritesView: View {
                 ScrollView(showsIndicators: false) {
                     ForEach(1..<5) { _ in
                         NavigationLink{
-                            PropertyDetailView()
+                            PropertyDetailView(id: 1)
                                 .navigationBarHidden(true)
                         } label: {
-                            PropertyCellView(image: "")
+                            PropertyCellView(property: sampleProp, image: "")
                         }
                     }                    
                 }

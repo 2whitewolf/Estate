@@ -137,6 +137,7 @@ extension ProfileView {
             
             VStack(alignment: .leading, spacing: 4){
                 Text("Currency")
+                    
                 HStack{
                     Image("person")
                      Text("AED")
@@ -148,6 +149,7 @@ extension ProfileView {
                 .background(RoundedRectangle(cornerRadius: 14)
                     .stroke(Color.gray, lineWidth: 0.5))
             }
+            .foregroundColor(.black)
             VStack(alignment: .leading, spacing: 4){
                 Text("Language")
                 HStack{
@@ -161,6 +163,7 @@ extension ProfileView {
                 .background(RoundedRectangle(cornerRadius: 14)
                     .stroke(Color.gray, lineWidth: 0.5))
             }
+            .foregroundColor(.black)
             
             Divider()
             
@@ -176,6 +179,7 @@ extension ProfileView {
             .padding()
             .background(RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.gray, lineWidth: 0.5))
+            .foregroundColor(.black)
             
         }
         .modifier(CornerBackground())
@@ -197,6 +201,7 @@ extension ProfileView {
                 Image(systemName: "doc.text")
                     .foregroundColor(.blue)
                  Text("Submit Feedback")
+                    .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
@@ -210,6 +215,7 @@ extension ProfileView {
                 Image(systemName: "doc.text")
                     .foregroundColor(.blue)
                  Text("Terms and Conditions")
+                    .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
@@ -223,6 +229,7 @@ extension ProfileView {
                 Image(systemName: "shield")
                     .foregroundColor(.blue)
                  Text("Privacy and Conditions")
+                    .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
@@ -235,6 +242,7 @@ extension ProfileView {
                 Image(systemName: "star.fill")
                     .foregroundColor(.blue)
                  Text("Rate the App")
+                    .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
                     .foregroundColor(.gray)

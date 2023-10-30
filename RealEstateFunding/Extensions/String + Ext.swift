@@ -9,7 +9,16 @@ import Foundation
 extension String {
     var countryFlag : String {
         String(String.UnicodeScalarView(self.unicodeScalars.compactMap {
-          UnicodeScalar(127397 + $0.value)
+            UnicodeScalar(127397 + $0.value)
         }))
     }
+    
+    func toDouble() -> Double {
+        return Double(self) ?? 0.0
+    }
+    
+    func toInt() -> Int {
+        return Int(self) ?? 0
+    }
+    
 }

@@ -9,7 +9,7 @@ import SwiftUI
 //import CountryPicker
 import PopupView
 
-struct SelectCountryView: View {
+struct CitizenshipView: View {
     @EnvironmentObject var vm: RegistrationViewModel
     @State private var isShowingCountryPicker = false
     @State private var countryCode: String = "" //Country = CountryManager.shared.currentCountry ?? Country.init(countryCode: "IN")
@@ -84,7 +84,7 @@ struct SelectCountryView: View {
                 
                 Button {
                     withAnimation{
-                        vm.currentState = .terms
+                        vm.currentState =  vm.currentState.next()
                     }
                   
                 } label: {
@@ -125,7 +125,7 @@ struct SelectCountryView: View {
 
 struct SelectCountryView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectCountryView()
+        CitizenshipView()
             .environmentObject(RegistrationViewModel())
     }
 }

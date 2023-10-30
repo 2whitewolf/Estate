@@ -39,20 +39,19 @@ class LoginViewModel: ObservableObject {
     }
     func login_with_Google() {
         networking.login_withProvider(provider: .Google)
-            .sink {[weak self] completion in
-                            guard let self = self else { return }
-                            switch completion {
-                            case .failure(let error):
-                                print(error)
-                            case .finished:
-                                break
-                            }
-                        } receiveValue: {[weak self] value in
-                            guard let self = self else { return }
-                            print(value)
-//                            self.user = value
-                        }
-            .store(in: &subscriptions)
+//            .sink {[weak self] completion in
+//                            guard let self = self else { return }
+//                            switch completion {
+//                            case .failure(let error):
+//                                print(error)
+//                            case .finished:
+//                                break
+//                            }
+//                        } receiveValue: {[weak self] value in
+//                            guard let self = self else { return }
+//                            print(value)
+//                        }
+//            .store(in: &subscriptions)
 
     }
     

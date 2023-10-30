@@ -28,10 +28,14 @@ struct AppMainState: View {
             }
         }
         .environmentObject(vm)
+       
            
     }
 }
 
 #Preview {
-    AppMainState()
+    NavigationView {
+        AppMainState()
+    }
+    .navigationViewStyle(StackNavigationViewStyle())
 }

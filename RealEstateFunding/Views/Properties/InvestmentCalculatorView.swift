@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct InvestmentCalculatorView: View {
-    @State var slider1: Double = 2.0
+    @State var slider1: Double = 1000
     @State var slider2: Double = 5.0
+//    lazy var returnedValue: Double = {
+//      return self.slider1 + self.slider1 * self.slider2 / 100.0
+//    }()
+    
+    func xValue() -> Double {
+        return self.slider1 + self.slider1 * self.slider2 / 100.0
+         
+    }
+//    @State var n =
+    
+    
     var body: some View {
         VStack(spacing: 16){
             HStack{
@@ -25,12 +36,13 @@ struct InvestmentCalculatorView: View {
                 .foregroundColor(.gray)
               
           
-                Text("AED")
+                Text("AED ")
                     .font(.system(size: 15).weight(.semibold))
                     .foregroundColor(.blue)
                 
                 +
-                Text("13,851")
+            
+            Text("\(xValue().rotate(0))")
                     .font(.system(size: 28).weight(.bold))
                     .foregroundColor(.blue)
            
@@ -40,12 +52,12 @@ struct InvestmentCalculatorView: View {
                     Text("Initial investment")
                         .foregroundColor(.gray)
                     Spacer()
-                    Text("AED 3000")
+                    Text("AED " + slider1.rotate(0))
                         .fontWeight(.semibold)
                 }
                 .font(.system(size: 13))
                 
-                Slider(value: $slider1, in: 1.0...30.0)
+                Slider(value: $slider1, in: 1000...200000)
             }
             
             VStack(spacing: 0) {
@@ -53,12 +65,12 @@ struct InvestmentCalculatorView: View {
                     Text("Property Value Growth (1 Year)")
                         .foregroundColor(.gray)
                     Spacer()
-                    Text("50%")
+                    Text(slider2.rotate(0) + "%")
                         .fontWeight(.semibold)
                 }
                 .font(.system(size: 13))
                 
-                Slider(value: $slider2, in: 1.0...30.0)
+                Slider(value: $slider2, in: 1.0...100.0)
             }
             
             

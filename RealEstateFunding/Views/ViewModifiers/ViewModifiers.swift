@@ -17,7 +17,7 @@ struct CornerBackground: ViewModifier {
                 .padding(.horizontal)
             
         }
-        .padding(0.25)
+        .padding(0.3)
 //        content
 //    .padding(.vertical,24)
 //    .padding(.horizontal)

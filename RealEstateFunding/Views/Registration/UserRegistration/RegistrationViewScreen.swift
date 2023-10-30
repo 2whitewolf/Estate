@@ -13,27 +13,29 @@ struct RegistrationViewScreen: View {
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
-//            if vm.registrationCompleted {
-//                CustomTabBar()
-//                    .navigationBarHidden(true)
-//            } else {
+            VStack{
+                 RegistrationHeaderView()
                 switch vm.currentState {
                 case .signUp:
                     SignUpView()
                 case .inputData:
                     FillUserDataView()
-                case .selectCountry:
-                    SelectCountryView()
-                case .from:
-                    SelectCountryView()
+                case .selectCitizenship:
+                    CitizenshipView()
+                case .currentLive:
+                    CurrentLiveView()
+                case .employmentStatus:
+                    EmploymentStatusView()
+                case .annualIncome:
+                    AnnualIncomeView()
+                case .netWorth:
+                    NetWorthView()
                 case .terms:
                     TermsAndConditionsView()
                 case .investorTerms:
                     InvestorTermsView()
                 }
-                
-//            }
-            
+            }
         }
         .environmentObject(vm)
         .onChange(of: vm.registrationCompleted){ newValue in
