@@ -11,7 +11,13 @@ import SwiftUI
 
 class AppViewModel: ObservableObject {
     @AppStorage("onBoarding") var presented: Bool = false
-    @Published var currentState: AppState = .onboarding //.registration // .onboarding
+    @Published var currentState: AppState = .onboarding {
+        didSet {
+            if  currentState == .appStart && !presented {
+                presented = true
+            }
+        }
+    }
     @Published var registrationCompleted: Bool = false
     @Published var user: User?
     @Published var userToken: String = ""

@@ -8,76 +8,60 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
-    enum PasswordReset{
-        case sendRequest, emailSended, resetPassword
-    }
-
-        @State var email: String = ""
-    @State var state : PasswordReset = .sendRequest
-
+    
+    @EnvironmentObject var vm: LoginViewModel
+    
         var body: some View {
             ZStack{
-                Color.white.ignoresSafeArea()
-                switch state {
-                case .sendRequest:
+                Color.white
+                
+                VStack{
+                    HStack{
+                        Text("Forgot Password ?")
+                            .font(.system(size: 28).weight(.bold))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                    }
                     VStack{
-                        HStack{
-                            Text("Forgot Password ?")
-                                .font(.system(size: 28).weight(.bold))
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-                        }
-                        VStack{
-                            Text("You will receive a link in your inbox to reset your password.")
-                                .foregroundColor(.gray)
-                                .padding(.top)
-                            
-                            textFields
-                                .padding(.top,40)
-                            
-                            
-                            Button {
-                                state = .emailSended
-                            } label: {
-                                Text("Reset Password")
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 50)
-                                    .backgroundColor(.blue)
-                                    .cornerRadius(12)
-                            }
+                        Text("You will receive a link in your inbox to reset your password.")
+                            .foregroundColor(.gray)
+                            .padding(.top)
+                        
+                        textFields
                             .padding(.top,40)
+                        
+                        
+                        Button {
+                            vm.state = vm.state.next()
+                          // vm.changePassword()
+                        } label: {
+                            Text("Reset Password")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .backgroundColor(vm.emailToChange.isEmpty ? .customGray : .blue)
+                                .cornerRadius(12)
                         }
-                         Spacer()
-                        
+                        .padding(.top,40)
+                        .disabled(vm.emailToChange.isEmpty)
                     }
-                    .padding(.bottom, 20)
-                    .foregroundColor(.customGray)
-                    .padding(.horizontal,24)
+                    Spacer()
                     
-                case .emailSended:
-                    VStack{
-                        
-                    }
-                    
-                case.resetPassword:
-                    EnterNewPasswordView()
                 }
-               
-                
-               
-                
-
+                .padding(.bottom, 20)
+                .foregroundColor(.customGray)
+                .padding(.horizontal,24)
             }
+                
         }
     }
 
     extension ForgotPasswordView {
         private var textFields: some View {
             VStack{
-                TextField("email@example", text: $email)
+                TextField("email@example", text: $vm.emailToChange)
                     .textFieldStyle(ImageWithLineStroke(title: "Email", image: Image("email")))
             }
         }
@@ -86,5 +70,6 @@ struct ForgotPasswordView: View {
 struct ForgotPasswordView_Previews: PreviewProvider {
     static var previews: some View {
         ForgotPasswordView()
+            .environmentObject(LoginViewModel())
     }
 }

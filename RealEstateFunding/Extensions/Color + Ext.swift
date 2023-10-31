@@ -9,7 +9,8 @@ import SwiftUI
 
 extension Color{
     static var customGray: Color {
-        .init("hex3C3C43")
+//        .init("hex3C3C43")
+        Color.gray
     }
     static var lightBlue: Color {
         .init("15hex007AFF")

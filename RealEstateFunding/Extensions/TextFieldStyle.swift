@@ -19,7 +19,7 @@ struct ImageWithLineStroke: TextFieldStyle {
                 .font(.system(size: 13))
             HStack{
                 image
-                configuration
+                configuration  
                     .onTapGesture {
                                    withAnimation {
 //                                       isEditing = true

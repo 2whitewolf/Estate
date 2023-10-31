@@ -28,6 +28,28 @@ class RegistrationViewModel: ObservableObject {
     @Published var loginProviderUrl: URL? 
     @Published var header: RegistrationHeader = .home
     
+    //MARK: User data inputs
+    @Published var email: String = ""
+    @Published var password: String = ""
+    
+    @Published var name: String = ""
+    @Published var date: Date = Date()
+    @Published var number: String = ""
+    @Published var promocode: String = ""
+    
+    @Published var countryCode: String = ""
+    
+    @Published var currentCountryCode: String = ""
+    @Published var cityCode: String = ""
+    @Published var address: String = ""
+    
+    @Published var status: EmployedStatus?
+    
+    @Published var annualIncome: AnnualIncome?
+    
+    @Published var worth: NetWorth?
+    @Published var user: User?
+    
     
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
@@ -52,8 +74,51 @@ class RegistrationViewModel: ObservableObject {
     
     
     func register(){
-        networking.register(email: <#T##String#>, password: <#T##String#>)
+        networking.register(email: email, password: password)
+            
+            .sink {[weak self] completion in
+                            guard let self = self else { return }
+                            switch completion {
+                            case .failure(let error):
+                                print(error)
+                            case .finished:
+                                break
+                            }
+                        } receiveValue: {[weak self] value in
+                            guard let self = self else { return }
+                            currentState = currentState.next()
+                        }
+            .store(in: &subscriptions)
         
+    }
+    func updateUser() {
+        networking.updateUser(name: name,
+                              birth: "\(date)",
+                              phone: number,
+                              citizenship: countryCode,
+                              country: currentCountryCode,
+                              city: cityCode,
+                              address: address,
+                              employment: status?.text,
+                              organization: "",
+                              org_role: "",
+                              working_period: "",
+                              industry: "",
+                              income: annualIncome?.value,
+                              net_worth: worth?.value)
+//            .sink {[weak self] completion in
+//                            guard let self = self else { return }
+//                            switch completion {
+//                            case .failure(let error):
+//                                print(error)
+//                            case .finished:
+//                                break
+//                            }
+//                        } receiveValue: {[weak self] value in
+//                            guard let self = self else { return }
+//                            currentState = currentState.next()
+//                        }
+//            .store(in: &subscriptions)
     }
     
     func forgetPassword(){

@@ -14,7 +14,7 @@ struct PropertiesList: View {
     @EnvironmentObject var appVM: AppViewModel
     var body: some View {
         ZStack{
-          
+            Color.white
             VStack(spacing: 0){
                headerView
                titleView

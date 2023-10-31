@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8B16039E2AEF9C1E00A68981 /* RegistrationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B16039D2AEF9C1E00A68981 /* RegistrationHeaderView.swift */; };
+		8B1603DD2AF129C400A68981 /* LoginViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1603DC2AF129C400A68981 /* LoginViewScreen.swift */; };
+		8B1603DF2AF1336100A68981 /* LoginHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1603DE2AF1336100A68981 /* LoginHeader.swift */; };
+		8B1603E12AF14B3300A68981 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1603E02AF14B3300A68981 /* PasswordResetView.swift */; };
 		8B20CE5B2AB0540100FB3ECA /* RealEstateFundingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE5A2AB0540100FB3ECA /* RealEstateFundingApp.swift */; };
 		8B20CE5F2AB0540300FB3ECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B20CE5E2AB0540300FB3ECA /* Assets.xcassets */; };
 		8B20CE622AB0540300FB3ECA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B20CE612AB0540300FB3ECA /* Preview Assets.xcassets */; };
@@ -77,6 +80,10 @@
 
 /* Begin PBXFileReference section */
 		8B16039D2AEF9C1E00A68981 /* RegistrationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationHeaderView.swift; sourceTree = "<group>"; };
+		8B1603DC2AF129C400A68981 /* LoginViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewScreen.swift; sourceTree = "<group>"; };
+		8B1603DE2AF1336100A68981 /* LoginHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeader.swift; sourceTree = "<group>"; };
+		8B1603E02AF14B3300A68981 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
+		8B1603E22AF1543A00A68981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8B20CE572AB0540100FB3ECA /* RealEstateFunding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstateFunding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B20CE5A2AB0540100FB3ECA /* RealEstateFundingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateFundingApp.swift; sourceTree = "<group>"; };
 		8B20CE5E2AB0540300FB3ECA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +183,7 @@
 		8B20CE592AB0540100FB3ECA /* RealEstateFunding */ = {
 			isa = PBXGroup;
 			children = (
+				8B1603E22AF1543A00A68981 /* Info.plist */,
 				8B20CE7C2AB0910A00FB3ECA /* Extensions */,
 				8BA837BF2AD6B06A008DCF3D /* AppState */,
 				8BA837B92AD6A481008DCF3D /* Models */,
@@ -351,6 +359,7 @@
 			children = (
 				8B49CBED2AB491FD00F1800B /* ForgotPasswordView.swift */,
 				8B49CBFA2AB856E200F1800B /* EnterNewPasswordView.swift */,
+				8B1603E02AF14B3300A68981 /* PasswordResetView.swift */,
 			);
 			path = ResetPassword;
 			sourceTree = "<group>";
@@ -371,6 +380,8 @@
 				8BA837B82AD69C86008DCF3D /* ResetPassword */,
 				8B20CE8A2AB1F32400FB3ECA /* LoginView.swift */,
 				8BA837BD2AD6A59A008DCF3D /* LoginViewModel.swift */,
+				8B1603DC2AF129C400A68981 /* LoginViewScreen.swift */,
+				8B1603DE2AF1336100A68981 /* LoginHeader.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -480,6 +491,7 @@
 				8BA95B832ADFDF1900FA7D35 /* Property.swift in Sources */,
 				8BA8379B2ACEF30F008DCF3D /* RegistrationViewModel.swift in Sources */,
 				8B49CC0E2ABAF59500F1800B /* PropertyLocationView.swift in Sources */,
+				8B1603E12AF14B3300A68981 /* PasswordResetView.swift in Sources */,
 				8BA837B52AD53B50008DCF3D /* ViewModifiers.swift in Sources */,
 				8BA837592ACAAD85008DCF3D /* TermsAndConditionsView.swift in Sources */,
 				8B20CE6B2AB057F800FB3ECA /* OnboardingView.swift in Sources */,
@@ -497,6 +509,7 @@
 				8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */,
 				8BA837B72AD6986F008DCF3D /* BackendAPIServices.swift in Sources */,
 				8B49CC0A2AB9E43B00F1800B /* PropertyDetailView.swift in Sources */,
+				8B1603DF2AF1336100A68981 /* LoginHeader.swift in Sources */,
 				8B20CE5B2AB0540100FB3ECA /* RealEstateFundingApp.swift in Sources */,
 				8B20CE732AB07A0A00FB3ECA /* PropertiesList.swift in Sources */,
 				8B49CBF32AB8440300F1800B /* CitizenshipView.swift in Sources */,
@@ -516,6 +529,7 @@
 				8BA837C12AD6B07D008DCF3D /* AppViewModel.swift in Sources */,
 				8B20CE832AB1D37300FB3ECA /* UIScreen + Ext.swift in Sources */,
 				8B20CE872AB1D54300FB3ECA /* FillUserDataView.swift in Sources */,
+				8B1603DD2AF129C400A68981 /* LoginViewScreen.swift in Sources */,
 				8BC2C5332AB466DC0040D6B7 /* InvestmentDetails.swift in Sources */,
 				8BA8378F2ACEC4FA008DCF3D /* APIManager.swift in Sources */,
 				8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */,
@@ -661,6 +675,7 @@
 				DEVELOPMENT_TEAM = G67PZ48Y7D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RealEstateFunding/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -692,6 +707,7 @@
 				DEVELOPMENT_TEAM = G67PZ48Y7D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RealEstateFunding/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

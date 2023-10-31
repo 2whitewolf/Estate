@@ -9,9 +9,12 @@ import Foundation
 import Combine
 
 class LoginViewModel: ObservableObject {
+
+    @Published var state: Login = .login
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var user: UserData?
+    @Published var emailToChange: String = ""
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
     
@@ -62,8 +65,44 @@ class LoginViewModel: ObservableObject {
 
     
     func forgetPassword(){
-        
+        networking.forgotPassword(email: email)
+            .sink {[weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: {[weak self] value in
+                guard let self = self else { return }
+                print(value)
+                state = state.next()
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func changePassword() {
+        networking.changePassword(code: "", password: "")
+            .sink {[weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: {[weak self] value in
+                guard let self = self else { return }
+                print(value)
+                state = .login
+            }
+            .store(in: &subscriptions)
     }
   
 }
 
+
+enum Login: CaseIterable {
+    case login, forgotPassword, sended, changePassword
+}

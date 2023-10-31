@@ -18,10 +18,5 @@ struct CornerBackground: ViewModifier {
             
         }
         .padding(0.3)
-//        content
-//    .padding(.vertical,24)
-//    .padding(.horizontal)
-//    .background(RoundedRectangle(cornerRadius: 32)
-//        .stroke(Color.gray, lineWidth: 0.5))
     }
 }

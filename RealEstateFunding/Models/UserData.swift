@@ -33,3 +33,27 @@ struct User: Codable {
         case stripeID = "stripe_id"
     }
 }
+
+
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+            return lhs.id == rhs.id &&
+                lhs.name == rhs.name &&
+                lhs.email == rhs.email &&
+                lhs.birth == rhs.birth &&
+                lhs.phone == rhs.phone &&
+                lhs.citizenship == rhs.citizenship &&
+                lhs.country == rhs.country &&
+                lhs.city == rhs.city &&
+                lhs.address == rhs.address &&
+                lhs.employment == rhs.employment &&
+                lhs.organization == rhs.organization &&
+                lhs.orgRole == rhs.orgRole &&
+                lhs.workingPeriod == rhs.workingPeriod &&
+                lhs.industry == rhs.industry &&
+                lhs.income == rhs.income &&
+                lhs.netWorth == rhs.netWorth &&
+                lhs.emailVerifiedAt == rhs.emailVerifiedAt &&
+                lhs.stripeID == rhs.stripeID
+        }
+}

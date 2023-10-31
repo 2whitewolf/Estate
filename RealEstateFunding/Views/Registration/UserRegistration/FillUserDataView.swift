@@ -10,13 +10,8 @@ import iPhoneNumberField
 
 struct FillUserDataView: View {
     @EnvironmentObject var vm:RegistrationViewModel
-
-    @State var email: String = ""
-    @State var date: Date = Date()
-    @State var number: String = ""
-    @State var promocode: String = ""
     @State var datePickerShow: Bool = false
-//    @State var dateChanged
+
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
@@ -70,7 +65,7 @@ struct FillUserDataView_Previews: PreviewProvider {
 extension FillUserDataView {
     
     private var nameView : some View {
-        TextField("John Smith", text: $email)
+        TextField("John Smith", text: $vm.name)
             .textFieldStyle(ImageWithLineStroke(title: "Full Name", image: Image("person")))
     }
     
@@ -80,7 +75,7 @@ extension FillUserDataView {
                 .font(.system(size: 13))
             HStack{
                 Image("calendar")
-                Text(date.stringRepresentationOfYearMonthDay)
+                Text(vm.date.stringRepresentationOfYearMonthDay)
                  Spacer()
                 Button{
                     withAnimation {
@@ -96,7 +91,7 @@ extension FillUserDataView {
             .frame(height: 60)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.customGray, lineWidth: 1)
+                    .stroke(Color.customGray, lineWidth: 0.5)
             )
         }
     }
@@ -107,7 +102,7 @@ extension FillUserDataView {
                 .font(.system(size: 13))
             HStack{
                 Image("phone")
-                iPhoneNumberField(text: $number)
+                iPhoneNumberField(text: $vm.number)
                     .flagSelectable(true)
                 
                     .foregroundColor(Color.black)
@@ -118,13 +113,13 @@ extension FillUserDataView {
             .frame(height: 60)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke( number.count > 0 ? Color.blue :  Color.customGray, lineWidth: 1)
+                    .stroke( vm.number.count > 0 ? Color.blue :  Color.customGray, lineWidth: 0.5)
             )
         }
     }
     
     private var referalView: some View {
-        TextField("Promocode", text: $promocode)
+        TextField("Promocode", text: $vm.promocode)
             .textFieldStyle(ImageWithLineStroke(title: "Refferal Code",image: Image("discount")))
     }
     
@@ -139,7 +134,7 @@ extension FillUserDataView {
     
     private var datePickerView: some View {
         VStack{
-            DatePicker("", selection: $date, displayedComponents: .date)
+            DatePicker("", selection: $vm.date, displayedComponents: .date)
                 .datePickerStyle(.graphical)
                 .padding()
             HStack{

@@ -13,8 +13,7 @@ import iPhoneNumberField
 struct SignUpView: View {
     
     @EnvironmentObject var vm: RegistrationViewModel
-    @State var email: String = ""
-    @State var password: String = ""
+   
  
     var body: some View {
         ZStack{
@@ -80,10 +79,10 @@ struct SignUpView_Previews: PreviewProvider {
 extension SignUpView {
     private var textFields: some View {
         VStack{
-            TextField("email@example", text: $email)
+            TextField("email@example", text: $vm.email)
                 .textFieldStyle(ImageWithLineStroke(title: "Email", image: Image("email")))
             
-            SecureField("Password", text: $password)
+            SecureField("Password", text: $vm.password)
                 .textFieldStyle(ImageWithLineStroke(title: "Password", image: Image("password")))
             
             
@@ -93,10 +92,11 @@ extension SignUpView {
         VStack{
             
             Button{
+                vm.register()
 //                RegistrationViewScreen()
-                withAnimation{
-                    vm.currentState =  vm.currentState.next()
-                }
+//                withAnimation{
+//                    vm.currentState =  vm.currentState.next()
+//                }
                 
             } label: {
                 Text("Create account")

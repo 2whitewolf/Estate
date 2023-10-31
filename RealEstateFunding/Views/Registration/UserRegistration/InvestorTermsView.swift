@@ -50,7 +50,6 @@ struct InvestorTermsView: View {
                         
                         Text(text)
                             .foregroundColor(.black)
-                        //                }
                         Text("Please review the key risks and disclosures")
                             .foregroundColor(.black)
                         

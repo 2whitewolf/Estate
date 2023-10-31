@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmploymentStatusView: View {
     @EnvironmentObject var vm: RegistrationViewModel
-    @State var status: EmployedStatus?
+   
  
 
     var body: some View {
@@ -46,15 +46,15 @@ struct EmploymentStatusView: View {
                     
                     ForEach(EmployedStatus.allCases, id: \.rawValue) { status in 
                         Button{
-                            self.status = status
+                            vm.status = status
                         } label: {
                             ZStack(alignment: .leading){
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(self.status == status ? Color.blue : Color.gray, lineWidth: 0.5)
+                                    .stroke(vm.status == status ? Color.blue : Color.gray, lineWidth: 0.5)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 50)
                                 Text(status.text)
-                                    .foregroundColor(self.status == status ? Color.blue : Color.black)
+                                    .foregroundColor(vm.status == status ? Color.blue : Color.black)
                                     .fontWeight(.semibold)
                                     .padding(.leading)
                             }
@@ -77,11 +77,11 @@ struct EmploymentStatusView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
-                        .background((self.status != nil) ? Color.blue : Color.gray)
+                        .background((vm.status != nil) ? Color.blue : Color.gray)
                         .cornerRadius(12)
                 }
                 .padding(.bottom, 20)
-                .disabled(self.status == nil)
+                .disabled(vm.status == nil)
             }
             .padding(.horizontal,24)
         }

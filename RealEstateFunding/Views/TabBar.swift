@@ -22,47 +22,47 @@ struct CustomTabBar: View {
     }
     @ViewBuilder
     private var content: some View {
-        //        ZStack{
-        //            Color.white.ignoresSafeArea()
-        //
-        VStack(spacing:0){
-            Group {
-                switch selectedTab {
-                case .properties:
-                    PropertiesList()
-                case .portfolio:
-                    PortfolioView()
-                case .wallet:
-                    WalletView()
-                case .profile:
-                    ProfileView()
-                }
-            }
-            Divider()
-                .background(Color.gray)
-            HStack(spacing: 0) {
-                ForEach(Tabs.allCases, id: \.self) { i in
-                    Button {
-                        withAnimation(.easeInOut) {
-                            selectedTab = i
-                        }
-                    } label: {
-                        VStack(spacing: 4) {
-                            Image(i.image + (selectedTab == i ? "On" : ""))
-                                .renderingMode(.template)
-                            Text(i.title)
-                                .font(.system(size: 12))
-                        }
-                        .foregroundColor(selectedTab == i ? Color.blue : Color.black)
-                        .frame(height: 80)
-                        .frame(maxWidth: .infinity)
+        ZStack{
+            Color.white.ignoresSafeArea()
+            
+            VStack(spacing:0){
+                Group {
+                    switch selectedTab {
+                    case .properties:
+                        PropertiesList()
+                    case .portfolio:
+                        PortfolioView()
+                    case .wallet:
+                        WalletView()
+                    case .profile:
+                        ProfileView()
                     }
                 }
+                Divider()
+                    .background(Color.gray)
+                HStack(spacing: 0) {
+                    ForEach(Tabs.allCases, id: \.self) { i in
+                        Button {
+                            withAnimation(.easeInOut) {
+                                selectedTab = i
+                            }
+                        } label: {
+                            VStack(spacing: 4) {
+                                Image(i.image + (selectedTab == i ? "On" : ""))
+                                    .renderingMode(.template)
+                                Text(i.title)
+                                    .font(.system(size: 12))
+                            }
+                            .foregroundColor(selectedTab == i ? Color.blue : Color.black)
+                            .frame(height: 80)
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
+                .background(Color.white)
+                
             }
-            .background(Color.white)
-            
         }
-        
         
     }
     

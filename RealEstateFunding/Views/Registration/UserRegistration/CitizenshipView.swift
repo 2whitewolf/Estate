@@ -12,7 +12,7 @@ import PopupView
 struct CitizenshipView: View {
     @EnvironmentObject var vm: RegistrationViewModel
     @State private var isShowingCountryPicker = false
-    @State private var countryCode: String = "" //Country = CountryManager.shared.currentCountry ?? Country.init(countryCode: "IN")
+  
 
     var body: some View {
         ZStack{
@@ -44,7 +44,7 @@ struct CitizenshipView: View {
                 VStack(alignment: .leading, spacing: 8){
                     Text("Citizenship")
                     
-                    if countryCode.isEmpty {
+                    if vm.countryCode.isEmpty {
                         HStack{
                             Image(systemName: "globe")
                                 .foregroundColor(.blue)
@@ -63,8 +63,8 @@ struct CitizenshipView: View {
                             .stroke(Color.gray, lineWidth: 0.5))
                     } else {
                         HStack{
-                            Text(countryFlag(countryCode))
-                            Text(Locale.current.localizedString(forRegionCode: countryCode) ?? "")
+                            Text(countryFlag(vm.countryCode))
+                            Text(Locale.current.localizedString(forRegionCode: vm.countryCode) ?? "")
                             Spacer()
                             Image(systemName: "chevron.down")
                                 .foregroundColor(.gray)
@@ -108,7 +108,7 @@ struct CitizenshipView: View {
                     }
                     .onTapGesture {
                         isShowingCountryPicker.toggle()
-                        self.countryCode = countryCode //Locale.current.localizedString(forRegionCode: countryCode) ?? ""
+                        vm.countryCode = countryCode //Locale.current.localizedString(forRegionCode: countryCode) ?? ""
                     }
                 }
             })

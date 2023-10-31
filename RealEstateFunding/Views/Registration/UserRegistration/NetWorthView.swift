@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct NetWorthView: View {
-    @EnvironmentObject var vm: RegistrationViewModel
-    @State var status: NetWorth?
     
+    @EnvironmentObject var vm: RegistrationViewModel
     
     var body: some View {
         ZStack{
@@ -46,15 +45,15 @@ struct NetWorthView: View {
                     ScrollView(showsIndicators: false) {
                         ForEach(NetWorth.allCases, id: \.rawValue) { status in
                             Button{
-                                self.status = status
+                                vm.worth = status
                             } label: {
                                 ZStack(alignment: .leading){
                                     RoundedRectangle(cornerRadius: 12)
-                                        .stroke(self.status == status ? Color.blue : Color.gray, lineWidth: 0.5)
+                                        .stroke(vm.worth == status ? Color.blue : Color.gray, lineWidth: 0.5)
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 50)
                                     Text(status.value)
-                                        .foregroundColor(self.status == status ? Color.blue : Color.black)
+                                        .foregroundColor(vm.worth == status ? Color.blue : Color.black)
                                         .fontWeight(.semibold)
                                         .padding(.leading)
                                 }
@@ -75,11 +74,11 @@ struct NetWorthView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
-                        .background((self.status != nil) ? Color.blue : Color.gray)
+                        .background((vm.worth != nil) ? Color.blue : Color.gray)
                         .cornerRadius(12)
                 }
                 .padding(.bottom, 20)
-                .disabled(self.status == nil)
+                .disabled(vm.worth == nil)
             }
             .padding(.horizontal,24)
         }

@@ -28,11 +28,7 @@ struct RegistrationStartView: View {
                     .multilineTextAlignment(.leading)
                 
                 
-//                Button("Open Mail App") {
-//                    if let url = URL(string: "mailto:") {
-//                                  UIApplication.shared.open(url)
-//                              }
-//                     }
+
                 Button{
                     withAnimation{
                         appVM.currentState = .login

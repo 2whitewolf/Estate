@@ -17,7 +17,7 @@ struct AppMainState: View {
             case .onboarding:
                 OnboardingView()
             case .login:
-                LoginView()
+                LoginViewScreen()
             case .registration:
                 RegistrationViewScreen()
             case .app:

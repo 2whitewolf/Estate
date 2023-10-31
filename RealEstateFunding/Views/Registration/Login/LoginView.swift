@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject var vm: LoginViewModel = LoginViewModel()
+    @EnvironmentObject var vm: LoginViewModel
     @State var forgetPasswordTapped: Bool = false
     var body: some View {
         ZStack{
-            if !forgetPasswordTapped {
                 Color.white.ignoresSafeArea()
                 VStack{
                     HStack{
@@ -43,8 +42,10 @@ struct LoginView: View {
                         .foregroundColor(.blue)
                         .font(.system(size: 12))
                         .onTapGesture {
-                            forgetPasswordTapped.toggle()
+                            vm.state = vm.state.next()
                         }
+                        .padding()
+                        .padding(.top,8)
                     Spacer()
                     
                     HStack{
@@ -72,9 +73,6 @@ struct LoginView: View {
                 .padding(.bottom, 20)
                 .foregroundColor(.customGray)
                 .padding(.horizontal,24)
-            } else {
-                ForgotPasswordView()
-            }
         }
     }
 }
@@ -82,6 +80,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(LoginViewModel())
     }
 }
 

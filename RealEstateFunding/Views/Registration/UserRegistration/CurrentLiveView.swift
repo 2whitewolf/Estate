@@ -9,12 +9,11 @@ import SwiftUI
 import PopupView
 
 struct CurrentLiveView: View {
+    
     @EnvironmentObject var vm: RegistrationViewModel
     @State private var isShowingCountryPicker = false
-    @State private var countryCode: String = ""
     @State private var isShowingCityPicker = false
-    @State private var cityCode: String = ""
-    @State var address: String = ""
+
     
     var body: some View {
         ZStack{
@@ -47,7 +46,7 @@ struct CurrentLiveView: View {
                     
                     selectCity
                     
-                    TextField("Enter your address", text: $address)
+                    TextField("Enter your address", text: $vm.address)
                         .textFieldStyle(ImageWithLineStroke(title: "Addres",image: Image("address")))
                 }
                 .padding(.vertical)
@@ -86,7 +85,7 @@ struct CurrentLiveView: View {
                     }
                     .onTapGesture {
                         isShowingCountryPicker.toggle()
-                        self.countryCode = countryCode //Locale.current.localizedString(forRegionCode: countryCode) ?? ""
+                        vm.currentCountryCode = countryCode //Locale.current.localizedString(forRegionCode: countryCode) ?? ""
                     }
                 }
             })
@@ -113,7 +112,7 @@ extension CurrentLiveView {
         VStack(alignment: .leading, spacing: 8){
             Text("Country")
             
-            if countryCode.isEmpty {
+            if vm.currentCountryCode.isEmpty {
                 HStack{
                     Image(systemName: "globe")
                         .foregroundColor(.blue)
@@ -132,8 +131,8 @@ extension CurrentLiveView {
                     .stroke(Color.gray, lineWidth: 0.5))
             } else {
                 HStack{
-                    Text(countryFlag(countryCode))
-                    Text(Locale.current.localizedString(forRegionCode: countryCode) ?? "")
+                    Text(countryFlag(vm.currentCountryCode))
+                    Text(Locale.current.localizedString(forRegionCode: vm.currentCountryCode) ?? "")
                     Spacer()
                     Image(systemName: "chevron.down")
                         .foregroundColor(.gray)
@@ -156,7 +155,7 @@ extension CurrentLiveView {
         VStack(alignment: .leading, spacing: 8){
             Text("City")
             
-            if cityCode.isEmpty {
+            if vm.cityCode.isEmpty {
                 HStack{
                     Image(systemName: "globe")
                         .foregroundColor(.blue)
@@ -175,8 +174,8 @@ extension CurrentLiveView {
                     .stroke(Color.gray, lineWidth: 0.5))
             } else {
                 HStack{
-                    Text(countryFlag(cityCode))
-                    Text(Locale.current.localizedString(forRegionCode: cityCode) ?? "")
+                    Text(countryFlag(vm.cityCode))
+                    Text(Locale.current.localizedString(forRegionCode: vm.cityCode) ?? "")
                     Spacer()
                     Image(systemName: "chevron.down")
                         .foregroundColor(.gray)

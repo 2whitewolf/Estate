@@ -45,6 +45,11 @@ struct RegistrationViewScreen: View {
                 }
             }
         }
+        .onChange(of: vm.user) { value in
+            if let user = value {
+                appVM.user = user
+            }
+        }
     }
 }
 

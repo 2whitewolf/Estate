@@ -26,7 +26,7 @@ protocol APIProtocol{
      //MARK: Login and User data
     func login(email: String, password: String) -> AnyPublisher<UserData, AFError>
     func register(email: String, password: String) -> AnyPublisher<UserData, AFError>
-    func updateUser()
+    func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?)
     func changePassword(code: String, password:String) -> AnyPublisher<String,AFError>
     func forgotPassword(email: String) -> AnyPublisher<String,AFError>
     func login_withProvider(provider: Provider) -> URL//-> AnyPublisher<String,AFError>
@@ -40,26 +40,26 @@ protocol APIProtocol{
 
 
 class APIManager: APIProtocol{
-    func updateUser() {
+    func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?) {
         let url = makeUrl(make: .updateUser)
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)
         ]
         
-        let parameters: [String: String] = ["name": "bogdan",
-                                            "birth": "123456",
-                                            "phone": "12454365143514",
-                                            "citizenship": "gkjbvn",
-                                            "country": "ff",
-                                            "city": "hfgsj",
-                                            "address": "djsfsjdh",
-                                            "employment":"yes",
-                                            "organization": "fjdfkj",
-                                            "org_role":"boss",
-                                            "working_period": "5",
-                                            "industry":"it",
-                                            "income":"40000",
-                                            "net_worth":"100000"
+        let parameters: [String: String] = ["name": name ?? "",
+                                            "birth": birth ?? "",
+                                            "phone":  phone ?? "",
+                                            "citizenship": citizenship ?? "",
+                                            "country": country ?? "",
+                                            "city": city ?? "",
+                                            "address": address ?? "",
+                                            "employment": employment ?? "",
+                                            "organization": organization ?? "",
+                                            "org_role": org_role ?? "",
+                                            "working_period": working_period ?? "",
+                                            "industry": industry ?? "",
+                                            "income": income ?? "",
+                                            "net_worth":net_worth ?? ""
         ]
         let method = BackendAPIService.updateUser.method
         
@@ -206,22 +206,9 @@ class APIManager: APIProtocol{
         
         let url = makeUrl(make: .register)
         let method = BackendAPIService.register.method
-        let parameters: [String: String] = ["name": "bogdan",
+        let parameters: [String: String] = [
                                             "email": email,
                                             "password": password,
-                                            "birth": "123456",
-                                            "phone": "12454365143514",
-                                            "citizenship": "gkjbvn",
-                                            "country": "ff",
-                                            "city": "hfgsj",
-                                            "address": "djsfsjdh",
-                                            "employment":"yes",
-                                            "organization": "fjdfkj",
-                                            "org_role":"boss",
-                                            "working_period": "5",
-                                            "industry":"it",
-                                            "income":"40000",
-                                            "net_worth":"100000"
         ]
         return  AF.request(url,method: method,parameters: parameters)
             .validate()
