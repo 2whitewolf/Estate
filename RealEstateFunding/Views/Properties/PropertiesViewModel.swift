@@ -15,6 +15,8 @@ class PropertiesViewModel: ObservableObject {
     @Published var propertyDetail: PropertyDetail?
     @Published var similar: [Property]?
     
+    @Published var propertyPreviewHistory: [Int] = []
+    
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
     

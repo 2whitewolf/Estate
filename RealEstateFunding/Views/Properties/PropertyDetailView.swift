@@ -22,75 +22,90 @@ struct PropertyDetailView: View {
         ZStack(alignment: .bottom){
             Color.white.ignoresSafeArea()
             VStack{
-                ScrollView(showsIndicators: false) {
-                    ZStack(alignment: .top){
-                        if let property = vm.propertyDetail {
-                            PropertyImageView(images: property.images ?? [] , alignment: .bottom)
-                                .frame(maxWidth: .infinity)
-                                .frame(height:400)
-                                .cornerRadius(52)
-                                .padding(.top,8)
-                        }
-                        
-                        HStack{
-                            Button {
-                                presentation.wrappedValue.dismiss()
-                            } label: {
-                                Image(systemName: "arrow.left")
+                ScrollViewReader { value in
+                    ScrollView(showsIndicators: false) {
+                        ZStack(alignment: .top){
+                            if let property = vm.propertyDetail {
+                                PropertyImageView(images: property.images ?? [] , alignment: .bottom)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height:400)
+                                    .cornerRadius(52)
+                                    .padding(.top,8)
+                                    .id(1)
+                            }
+                            
+                            HStack{
+                                Button {
+                                    if vm.propertyPreviewHistory.count <= 1 {
+                                        presentation.wrappedValue.dismiss()
+                                    } else {
+                                        backToPreviously()
+                                    }
+                                } label: {
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(.white)
+                                        .padding(12)
+                                        .background(
+                                            Circle().fill(Color.black.opacity(0.5))
+                                        )
+                                }
+                                Spacer()
+                                Image(systemName: "bookmark.fill")
                                     .foregroundColor(.white)
                                     .padding(12)
                                     .background(
                                         Circle().fill(Color.black.opacity(0.5))
                                     )
+                                
+                                Image(systemName: "arkit")
+                                    .foregroundColor(.white)
+                                    .padding(12)
+                                    .background(
+                                        Circle().fill(Color.black.opacity(0.5))
+                                    )
+                                
+                                
                             }
+                            .padding(.top,55)
+                            .padding(.horizontal)
+                        }
+                        
+                        propertyPriceView
+                        
+                        propertyDescription
+                        
+                        InvestmentCalculatorView()
+                        
+                        FinancialsView()
+                        
+                        if let property = vm.propertyDetail {
+                            PropertyLocationView(coordinate: CLLocationCoordinate2D(latitude: property.coordinateX?.toDouble() ?? 0 , longitude: property.coordinateY?.toDouble() ?? 0))
+                        }
+                        
+                        aboutPropertyView
+                        
+                        HStack{
+                            Text("Similar properties")
+                                .font(.system(size: 20).weight(.semibold))
+                                .foregroundColor(.black)
                             Spacer()
-                            Image(systemName: "bookmark.fill")
-                                .foregroundColor(.white)
-                                .padding(12)
-                                .background(
-                                    Circle().fill(Color.black.opacity(0.5))
-                                )
-                            
-                            Image(systemName: "arkit")
-                                .foregroundColor(.white)
-                                .padding(12)
-                                .background(
-                                    Circle().fill(Color.black.opacity(0.5))
-                                )
-                            
-                            
                         }
-                        .padding(.top,55)
-                        .padding(.horizontal)
-                    }
-                    
-                    propertyPriceView
-                    
-                    propertyDescription
-                    
-                    InvestmentCalculatorView()
-                    
-                    FinancialsView()
-                    
-                    
-                    PropertyLocationView(coordinate: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166868))
-                    
-                    aboutPropertyView
-                    
-                    HStack{
-                        Text("Similar properties")
-                            .font(.system(size: 20).weight(.semibold))
-                            .foregroundColor(.black)
-                        Spacer()
-                    }
-                    if let  similars = vm.similar {
-                        VStack(spacing: 10) {
-                            ForEach(similars, id: \.id) { property in
-                                PropertyCellView(property: property, image: "")
+                        if let  similars = vm.similar {
+                            VStack(spacing: 10) {
+                                ForEach(similars, id: \.id) { property in
+                                    PropertyCellView(property: property, image: "")
+                                        .onTapGesture {
+                                            withAnimation(.spring()){
+                                                addPropertyToHistory(id: property.id ?? 1)
+//                                                vm.getPropertyDetail(id: property.id ?? 1)
+                                                value.scrollTo(1)
+                                            }
+                                        }
+                                }
+                                
                             }
-                            
+                            .padding(.bottom,105)
                         }
-                        .padding(.bottom,105)
                     }
                 }
                 .ignoresSafeArea()
@@ -132,6 +147,26 @@ struct PropertyDetailView: View {
             vm.getPropertyDetail(id: id)
         }
 
+    }
+    
+    func addPropertyToHistory(id: Int){
+        print ("ids: \(vm.propertyPreviewHistory)")
+        if vm.propertyPreviewHistory.isEmpty {
+            vm.propertyPreviewHistory.append(self.id)
+            vm.propertyPreviewHistory.append(id)
+        } else {
+            vm.propertyPreviewHistory.append(id)
+        }
+        print ("ids: \(vm.propertyPreviewHistory)")
+        vm.getPropertyDetail(id: id)
+    }
+    
+    func backToPreviously() {
+        print ("ids: \(vm.propertyPreviewHistory)")
+        vm.propertyPreviewHistory.removeLast()
+        vm.getPropertyDetail(id: vm.propertyPreviewHistory.last ?? 1)
+      
+        print ("ids: \(vm.propertyPreviewHistory)")
     }
 }
 

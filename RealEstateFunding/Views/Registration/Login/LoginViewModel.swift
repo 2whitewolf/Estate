@@ -67,8 +67,6 @@ class LoginViewModel: ObservableObject {
     func login_with_Apple(){
         
     }
-
-
     
     func forgetPassword(){
         networking.forgotPassword(email: email)
