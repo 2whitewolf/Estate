@@ -33,8 +33,8 @@ struct ForgotPasswordView: View {
                         
                         
                         Button {
+//                            vm.forgetPassword()
                             vm.state = vm.state.next()
-                          // vm.changePassword()
                         } label: {
                             Text("Reset Password")
                                 .fontWeight(.semibold)

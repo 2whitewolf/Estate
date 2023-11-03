@@ -44,6 +44,17 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    func logout(){
+        withAnimation{
+            currentState = .login
+        }
+         user = nil
+        keychain.set("", forKey: "userToken")
+    }
+    
+    func deleteAccount(){
+        
+    }
 }
 enum AppState {
     case onboarding,appStart, login, registration, app

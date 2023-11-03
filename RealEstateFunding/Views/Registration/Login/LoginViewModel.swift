@@ -17,6 +17,7 @@ class LoginViewModel: ObservableObject {
     @Published var user: UserData?
     @Published var emailToChange: String = ""
     
+    
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
     let keychain = KeychainSwift()
@@ -87,8 +88,8 @@ class LoginViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
-    func changePassword() {
-        networking.changePassword(code: "", password: "")
+    func changePassword(code:String, password: String) {
+        networking.changePassword(code: code, password: password)
             .sink {[weak self] completion in
                 guard let self = self else { return }
                 switch completion {

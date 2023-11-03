@@ -40,6 +40,10 @@ protocol APIProtocol{
 
 
 class APIManager: APIProtocol{
+    
+    
+    let keychain = KeychainSwift()
+    
     func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?) {
         let url = makeUrl(make: .updateUser)
         let token = keychain.get("userToken") ?? ""
@@ -75,11 +79,7 @@ class APIManager: APIProtocol{
             return decoder
         }
     
-    
-    let keychain = KeychainSwift()
-//    let token = "173|Ul7Pz8OYvBESgFrmVy0zpV4Od0h27kqWDZLIkkvaff3bf362"
-    
-    
+
     
     func createInvoice(userId: Int, propertyId: Int, amount: Double) {
         let url = makeUrl(make: .getInvoice)
@@ -89,11 +89,6 @@ class APIManager: APIProtocol{
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)
         ]
-        /*
-         'user_id' => 'required|numeric',
-         'property_id' => 'required|numeric',
-         'amount' => 'required|numeric'
-         */
         
         let parameters: [String: String] = ["user_id": "\(userId)", "property_id": "\(userId)", "amount" : "\(amount)" ]
     
@@ -187,12 +182,6 @@ class APIManager: APIProtocol{
         let newPathComponent = "/\(provider.path)"
         let updatedURL = url.appendingPathComponent(newPathComponent)
          return updatedURL
-//         AF.request(updatedURL,method: method)
-//            .validate()
-//            .publishString()
-//            .value()
-//            .receive(on: DispatchQueue.main)
-//            .eraseToAnyPublisher()
     }
     
     func login(email: String, password: String) -> AnyPublisher<UserData, Alamofire.AFError> {

@@ -116,7 +116,7 @@ extension ProfileView {
                 .padding(.top)
                 
                 Button{
-                    
+                    appVM.logout()
                 } label: {
                     Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
                         .foregroundColor(.red)

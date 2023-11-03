@@ -66,7 +66,7 @@ struct PropertyImageView: View {
                     }
                 }
                 .padding(8)
-                .background(Color.gray)
+//                .background(Color.gray)
             }
         }
     }
