@@ -23,19 +23,20 @@ struct DataClass: Codable {
 // MARK: - Property
 struct PropertyDetail: Codable {
     let id: Int?
-    let name, totalPrice, price, annualProfit: String?
-    let sellPrice, appFee: String?
-    let additionalCharges: Int?
-    let period, handover, location, coordinateX: String?
-    let coordinateY, developer, developerSpecsTitle, developerSpecsSubtitle: String?
-    let type: String?
-    let bed, meter, sold, completed: Int?
-    let about: String?
-    let investors, needed, funded: Int?
-    let dldFee, dubXfee: Double?
-    let registrationFee: Int?
-    let netIncome: String?
-    let images: [ImageData]?
+    var name: String?
+    var totalPrice, price: Double?
+    var annualProfit: String?
+    var sellPrice, appFee,additionalCharges: Double?
+    var period, handover, location, coordinateX: String?
+    var coordinateY, developer, developerSpecsTitle, developerSpecsSubtitle: String?
+    var type: String?
+    var bed, meter, sold, completed: Int?
+    var about: String?
+    var investors, needed, funded: Int?
+    var dldFee, dubXfee: Double?
+    var registrationFee: Int?
+    var netIncome: String?
+    var images: [ImageData]?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -89,11 +90,11 @@ var samplePropertyDetail: PropertyDetailData  =  PropertyDetailData(
         property: PropertyDetail(
             id: 1,
             name: "updated1 2",
-            totalPrice: "122882.00",
-            price: "5652.00",
+            totalPrice: 122882.00,
+            price: 5652.00,
             annualProfit: "123",
-            sellPrice: "59999412.00",
-            appFee: "22.00",
+            sellPrice: 59999412.00,
+            appFee: 22.00,
             additionalCharges: 10002,
             period: "252",
             handover: "372",
@@ -128,7 +129,7 @@ var samplePropertyDetail: PropertyDetailData  =  PropertyDetailData(
         similar: [
             Property(
                 id: 5,
-                totalPrice:"1000000.00",
+                totalPrice:1000000.00,
                 annualProfit: "10, 20",
                 period: "2, 5",
                 location: "Sample Location3",
@@ -143,40 +144,6 @@ var samplePropertyDetail: PropertyDetailData  =  PropertyDetailData(
                         id: nil,
                         path: "property/5/images/img1.jpeg",
                         mainImage: nil)
-                ]
-            ),
-            Property(
-                id: 29,
-                totalPrice: "1.00",
-                annualProfit: "3",
-                period: "7",
-                location: "mol",
-                bed: 3,
-                meter: 42,
-                type: "Ready",
-                invested: nil,
-                investors: nil,
-                funded: nil,
-                images: []
-            ),
-            Property(
-                id: 31,
-                totalPrice: "11111.00",
-                annualProfit: "2",
-                period: "6",
-                location: "mol",
-                bed: 3323,
-                meter: 22,
-                type: "Ready",
-                invested: nil,
-                investors: nil,
-                funded: nil,
-                images: [
-                    ImageData(
-                        id: nil,
-                        path: "property/31/images/heart.png",
-                        mainImage: nil
-                    )
                 ]
             )
         ]

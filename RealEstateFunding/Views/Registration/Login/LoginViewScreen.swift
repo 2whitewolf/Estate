@@ -31,6 +31,12 @@ struct LoginViewScreen: View {
             }
         }
         .environmentObject(vm)
+        .onChange(of: vm.user) { user in
+            if let user = user {
+                appVM.user = user.user
+                appVM.currentState = .app
+            }
+        }
     }
 }
 

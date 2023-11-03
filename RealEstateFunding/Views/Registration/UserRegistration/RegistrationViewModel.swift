@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import KeychainSwift
+
 class RegistrationViewModel: ObservableObject {
     @Published var currentState: RegistrationStates = .signUp {
         didSet{
@@ -53,6 +55,9 @@ class RegistrationViewModel: ObservableObject {
     
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
+    let keychain = KeychainSwift()
+    
+    
     init(){
         
     }
@@ -86,6 +91,8 @@ class RegistrationViewModel: ObservableObject {
                             }
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
+                            user = value.user
+                            keychain.set(value.token, forKey: "userToken")
                             currentState = currentState.next()
                         }
             .store(in: &subscriptions)

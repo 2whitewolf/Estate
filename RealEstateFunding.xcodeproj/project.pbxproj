@@ -11,6 +11,7 @@
 		8B1603DD2AF129C400A68981 /* LoginViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1603DC2AF129C400A68981 /* LoginViewScreen.swift */; };
 		8B1603DF2AF1336100A68981 /* LoginHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1603DE2AF1336100A68981 /* LoginHeader.swift */; };
 		8B1603E12AF14B3300A68981 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1603E02AF14B3300A68981 /* PasswordResetView.swift */; };
+		8B1604122AF4E5A000A68981 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1604112AF4E5A000A68981 /* UserDefaultsManager.swift */; };
 		8B20CE5B2AB0540100FB3ECA /* RealEstateFundingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE5A2AB0540100FB3ECA /* RealEstateFundingApp.swift */; };
 		8B20CE5F2AB0540300FB3ECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B20CE5E2AB0540300FB3ECA /* Assets.xcassets */; };
 		8B20CE622AB0540300FB3ECA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B20CE612AB0540300FB3ECA /* Preview Assets.xcassets */; };
@@ -84,6 +85,7 @@
 		8B1603DE2AF1336100A68981 /* LoginHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeader.swift; sourceTree = "<group>"; };
 		8B1603E02AF14B3300A68981 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		8B1603E22AF1543A00A68981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8B1604112AF4E5A000A68981 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8B20CE572AB0540100FB3ECA /* RealEstateFunding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstateFunding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B20CE5A2AB0540100FB3ECA /* RealEstateFundingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateFundingApp.swift; sourceTree = "<group>"; };
 		8B20CE5E2AB0540300FB3ECA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			children = (
 				8BA8378E2ACEC4FA008DCF3D /* APIManager.swift */,
 				8BA837B62AD6986F008DCF3D /* BackendAPIServices.swift */,
+				8B1604112AF4E5A000A68981 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				8BA837B72AD6986F008DCF3D /* BackendAPIServices.swift in Sources */,
 				8B49CC0A2AB9E43B00F1800B /* PropertyDetailView.swift in Sources */,
 				8B1603DF2AF1336100A68981 /* LoginHeader.swift in Sources */,
+				8B1604122AF4E5A000A68981 /* UserDefaultsManager.swift in Sources */,
 				8B20CE5B2AB0540100FB3ECA /* RealEstateFundingApp.swift in Sources */,
 				8B20CE732AB07A0A00FB3ECA /* PropertiesList.swift in Sources */,
 				8B49CBF32AB8440300F1800B /* CitizenshipView.swift in Sources */,

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var appVM: AppViewModel
     @State var notify: Bool = false
     var body: some View {
         ZStack{
@@ -52,75 +53,76 @@ struct ProfileView_Previews: PreviewProvider {
 extension ProfileView {
     private var personalInfoView: some View {
         VStack{
-            HStack{
-                Text("Personal Information")
-                    .font(.system(size: 20).weight(.semibold))
-                    .foregroundColor(.black)
-                 Spacer()
-            }
-            
-            HStack{
-                Text("Full name")
-                    .font(.system(size: 15))
-                 Spacer()
+            if let user = appVM.user {
+                HStack{
+                    Text("Personal Information")
+                        .font(.system(size: 20).weight(.semibold))
+                        .foregroundColor(.black)
+                    Spacer()
+                }
                 
-                Text("John Due")
-                    .font(.system(size: 16).weight(.semibold))
+                HStack{
+                    Text("Full name")
+                        .font(.system(size: 15))
+                    Spacer()
                     
-            }
-            .foregroundColor(.black)
-            .padding(.top)
-            
-            HStack{
-                Text("Email")
-                    .font(.system(size: 15))
-                 Spacer()
-                
-                Text("email@example.com")
-                    .font(.system(size: 16).weight(.semibold))
-                 Image(systemName: "square.on.square")
-                    .foregroundColor(.gray)
+                    Text(user.name ?? "")
+                        .font(.system(size: 16).weight(.semibold))
                     
-            }
-            .foregroundColor(.black)
-            .padding(.top)
-            
-            HStack{
-                Text("Phone number")
-                    .font(.system(size: 15))
-                 Spacer()
+                }
+                .foregroundColor(.black)
+                .padding(.top)
                 
-                Text("+123456789")
-                    .font(.system(size: 16).weight(.semibold))
-                 Image(systemName: "square.on.square")
-                    .foregroundColor(.gray)
+                HStack{
+                    Text("Email")
+                        .font(.system(size: 15))
+                    Spacer()
                     
-            }
-            .foregroundColor(.black)
-            .padding(.top)
-            
-            HStack{
-                Text("Investor Type")
-                    .font(.system(size: 15))
-                 Spacer()
-                
-                Text("Retail")
-                    .font(.system(size: 16).weight(.semibold))
-                 Image(systemName: "info.circle")
-                    .foregroundColor(.gray)
+                    Text(user.email ?? "")
+                        .font(.system(size: 16).weight(.semibold))
+                    Image(systemName: "square.on.square")
+                        .foregroundColor(.gray)
                     
-            }
-            .foregroundColor(.black)
-            .padding(.top)
-            
-            Button{
+                }
+                .foregroundColor(.black)
+                .padding(.top)
                 
-            } label: {
-                Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
-                    .foregroundColor(.red)
+                HStack{
+                    Text("Phone number")
+                        .font(.system(size: 15))
+                    Spacer()
+                    
+                    Text(user.phone ?? "")
+                        .font(.system(size: 16).weight(.semibold))
+                    Image(systemName: "square.on.square")
+                        .foregroundColor(.gray)
+                    
+                }
+                .foregroundColor(.black)
+                .padding(.top)
+                
+                HStack{
+                    Text("Investor Type")
+                        .font(.system(size: 15))
+                    Spacer()
+                    
+                    Text("Retail")
+                        .font(.system(size: 16).weight(.semibold))
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.gray)
+                    
+                }
+                .foregroundColor(.black)
+                .padding(.top)
+                
+                Button{
+                    
+                } label: {
+                    Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        .foregroundColor(.red)
+                }
+                .padding(.top)
             }
-            .padding(.top)
-           
         }
         .modifier(CornerBackground())
     }

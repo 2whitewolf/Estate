@@ -42,6 +42,7 @@ protocol APIProtocol{
 class APIManager: APIProtocol{
     func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?) {
         let url = makeUrl(make: .updateUser)
+        let token = keychain.get("userToken") ?? ""
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)
         ]
@@ -76,7 +77,7 @@ class APIManager: APIProtocol{
     
     
     let keychain = KeychainSwift()
-    let token = "115|OJv7rPM2JuAQjMvmK4KNIPdTKi3a1ooPmFMUzBP02e930731"
+//    let token = "173|Ul7Pz8OYvBESgFrmVy0zpV4Od0h27kqWDZLIkkvaff3bf362"
     
     
     
@@ -84,7 +85,7 @@ class APIManager: APIProtocol{
         let url = makeUrl(make: .getInvoice)
         
         let method = BackendAPIService.getInvoice.method
-        
+        let token = keychain.get("userToken") ?? ""
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)
         ]
@@ -130,6 +131,8 @@ class APIManager: APIProtocol{
         
         let method = BackendAPIService.getById.method
         
+        let token = keychain.get("userToken") ?? ""
+        
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)
         ]
@@ -148,6 +151,8 @@ class APIManager: APIProtocol{
         let url = makeUrl(make: .getAll)
         
         let method = BackendAPIService.getAll.method
+        
+        let token = keychain.get("userToken") ?? ""
         
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)]

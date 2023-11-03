@@ -18,33 +18,32 @@ class AppViewModel: ObservableObject {
             }
         }
     }
-    @Published var registrationCompleted: Bool = false
-    @Published var user: User?
+    
+    @Published var user: User? {
+        didSet{
+            userDefaults.user = user
+        }
+    }
+    
     @Published var userToken: String = ""
+    
+    
+    var userDefaults = UserDefaultsManager.shared
     let keychain = KeychainSwift()
     
+    
+    
     init(){
+      user = userDefaults.user
         userToken = keychain.get("userToken") ?? ""
         if presented {
             currentState = .appStart
-        } else if !userToken.isEmpty {
+        }
+        if !userToken.isEmpty {
             currentState = .app
         }
     }
-    func login() {
-    }
     
-    
-    func register(){
-        
-    }
-    
-    func forgetPassword(){
-        
-    }
-    func newPassword(){
-        
-    }
 }
 enum AppState {
     case onboarding,appStart, login, registration, app

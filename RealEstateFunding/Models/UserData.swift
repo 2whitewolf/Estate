@@ -16,12 +16,12 @@ struct UserData: Codable {
 // MARK: - User
 struct User: Codable {
     let id: Int
-    let name, email, birth, phone: String
-    let citizenship, country, city, address: String
-    let employment, organization, orgRole, workingPeriod: String
-    let industry, income, netWorth: String
+    let name, email, birth, phone: String?
+    let citizenship, country, city, address: String?
+    let employment, organization, orgRole, workingPeriod: String?
+    let industry, income, netWorth: String?
     let emailVerifiedAt: String?
-    let stripeID: String
+    let stripeID: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name, email, birth, phone, citizenship, country, city, address, employment, organization
@@ -55,5 +55,13 @@ extension User: Equatable {
                 lhs.netWorth == rhs.netWorth &&
                 lhs.emailVerifiedAt == rhs.emailVerifiedAt &&
                 lhs.stripeID == rhs.stripeID
+        }
+}
+
+
+extension UserData: Equatable {
+    static func == (lhs: UserData, rhs: UserData) -> Bool {
+            return lhs.token == rhs.token &&
+                lhs.user == rhs.user 
         }
 }

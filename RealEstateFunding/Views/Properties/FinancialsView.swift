@@ -24,7 +24,7 @@ struct FinancialsView: View {
             .pickerStyle(.segmented)
             if let property = vm.propertyDetail {
                 if selected == 0 {
-                    FinancialsCellView(title: "Property Price", second: "AED " +  (property.price ?? ""))
+                    FinancialsCellView(title: "Property Price", second: "AED " +  (property.price?.rotate(1) ?? ""))
                     HStack{
                         Text("Transaction Costs")
                             .font(.system(size: 13))

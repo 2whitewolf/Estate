@@ -15,23 +15,9 @@ struct PropertyCellView: View {
         ZStack{
             
             PropertyImageView(images: property.images, alignment: .top)
-            
-           
-//            WebImage(url: URL(string: "https://afehe-hwf.buzz/storage/" + (property.images.first?.path ?? ""))).placeholder(
-//           Image("propertyBackImage")
-////
-//           )
-//            .resizable()
-//            .scaledToFit()
-//                           .cornerRadius(40)
-//                           .frame(maxHeight: 400)
-//                           .frame(maxWidth: .infinity)
-            
+        
             VStack{
               propertyHeader
-                Spacer()
-                Text("\(property.id ?? 1)")
-                    .foregroundColor(.black)
                 Spacer()
                 propertyInfo
                
@@ -139,11 +125,11 @@ extension PropertyCellView {
             VStack(spacing: 4) {
                 HStack{
                     Text("AED ")
-                        .font(.system(size: 13).weight(.semibold)) + Text(property.totalPrice ?? "")
+                        .font(.system(size: 13).weight(.semibold)) + Text(property.totalPrice?.rotate(2) ?? "")
                         .font(.system(size: 17).weight(.semibold))
                     Spacer()
                     
-                    Text("\(property.invested?.value ?? 0)" + "%")
+                    Text("\(property.invested ?? 0)" + "%")
                         .foregroundColor(.gray)
                         .font(.system(size: 13))
                     

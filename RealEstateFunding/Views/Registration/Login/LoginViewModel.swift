@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import KeychainSwift
 
 class LoginViewModel: ObservableObject {
 
@@ -15,8 +16,10 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var user: UserData?
     @Published var emailToChange: String = ""
+    
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
+    let keychain = KeychainSwift()
     
     init(){
         
@@ -36,6 +39,8 @@ class LoginViewModel: ObservableObject {
                             guard let self = self else { return }
                             print(value)
                             self.user = value
+                            keychain.set(value.token, forKey: "userToken")
+                            
                         }
             .store(in: &subscriptions)
 

@@ -177,7 +177,7 @@ extension PropertyDetailView{
                 Text("AED")
                     .font(.system(size: 15).weight(.semibold))
                     .foregroundColor(.blue)
-                + Text(property.totalPrice ?? "")
+                + Text(property.totalPrice?.rotate(1) ?? "")
                     .foregroundColor(.blue)
                     .font(.system(size: 28).weight(.bold))
                 

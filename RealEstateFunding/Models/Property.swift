@@ -8,28 +8,28 @@
 
 
 
- var sampleProp = Property(id: 1,
-                     totalPrice: "122882.00",
-                     annualProfit: "123",
-                     period: "252",
-                     location: "Sample Location 2",
-                     bed: 2,
-                     meter: 120,
-                     type: "ready",
-                           invested: nil,
-//                     invested: "",
-                     investors: 0,
-                     funded: 0,
-                     images: [
-                        ImageData(id: 41,
-                                  path: "property/1/images/heart.png",
-                                  mainImage: 1),
-                        ImageData(id: 48,
-                                  path: "property/1/images/png-icon.png",
-                                  mainImage: 0)])
+var sampleProp = Property(id: 1,
+                          totalPrice: 122882.0,
+                          annualProfit: "123",
+                          period: "252",
+                          location: "Sample Location 2",
+                          bed: 2,
+                          meter: 120,
+                          type: "ready",
+                          invested: nil,
+                          //                     invested: "",
+                          investors: 0,
+                          funded: 0,
+                          images: [
+                            ImageData(id: 41,
+                                      path: "property/1/images/heart.png",
+                                      mainImage: 1),
+                            ImageData(id: 48,
+                                      path: "property/1/images/png-icon.png",
+                                      mainImage: 0)])
 import Foundation
 
- //MARK: - PropertyData
+//MARK: - PropertyData
 struct PropertyData: Codable {
     let responseCode: ResponseCode
     let data: [Property]
@@ -39,15 +39,16 @@ struct PropertyData: Codable {
 // MARK: - Datum
 struct Property: Codable {
     let id: Int?
-    let totalPrice, annualProfit, period, location: String?
-    let bed, meter: Int?
-    let type: String? // TypeEnum
-//    let invested: String?
-//    let invested: Int?
-    let invested: Invested?
-    let investors, funded: Int?
-    let images: [ImageData]
-
+    var totalPrice: Double?
+    var  annualProfit, period, location: String?
+    var bed, meter: Int?
+    var type: String? // TypeEnum
+    //    let invested: String?
+    //    let invested: Int?
+    //    let invested: Invested?
+    var invested,investors, funded: Int?
+    var images: [ImageData]
+    
     enum CodingKeys: String, CodingKey {
         case id
         case totalPrice = "total_price"
@@ -59,9 +60,9 @@ struct Property: Codable {
 // MARK: - Image
 struct ImageData: Codable {
     let id: Int?
-    let path: String?
-    let mainImage: Int?
-
+    var path: String?
+    var mainImage: Int?
+    
     enum CodingKeys: String, CodingKey {
         case id, path
         case mainImage = "main_image"
@@ -83,7 +84,7 @@ struct ResponseCode: Codable {
 enum Invested: Codable {
     case integer(Int)
     case string(String)
-
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let x = try? container.decode(Int.self) {
@@ -96,7 +97,7 @@ enum Invested: Codable {
         }
         throw DecodingError.typeMismatch(Invested.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Invested"))
     }
-
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
