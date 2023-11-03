@@ -24,87 +24,91 @@ struct PropertyDetailView: View {
             VStack{
                 ScrollViewReader { value in
                     ScrollView(showsIndicators: false) {
-                        ZStack(alignment: .top){
-                            if let property = vm.propertyDetail {
-                                PropertyImageView(images: property.images ?? [] , alignment: .bottom)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height:400)
-                                    .cornerRadius(52)
-                                    .padding(.top,8)
-                                    .id(1)
-                            }
-                            
-                            HStack{
-                                Button {
-                                    if vm.propertyPreviewHistory.count <= 1 {
-                                        presentation.wrappedValue.dismiss()
-                                    } else {
-                                        backToPreviously()
+                        LazyVStack {
+                            ZStack(alignment: .top){
+                                if let property = vm.propertyDetail {
+                                    PropertyImageView(images: property.images ?? [] , alignment: .bottom)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height:400)
+                                        .cornerRadius(52)
+                                        .padding(.top,8)
+                                      
+                                }
+                                
+                                HStack{
+                                    Button {
+                                        if vm.propertyPreviewHistory.count <= 1 {
+                                            presentation.wrappedValue.dismiss()
+                                            vm.propertyDetail = nil
+                                        } else {
+                                            backToPreviously()
+                                        }
+                                    } label: {
+                                        Image(systemName: "arrow.left")
+                                            .foregroundColor(.white)
+                                            .padding(12)
+                                            .background(
+                                                Circle().fill(Color.black.opacity(0.5))
+                                            )
                                     }
-                                } label: {
-                                    Image(systemName: "arrow.left")
+                                    Spacer()
+                                    Image(systemName: "bookmark.fill")
                                         .foregroundColor(.white)
                                         .padding(12)
                                         .background(
                                             Circle().fill(Color.black.opacity(0.5))
                                         )
+                                    
+                                    Image(systemName: "arkit")
+                                        .foregroundColor(.white)
+                                        .padding(12)
+                                        .background(
+                                            Circle().fill(Color.black.opacity(0.5))
+                                        )
+                                    
+                                    
                                 }
+                                .padding(.top,55)
+                                .padding(.horizontal)
+                            }
+                            .id(1)
+                      
+                            propertyPriceView
+                            
+                            propertyDescription
+                            
+                            InvestmentCalculatorView()
+                            
+                            FinancialsView()
+                            
+                            if let property = vm.propertyDetail {
+                                PropertyLocationView(coordinate: CLLocationCoordinate2D(latitude: property.coordinateX?.toDouble() ?? 0 , longitude: property.coordinateY?.toDouble() ?? 0))
+                            }
+                            
+                            aboutPropertyView
+                            
+                            HStack{
+                                Text("Similar properties")
+                                    .font(.system(size: 20).weight(.semibold))
+                                    .foregroundColor(.black)
                                 Spacer()
-                                Image(systemName: "bookmark.fill")
-                                    .foregroundColor(.white)
-                                    .padding(12)
-                                    .background(
-                                        Circle().fill(Color.black.opacity(0.5))
-                                    )
-                                
-                                Image(systemName: "arkit")
-                                    .foregroundColor(.white)
-                                    .padding(12)
-                                    .background(
-                                        Circle().fill(Color.black.opacity(0.5))
-                                    )
-                                
-                                
                             }
-                            .padding(.top,55)
-                            .padding(.horizontal)
-                        }
-                        
-                        propertyPriceView
-                        
-                        propertyDescription
-                        
-                        InvestmentCalculatorView()
-                        
-                        FinancialsView()
-                        
-                        if let property = vm.propertyDetail {
-                            PropertyLocationView(coordinate: CLLocationCoordinate2D(latitude: property.coordinateX?.toDouble() ?? 0 , longitude: property.coordinateY?.toDouble() ?? 0))
-                        }
-                        
-                        aboutPropertyView
-                        
-                        HStack{
-                            Text("Similar properties")
-                                .font(.system(size: 20).weight(.semibold))
-                                .foregroundColor(.black)
-                            Spacer()
-                        }
-                        if let  similars = vm.similar {
-                            VStack(spacing: 10) {
-                                ForEach(similars, id: \.id) { property in
-                                    PropertyCellView(property: property, image: "")
-                                        .onTapGesture {
-                                            withAnimation(.spring()){
-                                                addPropertyToHistory(id: property.id ?? 1)
-//                                                vm.getPropertyDetail(id: property.id ?? 1)
-                                                value.scrollTo(1)
+                            if let  similars = vm.similar {
+                                VStack(spacing: 10) {
+                                    ForEach(similars, id: \.id) { property in
+                                        PropertyCellView(property: property, image: "")
+                                            .onTapGesture {
+                                                withAnimation(.spring()){
+                                                    addPropertyToHistory(id: property.id ?? 1)
+                                                    //                                                vm.getPropertyDetail(id: property.id ?? 1)
+                                                    value.scrollTo(1)
+                                                }
                                             }
-                                        }
+                                    }
+                                    
                                 }
-                                
+                                .padding(.bottom,105)
                             }
-                            .padding(.bottom,105)
                         }
                     }
                 }

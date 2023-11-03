@@ -20,19 +20,20 @@ struct PropertiesList: View {
                titleView
                     .padding(.top,6)
                 ScrollView(showsIndicators: false) {
-                    ForEach(vm.properties, id: \.id) { property in
-                        NavigationLink{
-//                            InvestmentDetails()
-                            PropertyDetailView(id: property.id ?? 0)
-                                .navigationBarHidden(true)
-                                .environmentObject(vm)
-                                .environmentObject(appVM)
-                        } label: {
-                            PropertyCellView(property: property, image: "")
+                    LazyVStack {
+                        ForEach(vm.properties, id: \.id) { property in
+                            NavigationLink{
+                                //                            InvestmentDetails()
+                                PropertyDetailView(id: property.id ?? 0)
+                                    .navigationBarHidden(true)
+                                    .environmentObject(vm)
+                                    .environmentObject(appVM)
+                            } label: {
+                                PropertyCellView(property: property, image: "")
+                            }
+                            
                         }
-                        
                     }
-                    
                 }
                 .padding(.top,23)
                 
