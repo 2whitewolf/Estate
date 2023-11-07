@@ -92,9 +92,10 @@ struct CitizenshipView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
-                        .background(Color.blue)
+                        .background(vm.countryCode.isEmpty ? Color.gray :  Color.blue)
                         .cornerRadius(12)
                 }
+                .disabled(vm.countryCode.isEmpty)
                 .padding(.bottom, 20)
             }
             .padding(.horizontal,24)

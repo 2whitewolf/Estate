@@ -23,9 +23,7 @@ struct PropertyImageView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.screenWidth - 16)
-                    .frame(height:400)
-                    
-//                    .scaledToFit()
+                    .frame(height:alignment == .bottom ? 283 : 400)
                     .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                         .onEnded({ value in
                             if value.translation.width < 0 {
@@ -46,7 +44,7 @@ struct PropertyImageView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: UIScreen.screenWidth - 16)
-                    .frame(height:400)
+                    .frame(height:alignment == .bottom ? 283 : 400)
             }
             
             if images.count > 1{
@@ -66,7 +64,7 @@ struct PropertyImageView: View {
                     }
                 }
                 .padding(8)
-//                .background(Color.gray)
+                //                .background(Color.gray)
             }
         }
     }

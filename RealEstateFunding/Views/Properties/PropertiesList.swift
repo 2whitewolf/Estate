@@ -78,8 +78,6 @@ extension PropertiesList {
             } label: {
                 Image(systemName: "bell")
                     .font(.system(size: 20))
-//                    .foregroundColor(.blue)
-                   
                     .frame(width: 44, height: 44)
                     .background(Circle().stroke(Color.gray, lineWidth: 0.5))
             }

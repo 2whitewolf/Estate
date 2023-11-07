@@ -10,13 +10,16 @@ import Combine
 import KeychainSwift
 
 class RegistrationViewModel: ObservableObject {
-    @Published var currentState: RegistrationStates = .signUp {
+    @Published var currentState: RegistrationStates = .signUp{
         didSet{
             switch currentState {
             case .signUp:
                 header = .home
+                
+            case .inputData :
+                header = .skip
        
-            case  .inputData,.selectCitizenship,.currentLive,.employmentStatus,.annualIncome,.netWorth:
+            case .selectCitizenship,.currentLive,.employmentStatus,.annualIncome,.netWorth:
                 header = .back_home
 
                 
@@ -29,6 +32,13 @@ class RegistrationViewModel: ObservableObject {
     @Published var showingSheet: Bool = false
     @Published var loginProviderUrl: URL? 
     @Published var header: RegistrationHeader = .home
+    @Published var verifyEmail: Bool = false {
+        didSet{
+            if !verifyEmail {
+                currentState = currentState.next()
+            }
+        }
+    }
     
     //MARK: User data inputs
     @Published var email: String = ""
@@ -91,9 +101,10 @@ class RegistrationViewModel: ObservableObject {
                             }
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
-                            user = value.user
+//                            user = value.user
                             keychain.set(value.token, forKey: "userToken")
-                            currentState = currentState.next()
+
+                            verifyEmail = true
                         }
             .store(in: &subscriptions)
         
@@ -113,6 +124,7 @@ class RegistrationViewModel: ObservableObject {
                               industry: "",
                               income: annualIncome?.value,
                               net_worth: worth?.value)
+        
 //            .sink {[weak self] completion in
 //                            guard let self = self else { return }
 //                            switch completion {
@@ -126,6 +138,7 @@ class RegistrationViewModel: ObservableObject {
 //                            currentState = currentState.next()
 //                        }
 //            .store(in: &subscriptions)
+        
     }
     
     func forgetPassword(){

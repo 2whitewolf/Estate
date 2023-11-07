@@ -14,7 +14,7 @@ struct PropertyCellView: View {
     var body: some View {
         ZStack{
             
-            PropertyImageView(images: property.images, alignment: .top)
+            PropertyImageView(images: property.images, alignment: .top )
         
             VStack{
               propertyHeader
@@ -143,8 +143,6 @@ extension PropertyCellView {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color.blue)
                         .frame(width: 50)
-//                        .frame(width: CGFloat( property.invested?.toInt() ?? 0))
-                    
                 }
                 .frame(height: 4)
                 

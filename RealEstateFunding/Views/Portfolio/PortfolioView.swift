@@ -45,7 +45,6 @@ struct PortfolioView: View {
                     transactionsView
                     
                     annualInvestmentLimitView
-//                        .padding(.bottom,20)
                     
                     
                 }

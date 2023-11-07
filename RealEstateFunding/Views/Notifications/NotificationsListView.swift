@@ -32,7 +32,6 @@ struct NotificationsListView: View {
                         .font(.system(size: 34).weight(.bold))
                      Spacer()
                 }
-//                .padding(.top,50)
                 .padding(.leading,22)
                 
                 
@@ -52,9 +51,9 @@ struct NotificationsListView: View {
 
 struct NotificationsListView_Previews: PreviewProvider {
     static var previews: some View {
-//        NavigationView {
+
             NotificationsListView()
-//        }
+
     }
 }
 

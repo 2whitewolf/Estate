@@ -40,7 +40,6 @@ struct OnboardingView: View {
                             } else {
                                 index = 1
                             }
-//                            index = index == 0 ? 1 : 0
                         }
                     } label: {
                         Text("Continue")
@@ -61,7 +60,6 @@ struct OnboardingView: View {
                             .frame(width:24, height: 3)
                     }
                 }
-//                .padding(.horizontal, 20)
                 .padding(.bottom, 30)
             }
             .padding(.horizontal,24)

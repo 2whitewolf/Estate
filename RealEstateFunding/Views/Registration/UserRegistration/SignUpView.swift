@@ -7,6 +7,7 @@
 
 import SwiftUI
 import iPhoneNumberField
+import PopupView
 
 
 
@@ -62,8 +63,9 @@ struct SignUpView: View {
             .foregroundColor(.customGray)
             .padding(.horizontal,24)
         }
+       
         .sheet(isPresented: $vm.showingSheet) {
-            WebRepresent(url: vm.loginProviderUrl!)
+            WebRepresent(user: $vm.user, url: vm.loginProviderUrl!)
               }
     }
 }
@@ -92,12 +94,8 @@ extension SignUpView {
         VStack{
             
             Button{
-                vm.register()
-//                RegistrationViewScreen()
-//                withAnimation{
-//                    vm.currentState =  vm.currentState.next()
-//                }
-                
+//                vm.register()
+                vm.verifyEmail.toggle()
             } label: {
                 Text("Create account")
                     .foregroundColor(.white)

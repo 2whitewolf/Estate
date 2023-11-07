@@ -10,15 +10,10 @@ import SwiftUI
 struct InvestmentCalculatorView: View {
     @State var slider1: Double = 1000
     @State var slider2: Double = 5.0
-//    lazy var returnedValue: Double = {
-//      return self.slider1 + self.slider1 * self.slider2 / 100.0
-//    }()
-    
     func xValue() -> Double {
         return self.slider1 + self.slider1 * self.slider2 / 100.0
          
     }
-//    @State var n =
     
     
     var body: some View {

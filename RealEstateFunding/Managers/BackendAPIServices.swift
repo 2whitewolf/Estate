@@ -20,16 +20,13 @@ enum BackendAPIService {
     var baseURL: String {
       return "https://afehe-hwf.buzz/api"
     }
-//    var baseUrl : URL{
-//        return URL(string:"https://afehe-hwf.buzz/api")!
-//    }
     var path: String {
         switch self {
        
         case .login:
             return "/login"
         case .register:
-          return  "/password"
+          return  "/register"
         case .updateUser:
           return  "/update"
         case .forget_password:
@@ -54,13 +51,5 @@ enum BackendAPIService {
             return .get
         }
     }
-    
-//    var headers: String {
-//        ""
-//    }
-//    
-//    var parameters: String {
-//        ""
-//    }
-    
+
 }

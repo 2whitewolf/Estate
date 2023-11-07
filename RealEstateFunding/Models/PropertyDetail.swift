@@ -1,9 +1,9 @@
-////
-////  PropertyDetail.swift
-////  RealEstateFunding
-////
-////  Created by iMacRoman on 19.10.2023.
-////
+//
+//  PropertyDetail.swift
+//  RealEstateFunding
+//
+//  Created by iMacRoman on 19.10.2023.
+//
 //
 
 import Foundation
@@ -62,23 +62,6 @@ struct PropertyDetail: Codable {
 extension PropertyDetail: Equatable {
     static func == (lhs: PropertyDetail, rhs: PropertyDetail) -> Bool {
             return lhs.id == rhs.id //&&
-//                lhs.name == rhs.name &&
-//                lhs.email == rhs.email &&
-//                lhs.birth == rhs.birth &&
-//                lhs.phone == rhs.phone &&
-//                lhs.citizenship == rhs.citizenship &&
-//                lhs.country == rhs.country &&
-//                lhs.city == rhs.city &&
-//                lhs.address == rhs.address &&
-//                lhs.employment == rhs.employment &&
-//                lhs.organization == rhs.organization &&
-//                lhs.orgRole == rhs.orgRole &&
-//                lhs.workingPeriod == rhs.workingPeriod &&
-//                lhs.industry == rhs.industry &&
-//                lhs.income == rhs.income &&
-//                lhs.netWorth == rhs.netWorth &&
-//                lhs.emailVerifiedAt == rhs.emailVerifiedAt &&
-//                lhs.stripeID == rhs.stripeID
         }
 }
 

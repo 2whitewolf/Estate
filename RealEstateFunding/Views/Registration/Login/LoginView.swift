@@ -74,6 +74,9 @@ struct LoginView: View {
                 .foregroundColor(.customGray)
                 .padding(.horizontal,24)
         }
+        .sheet(isPresented: $vm.showingSheet) {
+            WebRepresent(user: $vm.user, url: vm.loginProviderUrl!)
+              }
     }
 }
 
@@ -101,36 +104,40 @@ extension LoginView {
     }
     private var buttonsView: some View {
         VStack{
-            
-            HStack{
-                Image(systemName: "apple.logo")
-                    .foregroundColor(.black)
-                
-                Text("Sign up with Apple")
-                    .fontWeight(.semibold)
+            Button {
+                vm.loginWithApple()
+            } label: {
+                HStack{
+                    Image(systemName: "apple.logo")
+                        .foregroundColor(.black)
+                    
+                    Text("Sign up with Apple")
+                        .fontWeight(.semibold)
+                }
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.black, lineWidth: 1)
+                )
             }
-           
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .background(RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.black, lineWidth: 1)
-            )
-            
-            
-            HStack{
-                Image("googleLogo")
+            Button {
+                vm.loginWithGoogle()
+            } label: {
                 
-                Text("Sign up with Google")
-                    .fontWeight(.semibold)
+                HStack{
+                    Image("googleLogo")
+                    
+                    Text("Sign up with Google")
+                        .fontWeight(.semibold)
+                }
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.black, lineWidth: 1)
+                )
             }
-           
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .background(RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.black, lineWidth: 1)
-            )
         }
     }
 }

@@ -67,6 +67,7 @@ struct NetWorthView: View {
                 Button {
                     withAnimation{
                         vm.currentState =  vm.currentState.next()
+                        vm.updateUser()
                     }
                     
                 } label: {

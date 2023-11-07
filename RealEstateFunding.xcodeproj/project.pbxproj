@@ -47,6 +47,9 @@
 		8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC0F2ABB0ECB00F1800B /* InvestmentCalculatorView.swift */; };
 		8B49CC122ABB224600F1800B /* FinancialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC112ABB224600F1800B /* FinancialsView.swift */; };
 		8B49CC152ABB34EA00F1800B /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC142ABB34EA00F1800B /* FavouritesView.swift */; };
+		8B58D6892AF8DF0F000EB557 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B58D6882AF8DF0F000EB557 /* SwiftSoup */; };
+		8B58D68B2AF9177C000EB557 /* VerifyMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68A2AF9177C000EB557 /* VerifyMail.swift */; };
+		8B58D68D2AFA4454000EB557 /* KeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */; };
 		8B5ECCD82AE009270068D5D1 /* PropertyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */; };
 		8B5ECCDB2AE1141D0068D5D1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B5ECCDA2AE1141D0068D5D1 /* KeychainSwift */; };
 		8B5ECCE02AE146F60068D5D1 /* Double + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */; };
@@ -120,6 +123,8 @@
 		8B49CC0F2ABB0ECB00F1800B /* InvestmentCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentCalculatorView.swift; sourceTree = "<group>"; };
 		8B49CC112ABB224600F1800B /* FinancialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsView.swift; sourceTree = "<group>"; };
 		8B49CC142ABB34EA00F1800B /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
+		8B58D68A2AF9177C000EB557 /* VerifyMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMail.swift; sourceTree = "<group>"; };
+		8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModifier.swift; sourceTree = "<group>"; };
 		8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCellView.swift; sourceTree = "<group>"; };
 		8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Ext.swift"; sourceTree = "<group>"; };
 		8B5ECCE12AE14F7C0068D5D1 /* PropertyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDetail.swift; sourceTree = "<group>"; };
@@ -158,6 +163,7 @@
 				8BA837922ACEC68B008DCF3D /* Alamofire in Frameworks */,
 				8B5ECCDB2AE1141D0068D5D1 /* KeychainSwift in Frameworks */,
 				8BA837952ACEC69B008DCF3D /* Reachability in Frameworks */,
+				8B58D6892AF8DF0F000EB557 /* SwiftSoup in Frameworks */,
 				8B20CE792AB08FF000FB3ECA /* iPhoneNumberField in Frameworks */,
 				8B49CBF12AB842BE00F1800B /* CountryPicker in Frameworks */,
 			);
@@ -233,6 +239,7 @@
 				8B49CC052AB9A90B00F1800B /* String + Ext.swift */,
 				8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */,
 				8BEBC35C2AEAA5180016FCA4 /* Enum + Ext.swift */,
+				8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -345,6 +352,7 @@
 				8BEBC3622AEBB4CA0016FCA4 /* AnnualIncomeView.swift */,
 				8BEBC3642AEBB7A50016FCA4 /* NetWorthView.swift */,
 				8B16039D2AEF9C1E00A68981 /* RegistrationHeaderView.swift */,
+				8B58D68A2AF9177C000EB557 /* VerifyMail.swift */,
 			);
 			path = UserRegistration;
 			sourceTree = "<group>";
@@ -422,6 +430,7 @@
 				8BA837942ACEC69B008DCF3D /* Reachability */,
 				8BA837972ACEC6B8008DCF3D /* SDWebImageSwiftUI */,
 				8B5ECCDA2AE1141D0068D5D1 /* KeychainSwift */,
+				8B58D6882AF8DF0F000EB557 /* SwiftSoup */,
 			);
 			productName = RealEstateFunding;
 			productReference = 8B20CE572AB0540100FB3ECA /* RealEstateFunding.app */;
@@ -459,6 +468,7 @@
 				8BA837932ACEC69B008DCF3D /* XCRemoteSwiftPackageReference "Reachability" */,
 				8BA837962ACEC6B8008DCF3D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8B5ECCD92AE1141D0068D5D1 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				8B58D6872AF8DF0F000EB557 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 8B20CE582AB0540100FB3ECA /* Products */;
 			projectDirPath = "";
@@ -503,10 +513,12 @@
 				8B6496C32AE92D0600C0A5A5 /* WebView.swift in Sources */,
 				8B20CE892AB1EB8800FB3ECA /* Keyboard + Ext.swift in Sources */,
 				8BEBC3652AEBB7A50016FCA4 /* NetWorthView.swift in Sources */,
+				8B58D68B2AF9177C000EB557 /* VerifyMail.swift in Sources */,
 				8B5ECCE22AE14F7C0068D5D1 /* PropertyDetail.swift in Sources */,
 				8B20CE8B2AB1F32400FB3ECA /* LoginView.swift in Sources */,
 				8B20CE762AB0867B00FB3ECA /* RegistrationStartView.swift in Sources */,
 				8B20CE812AB09B8300FB3ECA /* AppleSignInSwift.swift in Sources */,
+				8B58D68D2AFA4454000EB557 /* KeyboardModifier.swift in Sources */,
 				8BEBC3632AEBB4CA0016FCA4 /* AnnualIncomeView.swift in Sources */,
 				8B49CC012AB86E3C00F1800B /* ProfileView.swift in Sources */,
 				8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */,
@@ -779,6 +791,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		8B58D6872AF8DF0F000EB557 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.1;
+			};
+		};
 		8B5ECCD92AE1141D0068D5D1 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -828,6 +848,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B49CBF72AB84C4C00F1800B /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
+		};
+		8B58D6882AF8DF0F000EB557 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B58D6872AF8DF0F000EB557 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 		8B5ECCDA2AE1141D0068D5D1 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

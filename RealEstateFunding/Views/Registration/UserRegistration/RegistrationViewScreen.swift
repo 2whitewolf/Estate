@@ -34,8 +34,20 @@ struct RegistrationViewScreen: View {
                     TermsAndConditionsView()
                 case .investorTerms:
                     InvestorTermsView()
+              
                 }
             }
+        }
+        .popup(isPresented: $vm.verifyEmail){
+            VerifyMail()
+                .environmentObject(vm)
+                .cornerRadius(20, corners: [.topLeft, .topRight])
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
         }
         .environmentObject(vm)
         .onChange(of: vm.registrationCompleted){ newValue in
@@ -48,6 +60,7 @@ struct RegistrationViewScreen: View {
         .onChange(of: vm.user) { value in
             if let user = value {
                 appVM.user = user
+                vm.currentState = .inputData
             }
         }
     }

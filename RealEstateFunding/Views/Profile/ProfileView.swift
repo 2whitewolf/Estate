@@ -30,11 +30,14 @@ struct ProfileView: View {
                     preferencesView
                     
                     appInfo
-                    
-                    Label("Delete Account", systemImage: "trash")
-                        .foregroundColor(.red)
-                        .padding(.bottom,20)
-                        .padding(.top, 30)
+                    Button {
+                        appVM.logout()
+                    } label: {
+                        Label("Delete Account", systemImage: "trash")
+                            .foregroundColor(.red)
+                            .padding(.bottom,20)
+                            .padding(.top, 30)
+                    }
                 }
                 
             }.padding(.horizontal,8)

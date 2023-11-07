@@ -11,6 +11,13 @@ import iPhoneNumberField
 struct FillUserDataView: View {
     @EnvironmentObject var vm:RegistrationViewModel
     @State var datePickerShow: Bool = false
+    var button_enabled: Binding<Bool> {
+        Binding(get: {
+            !vm.name.isEmpty && !vm.number.isEmpty && !vm.promocode.isEmpty
+        }) { (newVal) in
+
+        }
+    }
 
     var body: some View {
         ZStack{
@@ -35,9 +42,11 @@ struct FillUserDataView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
-                        .background(Color.blue)
+                        .background(button_enabled.wrappedValue ?  Color.blue : Color.gray)
                         .cornerRadius(12)
+                       
                 }
+                .disabled(!button_enabled.wrappedValue)
                 
             }
             .padding(.bottom, 20)

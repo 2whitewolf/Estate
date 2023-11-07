@@ -13,6 +13,13 @@ struct UserData: Codable {
     let user: User
 }
 
+
+struct UserDataByProvider: Codable {
+   
+    let user: User
+    let token: String
+}
+
 // MARK: - User
 struct User: Codable {
     let id: Int

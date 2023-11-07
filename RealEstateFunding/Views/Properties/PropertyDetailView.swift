@@ -17,7 +17,7 @@ struct PropertyDetailView: View {
     @EnvironmentObject var vm: PropertiesViewModel
     @EnvironmentObject var appVM: AppViewModel
     var id: Int
-
+    
     var body: some View {
         ZStack(alignment: .bottom){
             Color.white.ignoresSafeArea()
@@ -29,10 +29,9 @@ struct PropertyDetailView: View {
                                 if let property = vm.propertyDetail {
                                     PropertyImageView(images: property.images ?? [] , alignment: .bottom)
                                         .frame(maxWidth: .infinity)
-                                        .frame(height:400)
                                         .cornerRadius(52)
                                         .padding(.top,8)
-                                      
+                                    
                                 }
                                 
                                 HStack{
@@ -72,7 +71,7 @@ struct PropertyDetailView: View {
                                 .padding(.horizontal)
                             }
                             .id(1)
-                      
+                            
                             propertyPriceView
                             
                             propertyDescription
@@ -124,7 +123,8 @@ struct PropertyDetailView: View {
                     InvestView()
                         .environmentObject(vm)
                         .environmentObject(appVM)
-                        
+                        .navigationBarHidden(true)
+                    
                 } label: {
                     Text("Invest")
                         .foregroundColor(.white)
@@ -150,7 +150,10 @@ struct PropertyDetailView: View {
         .onAppear{
             vm.getPropertyDetail(id: id)
         }
-
+        .onDisappear(perform: {
+            SDImageCache().clearMemory()
+        })
+        
     }
     
     func addPropertyToHistory(id: Int){
@@ -169,7 +172,7 @@ struct PropertyDetailView: View {
         print ("ids: \(vm.propertyPreviewHistory)")
         vm.propertyPreviewHistory.removeLast()
         vm.getPropertyDetail(id: vm.propertyPreviewHistory.last ?? 1)
-      
+        
         print ("ids: \(vm.propertyPreviewHistory)")
     }
 }
@@ -199,10 +202,10 @@ extension PropertyDetailView{
                     .background(RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.gray, lineWidth: 0.5))
             }
-                
-            }
-            .font(.system(size: 11).weight(.medium))
-            .foregroundColor(.gray)
+            
+        }
+        .font(.system(size: 11).weight(.medium))
+        .foregroundColor(.gray)
         
     }
     
@@ -276,56 +279,55 @@ extension PropertyDetailView{
     private var tegsView: some View {
         HStack(spacing: 8){
             if let property = vm.propertyDetail {
-            HStack{
-                Circle()
-                    .fill(Color.blue)
-                    .frame(width: 8)
-                Text(property.type ?? "")
-                    .font(.system(size: 11))
-                    .foregroundColor(.black)
+                HStack{
+                    Circle()
+                        .fill(Color.blue)
+                        .frame(width: 8)
+                    Text(property.type ?? "")
+                        .font(.system(size: 11))
+                        .foregroundColor(.black)
+                }
+                .frame(height:21)
+                .padding(.horizontal,8)
+                .background(Color(red: 0.95, green: 0.95, blue: 0.97))
+                .cornerRadius(12)
+                
+                
+                HStack{
+                    Text("AE".countryFlag)
+                    Text("Dubai")
+                        .font(.system(size: 11))
+                        .foregroundColor(.black)
+                }
+                .frame(height:21)
+                .padding(.horizontal,8)
+                .background(Color(red: 0.95, green: 0.95, blue: 0.97))
+                .cornerRadius(12)
+                
+                HStack{
+                    Image(systemName: "bed.double.fill")
+                        .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
+                    Text("\(property.bed ?? 0) Bed")
+                        .font(.system(size: 11))
+                        .foregroundColor(.black)
+                }
+                .frame(height:21)
+                .padding(.horizontal,8)
+                .background(Color(red: 0.95, green: 0.95, blue: 0.97))
+                .cornerRadius(12)
+                
+                HStack{
+                    Image("size")
+                        .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
+                    Text("\(property.meter ?? 0) sq.ft")
+                        .font(.system(size: 11))
+                        .foregroundColor(.black)
+                }
+                .frame(height:21)
+                .padding(.horizontal,8)
+                .background(Color(red: 0.95, green: 0.95, blue: 0.97))
+                .cornerRadius(12)
             }
-            .frame(height:21)
-            .padding(.horizontal,8)
-            .background(Color(red: 0.95, green: 0.95, blue: 0.97))
-            .cornerRadius(12)
-            
-            
-            HStack{
-                Text("AE".countryFlag)
-                Text("Dubai")
-                    .font(.system(size: 11))
-                    .foregroundColor(.black)
-            }
-            .frame(height:21)
-            .padding(.horizontal,8)
-            .background(Color(red: 0.95, green: 0.95, blue: 0.97))
-            .cornerRadius(12)
-            
-            HStack{
-                Image(systemName: "bed.double.fill")
-                    .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
-                Text("\(property.bed ?? 0) Bed")
-                    .font(.system(size: 11))
-                    .foregroundColor(.black)
-            }
-            .frame(height:21)
-            .padding(.horizontal,8)
-            .background(Color(red: 0.95, green: 0.95, blue: 0.97))
-            .cornerRadius(12)
-            
-            HStack{
-                Image("size")
-                    .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
-                Text("\(property.meter ?? 0) sq.ft")
-                    .font(.system(size: 11))
-                    .foregroundColor(.black)
-            }
-            .frame(height:21)
-            .padding(.horizontal,8)
-            .background(Color(red: 0.95, green: 0.95, blue: 0.97))
-            .cornerRadius(12)
-//            Spacer()
-        }
         }
     }
     
@@ -395,9 +397,9 @@ private struct PropertyInfoDetailCellView: View {
             if let flag = flag {
                 Text(flag.countryFlag)
             }
-           
+            
             if let image = image {
-               image
+                image
             }
             
             VStack(alignment: .leading){
@@ -405,10 +407,9 @@ private struct PropertyInfoDetailCellView: View {
                     .font(.system(size: 15).weight(.semibold))
                     .foregroundColor(.black)
                 Text(message)
-                   .multilineTextAlignment(.leading)
-                   .font(.system(size: 13))
-                   .foregroundColor(.gray)
-//                   .padding(.trailing)
+                    .multilineTextAlignment(.leading)
+                    .font(.system(size: 13))
+                    .foregroundColor(.gray)
             }
         }
     }
@@ -417,7 +418,7 @@ private struct PropertyInfoDetailCellView: View {
 
 
 #Preview{
-//    PropertyImageView(images: sampleProp.images, alignment: .top)
+    
     PropertyDetailView(id: 25)
         .environmentObject(PropertiesViewModel())
         .environmentObject(AppViewModel())

@@ -14,8 +14,11 @@ class LoginViewModel: ObservableObject {
     @Published var state: Login = .login
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var user: UserData?
+    @Published var user: User?
     @Published var emailToChange: String = ""
+    
+    @Published var showingSheet: Bool = false
+    @Published var loginProviderUrl: URL? 
     
     
     private var subscriptions: Set<AnyCancellable> = []
@@ -39,34 +42,25 @@ class LoginViewModel: ObservableObject {
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
                             print(value)
-                            self.user = value
+                            self.user = value.user
                             keychain.set(value.token, forKey: "userToken")
                             
                         }
             .store(in: &subscriptions)
 
     }
-    func login_with_Google() {
-        networking.login_withProvider(provider: .Google)
-//            .sink {[weak self] completion in
-//                            guard let self = self else { return }
-//                            switch completion {
-//                            case .failure(let error):
-//                                print(error)
-//                            case .finished:
-//                                break
-//                            }
-//                        } receiveValue: {[weak self] value in
-//                            guard let self = self else { return }
-//                            print(value)
-//                        }
-//            .store(in: &subscriptions)
+
+    func loginWithApple() {
+      loginProviderUrl =   networking.login_withProvider(provider: .Apple)
+        showingSheet.toggle()
 
     }
     
-    func login_with_Apple(){
-        
+    func loginWithGoogle() {
+        loginProviderUrl =   networking.login_withProvider(provider: .Google)
+        showingSheet.toggle()
     }
+    
     
     func forgetPassword(){
         networking.forgotPassword(email: email)

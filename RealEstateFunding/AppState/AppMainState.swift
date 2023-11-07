@@ -18,8 +18,10 @@ struct AppMainState: View {
                 OnboardingView()
             case .login:
                 LoginViewScreen()
+                    .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
             case .registration:
                 RegistrationViewScreen()
+                    .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
             case .app:
                 CustomTabBar()
             case .appStart:
