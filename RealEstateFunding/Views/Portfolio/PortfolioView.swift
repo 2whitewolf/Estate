@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PortfolioView: View {
+    @StateObject var vm: PortfolioViewModel = PortfolioViewModel()
+    @EnvironmentObject var appVM: AppViewModel
+  
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
@@ -30,7 +33,7 @@ struct PortfolioView: View {
                             VStack(spacing: 4){
                                 Text("Total invested")
                                 Text("AED")
-                                + Text(" 0")
+                                + Text(" \(vm.investments?.totalInvested ?? 0)")
                                     .font(.system(size: 28))
                             }
                                 .foregroundColor(.white)
@@ -48,20 +51,26 @@ struct PortfolioView: View {
                     
                     
                 }
-               
+                
                 
             }
             .padding(.horizontal,8)
+        }
+        .onAppear{
+            if let user = appVM.user {
+                vm.getPortfolioData(userId: user.id)
+            }
         }
         
     }
 }
 
-struct PortfolioView_Previews: PreviewProvider {
-    static var previews: some View {
-        PortfolioView()
-    }
+
+#Preview{
+    PortfolioView()
+        .environmentObject(AppViewModel())
 }
+
 
 
 extension PortfolioView {
@@ -120,22 +129,41 @@ extension PortfolioView {
                     .font(.system(size: 20).weight(.semibold))
                 Spacer()
             }
-                ScrollView(showsIndicators: false) {
-                    ForEach(1..<5, id: \.self) { _ in
-                        NavigationLink{
-                            InvestmentDetails()
-                                .navigationBarHidden(true)
-                        } label: {
-                            VStack{
-                                InvestmentCellView(image: "investmentCellImage", title: "1 Bed in Downtown Dubai", cost: "AED 8,230")
-                                 
-                                 Divider()
-                                    .padding(.leading, 50)
+            VStack{
+                if !(vm.investmentsList.wrappedValue.isEmpty ?? false)  {
+                    
+                    ScrollView(showsIndicators: false) {
+                        ForEach( vm.investmentsList.wrappedValue, id: \.id) { _ in
+                            NavigationLink{
+                                InvestmentDetails()
+                                    .navigationBarHidden(true)
+                            } label: {
+                                VStack{
+                                    InvestmentCellView(image: "investmentCellImage", title: "1 Bed in Downtown Dubai", cost: "AED 8,230")
+                                    
+                                    Divider()
+                                        .padding(.leading, 50)
+                                }
                             }
+                            
                         }
-
                     }
+                    ShowMoreLessButton(tapped: $vm.investmentsListOpened)
+                    //                }
+                } else {
+                    //                VStack{
+                    Image(systemName: "clock.arrow.circlepath")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.gray)
+                        .frame(width: 26)
+                    
+                    Text("No investments yet")
+                        .font(.system(size: 15))
+                        .foregroundColor(.gray)
+                    //                }
                 }
+            }
         }
         .modifier(CornerBackground())
     }
@@ -158,6 +186,8 @@ extension PortfolioView {
                 .font(.system(size: 15))
                 .foregroundColor(.gray)
             
+            ShowMoreLessButton(tapped: $vm.transactionsListOpened)
+                .hidden()
         }
         .modifier(CornerBackground())
     }
@@ -169,18 +199,18 @@ extension PortfolioView {
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
                 Spacer()
-                 Image(systemName: "info.circle")
+                Image(systemName: "info.circle")
                     .foregroundColor(.gray)
             }
             
             ZStack(alignment: .leading) {
                 Rectangle().fill(Color.lightGray)
                     .frame(maxWidth: .infinity)
-                  
-                 Rectangle()
+                
+                Rectangle()
                     .fill(Color.blue)
                     .frame(width: 10)
-   
+                
             }
             .frame(height: 5)
             HStack{
@@ -201,7 +231,7 @@ extension PortfolioView {
                     Circle()
                         .fill(Color.gray)
                         .frame(width: 8)
-                     Text("AED 0 available")
+                    Text("AED 0 available")
                         .font(.system(size: 11).weight(.medium))
                         .foregroundColor(.gray)
                 }
@@ -211,7 +241,7 @@ extension PortfolioView {
                 
                 
             }
-           
+            
             
             
             
@@ -247,7 +277,7 @@ struct InvestmentCellView : View {
             VStack(alignment: .leading){
                 Text(title)
                     .foregroundColor(Color.gray)
-                  
+                
                 Text(cost)
                     .foregroundColor(.black)
             }

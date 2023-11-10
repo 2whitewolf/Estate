@@ -34,15 +34,35 @@ protocol APIProtocol{
     // MARK: Properties
     func getAll() -> AnyPublisher<PropertyData, AFError>
     func getPropertyById(id: Int ) -> AnyPublisher<PropertyDetailData,AFError>
-    func createInvoice(userId: Int, propertyId: Int, amount: Double)
+    func createInvoice(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<Payment,AFError>
+     func getPortfolio(userId: Int) -> AnyPublisher<InvestmentsData,AFError>
     
 }
 
 
 class APIManager: APIProtocol{
-    
-    
+ 
     let keychain = KeychainSwift()
+    
+    func getPortfolio(userId: Int) -> AnyPublisher<InvestmentsData,AFError> {
+        let url = makeUrl(make: .getPortfolio)
+        let token = keychain.get("userToken") ?? ""
+        let headers: HTTPHeaders = [
+               .authorization(bearerToken: token)
+        ]
+        
+        let parameters: [String: String] = [
+            "user_id": "\(userId)"
+        ]
+        let method = BackendAPIService.getPortfolio.method
+        
+       return AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: InvestmentsData.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
     
     func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?) {
         let url = makeUrl(make: .updateUser)
@@ -81,7 +101,7 @@ class APIManager: APIProtocol{
     
 
     
-    func createInvoice(userId: Int, propertyId: Int, amount: Double) {
+    func createInvoice(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<Payment,AFError> {
         let url = makeUrl(make: .getInvoice)
         
         let method = BackendAPIService.getInvoice.method
@@ -90,32 +110,31 @@ class APIManager: APIProtocol{
                .authorization(bearerToken: token)
         ]
         
-        let parameters: [String: String] = ["user_id": "\(userId)", "property_id": "\(userId)", "amount" : "\(amount)" ]
+        let parameters: [String: String] = ["user_id": "\(userId)", "property_id": "\(propertyId)", "amount" : "\(amount)" ]
     
-        AF.request(url, method: method, parameters: parameters, headers: headers)
-            .responseJSON{ response in
-                if let error = response.error {
-                    print("Error: \(error)")
-                    return
-                }
-                if let data = response.data {
-                    print("Data from Json \(data)")
-                }
-            }
-//            .responseDecodable(of: PropertyData.self ) { response in
-//                             switch response.result {
-//                                         case .success(_):
-//                                             let data = try? self.newJSONDecoder().decode(PropertyData.self, from: response.data!)
-//                                             guard let data = data else {return}
-//                                             print(data)
-//                                             completion(data,nil)
-//                                         case .failure(let error):
-//                                             completion(nil, error)
-//                                             print("Erorr: \(error)")
-//                                         }
-//        
-//        
-//                         }
+     return AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: Payment.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    
+        
+//        print("url:\(url)\n method: \(method) \n parameters: \(parameters) \n headers \(headers)")
+//        AF.request(url,method: method,parameters: parameters,headers: headers)
+//            .responseDecodable(of: Payment.self) {[weak self] response in
+//                guard let self = self else {return}
+//                
+//                switch response.result {
+//                case .success(_):
+//                    let data = try? self.newJSONDecoder().decode(Payment.self, from: response.data!)
+//                    guard let data = data else {return}
+//                    print(data)
+//                case .failure(let error):
+//                    print("Erorr: \(error)")
+//                }
+//            }
+
        
     }
     

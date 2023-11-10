@@ -95,7 +95,7 @@ extension ProfileView {
                         .font(.system(size: 15))
                     Spacer()
                     
-                    Text(user.phone ?? "")
+                    Text(user.phone ?? "\(user.id)" ?? "")
                         .font(.system(size: 16).weight(.semibold))
                     Image(systemName: "square.on.square")
                         .foregroundColor(.gray)

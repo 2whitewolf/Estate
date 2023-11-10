@@ -35,7 +35,9 @@ class AppViewModel: ObservableObject {
     
     init(){
       user = userDefaults.user
+        print("userId: \(user?.id)")
         userToken = keychain.get("userToken") ?? ""
+        print("token:  \(userToken)")
         if presented {
             currentState = .appStart
         }

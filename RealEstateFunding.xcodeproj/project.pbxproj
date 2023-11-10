@@ -50,6 +50,8 @@
 		8B58D6892AF8DF0F000EB557 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B58D6882AF8DF0F000EB557 /* SwiftSoup */; };
 		8B58D68B2AF9177C000EB557 /* VerifyMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68A2AF9177C000EB557 /* VerifyMail.swift */; };
 		8B58D68D2AFA4454000EB557 /* KeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */; };
+		8B58D68F2AFA8588000EB557 /* country_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B58D68E2AFA8588000EB557 /* country_data.json */; };
+		8B58D6912AFA859D000EB557 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D6902AFA859D000EB557 /* Country.swift */; };
 		8B5ECCD82AE009270068D5D1 /* PropertyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */; };
 		8B5ECCDB2AE1141D0068D5D1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B5ECCDA2AE1141D0068D5D1 /* KeychainSwift */; };
 		8B5ECCE02AE146F60068D5D1 /* Double + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */; };
@@ -57,6 +59,9 @@
 		8B6496C32AE92D0600C0A5A5 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6496C22AE92D0600C0A5A5 /* WebView.swift */; };
 		8B7B0B102AE6884E008C2F19 /* InvestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */; };
 		8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */; };
+		8B955B9D2AFE5F78005E4D0C /* InvestmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */; };
+		8B955BA12AFE608C005E4D0C /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B955BA02AFE608C005E4D0C /* PortfolioViewModel.swift */; };
+		8B955BA32AFE6B9A005E4D0C /* ShowMoreLessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B955BA22AFE6B9A005E4D0C /* ShowMoreLessButton.swift */; };
 		8BA837592ACAAD85008DCF3D /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA837582ACAAD85008DCF3D /* TermsAndConditionsView.swift */; };
 		8BA8375B2ACAF09F008DCF3D /* InvestorTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8375A2ACAF09E008DCF3D /* InvestorTermsView.swift */; };
 		8BA8378F2ACEC4FA008DCF3D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8378E2ACEC4FA008DCF3D /* APIManager.swift */; };
@@ -125,12 +130,17 @@
 		8B49CC142ABB34EA00F1800B /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		8B58D68A2AF9177C000EB557 /* VerifyMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMail.swift; sourceTree = "<group>"; };
 		8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModifier.swift; sourceTree = "<group>"; };
+		8B58D68E2AFA8588000EB557 /* country_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = country_data.json; sourceTree = "<group>"; };
+		8B58D6902AFA859D000EB557 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCellView.swift; sourceTree = "<group>"; };
 		8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Ext.swift"; sourceTree = "<group>"; };
 		8B5ECCE12AE14F7C0068D5D1 /* PropertyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDetail.swift; sourceTree = "<group>"; };
 		8B6496C22AE92D0600C0A5A5 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestView.swift; sourceTree = "<group>"; };
 		8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyImageView.swift; sourceTree = "<group>"; };
+		8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentData.swift; sourceTree = "<group>"; };
+		8B955BA02AFE608C005E4D0C /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
+		8B955BA22AFE6B9A005E4D0C /* ShowMoreLessButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreLessButton.swift; sourceTree = "<group>"; };
 		8BA837582ACAAD85008DCF3D /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		8BA8375A2ACAF09E008DCF3D /* InvestorTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorTermsView.swift; sourceTree = "<group>"; };
 		8BA8378E2ACEC4FA008DCF3D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -191,6 +201,7 @@
 		8B20CE592AB0540100FB3ECA /* RealEstateFunding */ = {
 			isa = PBXGroup;
 			children = (
+				8B58D68E2AFA8588000EB557 /* country_data.json */,
 				8B1603E22AF1543A00A68981 /* Info.plist */,
 				8B20CE7C2AB0910A00FB3ECA /* Extensions */,
 				8BA837BF2AD6B06A008DCF3D /* AppState */,
@@ -281,6 +292,7 @@
 			children = (
 				8BC2C5322AB466DC0040D6B7 /* InvestmentDetails.swift */,
 				8B20CE8E2AB20F9C00FB3ECA /* PortfolioView.swift */,
+				8B955BA02AFE608C005E4D0C /* PortfolioViewModel.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -288,12 +300,13 @@
 		8B49CC042AB9A29400F1800B /* Properties */ = {
 			isa = PBXGroup;
 			children = (
+				8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */,
 				8B20CE722AB07A0A00FB3ECA /* PropertiesList.swift */,
 				8B49CC092AB9E43B00F1800B /* PropertyDetailView.swift */,
+				8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */,
 				8B49CC0D2ABAF59500F1800B /* PropertyLocationView.swift */,
 				8B49CC0F2ABB0ECB00F1800B /* InvestmentCalculatorView.swift */,
 				8B49CC112ABB224600F1800B /* FinancialsView.swift */,
-				8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */,
 				8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */,
 				8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */,
 			);
@@ -322,7 +335,6 @@
 				8B49CBFC2AB8628700F1800B /* Notifications */,
 				8B49CBF42AB846F800F1800B /* Components */,
 				8B20CE742AB0860C00FB3ECA /* Registration */,
-				8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,13 +352,13 @@
 		8BA837992ACEF2C8008DCF3D /* UserRegistration */ = {
 			isa = PBXGroup;
 			children = (
+				8BA8379C2ACEF49D008DCF3D /* RegistrationViewScreen.swift */,
+				8BA8379A2ACEF30F008DCF3D /* RegistrationViewModel.swift */,
 				8BA837582ACAAD85008DCF3D /* TermsAndConditionsView.swift */,
 				8BA8375A2ACAF09E008DCF3D /* InvestorTermsView.swift */,
 				8B20CE862AB1D54300FB3ECA /* FillUserDataView.swift */,
 				8B20CE7A2AB0900C00FB3ECA /* SignUpView.swift */,
 				8B49CBF22AB8440300F1800B /* CitizenshipView.swift */,
-				8BA8379A2ACEF30F008DCF3D /* RegistrationViewModel.swift */,
-				8BA8379C2ACEF49D008DCF3D /* RegistrationViewScreen.swift */,
 				8BEBC35E2AEB9B4D0016FCA4 /* CurrentLiveView.swift */,
 				8BEBC3602AEBA7F40016FCA4 /* EmploymentStatusView.swift */,
 				8BEBC3622AEBB4CA0016FCA4 /* AnnualIncomeView.swift */,
@@ -361,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				8BA837B42AD53B50008DCF3D /* ViewModifiers.swift */,
+				8B955BA22AFE6B9A005E4D0C /* ShowMoreLessButton.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -381,6 +394,8 @@
 				8BA837BA2AD6A48F008DCF3D /* UserData.swift */,
 				8BA95B822ADFDF1900FA7D35 /* Property.swift */,
 				8B5ECCE12AE14F7C0068D5D1 /* PropertyDetail.swift */,
+				8B58D6902AFA859D000EB557 /* Country.swift */,
+				8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -388,10 +403,10 @@
 		8BA837BC2AD6A57B008DCF3D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				8B1603DC2AF129C400A68981 /* LoginViewScreen.swift */,
+				8BA837BD2AD6A59A008DCF3D /* LoginViewModel.swift */,
 				8BA837B82AD69C86008DCF3D /* ResetPassword */,
 				8B20CE8A2AB1F32400FB3ECA /* LoginView.swift */,
-				8BA837BD2AD6A59A008DCF3D /* LoginViewModel.swift */,
-				8B1603DC2AF129C400A68981 /* LoginViewScreen.swift */,
 				8B1603DE2AF1336100A68981 /* LoginHeader.swift */,
 			);
 			path = Login;
@@ -486,6 +501,7 @@
 			files = (
 				8B20CE852AB1D45F00FB3ECA /* Launch Screen.storyboard in Resources */,
 				8B20CE622AB0540300FB3ECA /* Preview Assets.xcassets in Resources */,
+				8B58D68F2AFA8588000EB557 /* country_data.json in Resources */,
 				8B20CE5F2AB0540300FB3ECA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +517,7 @@
 				8BA837BB2AD6A48F008DCF3D /* UserData.swift in Sources */,
 				8BEBC35F2AEB9B4D0016FCA4 /* CurrentLiveView.swift in Sources */,
 				8B20CE8F2AB20F9C00FB3ECA /* PortfolioView.swift in Sources */,
+				8B955BA12AFE608C005E4D0C /* PortfolioViewModel.swift in Sources */,
 				8BA95B832ADFDF1900FA7D35 /* Property.swift in Sources */,
 				8BA8379B2ACEF30F008DCF3D /* RegistrationViewModel.swift in Sources */,
 				8B49CC0E2ABAF59500F1800B /* PropertyLocationView.swift in Sources */,
@@ -519,12 +536,14 @@
 				8B20CE762AB0867B00FB3ECA /* RegistrationStartView.swift in Sources */,
 				8B20CE812AB09B8300FB3ECA /* AppleSignInSwift.swift in Sources */,
 				8B58D68D2AFA4454000EB557 /* KeyboardModifier.swift in Sources */,
+				8B955B9D2AFE5F78005E4D0C /* InvestmentData.swift in Sources */,
 				8BEBC3632AEBB4CA0016FCA4 /* AnnualIncomeView.swift in Sources */,
 				8B49CC012AB86E3C00F1800B /* ProfileView.swift in Sources */,
 				8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */,
 				8BA837B72AD6986F008DCF3D /* BackendAPIServices.swift in Sources */,
 				8B49CC0A2AB9E43B00F1800B /* PropertyDetailView.swift in Sources */,
 				8B1603DF2AF1336100A68981 /* LoginHeader.swift in Sources */,
+				8B58D6912AFA859D000EB557 /* Country.swift in Sources */,
 				8B1604122AF4E5A000A68981 /* UserDefaultsManager.swift in Sources */,
 				8B20CE5B2AB0540100FB3ECA /* RealEstateFundingApp.swift in Sources */,
 				8B20CE732AB07A0A00FB3ECA /* PropertiesList.swift in Sources */,
@@ -554,6 +573,7 @@
 				8BA8379D2ACEF49D008DCF3D /* RegistrationViewScreen.swift in Sources */,
 				8B20CE6F2AB0676B00FB3ECA /* TabBarViewModifier.swift in Sources */,
 				8B49CBFB2AB856E200F1800B /* EnterNewPasswordView.swift in Sources */,
+				8B955BA32AFE6B9A005E4D0C /* ShowMoreLessButton.swift in Sources */,
 				8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */,
 				8B49CC152ABB34EA00F1800B /* FavouritesView.swift in Sources */,
 				8B49CBFE2AB8629E00F1800B /* NotificationsListView.swift in Sources */,
@@ -698,6 +718,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -730,6 +751,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

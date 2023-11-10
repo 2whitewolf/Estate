@@ -17,7 +17,7 @@ var sampleProp = Property(id: 1,
                           meter: 120,
                           type: "ready",
                           invested: nil,
-                          //                     invested: "",
+                          
                           investors: 0,
                           funded: 0,
                           images: [
@@ -42,11 +42,12 @@ struct Property: Codable {
     var totalPrice: Double?
     var  annualProfit, period, location: String?
     var bed, meter: Int?
-    var type: String? // TypeEnum
+    var type: String?
     //    let invested: String?
     //    let invested: Int?
-    //    let invested: Invested?
-    var invested,investors, funded: Int?
+       var  invested: Invested?
+    var investors,funded: Int?
+//    var invested,investors, funded: Int?
     var images: [ImageData]
     
     enum CodingKeys: String, CodingKey {

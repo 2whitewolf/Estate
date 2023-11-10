@@ -15,6 +15,7 @@ struct RegistrationViewScreen: View {
             Color.white.ignoresSafeArea()
             VStack{
                  RegistrationHeaderView()
+                    .padding(.top,55)
                 switch vm.currentState {
                 case .signUp:
                     SignUpView()

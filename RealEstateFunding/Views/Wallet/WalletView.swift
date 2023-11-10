@@ -118,15 +118,7 @@ extension WalletView{
                 }
             }
             
-            Button{
-                withAnimation {
-                    hidden.toggle()
-                }
-            } label: {
-                Label("Show \(hidden ? "more" : "less")", systemImage: hidden ? "chevron.down" : "chevron.up")
-                    .foregroundColor(.blue)
-                    .font(.system(size: 13))
-            }
+          ShowMoreLessButton(tapped: $hidden)
         }
         .modifier(CornerBackground())
     }

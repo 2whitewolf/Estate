@@ -76,6 +76,7 @@ struct LoginView: View {
         }
         .sheet(isPresented: $vm.showingSheet) {
             WebRepresent(user: $vm.user, url: vm.loginProviderUrl!)
+                .environmentObject(vm)
               }
     }
 }
@@ -111,7 +112,7 @@ extension LoginView {
                     Image(systemName: "apple.logo")
                         .foregroundColor(.black)
                     
-                    Text("Sign up with Apple")
+                    Text("Sign in with Apple")
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.black)
@@ -128,7 +129,7 @@ extension LoginView {
                 HStack{
                     Image("googleLogo")
                     
-                    Text("Sign up with Google")
+                    Text("Sign in with Google")
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.black)

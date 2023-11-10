@@ -12,10 +12,18 @@ import Combine
 class PropertiesViewModel: ObservableObject {
      
     @Published var properties: [Property] = []
-    @Published var propertyDetail: PropertyDetail?
+    @Published var propertyDetail: PropertyDetail? {
+        didSet{
+            if let  propertyDetail = propertyDetail {
+                print(propertyDetail)
+            }
+        }
+    }
     @Published var similar: [Property]?
     
     @Published var propertyPreviewHistory: [Int] = []
+    @Published var linkToPayment: URL?
+    @Published var openWebViewToPay: Bool = false
     
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
@@ -32,8 +40,7 @@ class PropertiesViewModel: ObservableObject {
                             }
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
-                            print(value)
-                            self.properties = value.data
+                            self.properties = value.data//.enumerated().filter{ $0.offset < 3 }.map{ $0.element}
                         }
             .store(in: &subscriptions)
     }
@@ -50,7 +57,6 @@ class PropertiesViewModel: ObservableObject {
                             }
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
-                            print(value)
                             if let data = value.data {
                                 self.propertyDetail = data.property
                                 self.similar = data.similar
@@ -60,6 +66,29 @@ class PropertiesViewModel: ObservableObject {
     }
     
     func createInvoice(userId:Int, amount: Double) {
-        networking.createInvoice(userId: userId, propertyId: propertyDetail?.id ?? 0, amount: amount)
+       
+        if let propertyDetail = propertyDetail {
+           
+            networking.createInvoice(userId: userId, propertyId: propertyDetail.id ?? 1, amount: amount)
+                .sink {[weak self] completion in
+                                guard let self = self else { return }
+                                switch completion {
+                                case .failure(let error):
+                                    print(error.localizedDescription)
+                                case .finished:
+                                    break
+                                }
+                            } receiveValue: {[weak self] value in
+                                guard let self = self else { return }
+                                if let link = value.paymentLink {
+                                    if let url  = URL(string: link) {
+                                        linkToPayment = url
+                                        openWebViewToPay.toggle()
+                                    }
+                                }
+                            }
+                .store(in: &subscriptions)
+        }
+      
     }
 }

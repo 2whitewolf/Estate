@@ -132,3 +132,9 @@ var samplePropertyDetail: PropertyDetailData  =  PropertyDetailData(
         ]
     )
 )
+
+
+struct Payment: Codable {
+    let paymentLink:String?
+}
+ 

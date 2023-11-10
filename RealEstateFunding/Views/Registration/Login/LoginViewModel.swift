@@ -41,7 +41,6 @@ class LoginViewModel: ObservableObject {
                             }
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
-                            print(value)
                             self.user = value.user
                             keychain.set(value.token, forKey: "userToken")
                             
@@ -74,7 +73,6 @@ class LoginViewModel: ObservableObject {
                 }
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
-                print(value)
                 state = state.next()
             }
             .store(in: &subscriptions)
@@ -92,7 +90,6 @@ class LoginViewModel: ObservableObject {
                 }
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
-                print(value)
                 state = .login
             }
             .store(in: &subscriptions)

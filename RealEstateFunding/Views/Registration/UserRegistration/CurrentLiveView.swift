@@ -98,6 +98,18 @@ struct CurrentLiveView: View {
                     }
                 }
             })
+            .popup(isPresented: $isShowingCityPicker, view: {
+                List(vm.cities, id: \.self) { city in
+                    HStack {
+                        Text(city)
+                        Spacer()
+                    }
+                    .onTapGesture {
+                        isShowingCityPicker.toggle()
+                        vm.cityCode = city//Locale.current.localizedString(forRegionCode: countryCode) ?? ""
+                    }
+                }
+            })
         }
     
     }
@@ -183,7 +195,7 @@ extension CurrentLiveView {
                     .stroke(Color.gray, lineWidth: 0.5))
             } else {
                 HStack{
-                    Text(countryFlag(vm.cityCode))
+                    Text(vm.cityCode)
                     Text(Locale.current.localizedString(forRegionCode: vm.cityCode) ?? "")
                     Spacer()
                     Image(systemName: "chevron.down")
@@ -196,9 +208,6 @@ extension CurrentLiveView {
                 .background(RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.gray, lineWidth: 0.5))
             }
-            
-            
         }
-//        .padding(.vertical)
     }
 }

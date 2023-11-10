@@ -17,8 +17,6 @@ extension Date {
         let year = calendar.component(.year, from: currentDate)
         let month = calendar.component(.month, from: currentDate)
         let day = calendar.component(.day, from: currentDate)
-        print("Year: \(year)")
-        print("Month: \(month)")
         return "\(day) / \(month) / \(year)"
     }
 }

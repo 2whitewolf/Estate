@@ -9,6 +9,9 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct PropertyCellView: View {
+    let columns = [
+        GridItem(.adaptive(minimum: 80))
+       ]
     var property: Property
     var image: String
     var body: some View {
@@ -25,6 +28,7 @@ struct PropertyCellView: View {
                     investmentInfo
                     investmentAnnalize
                 }
+                
                 .padding(.vertical,16)
                 .padding(.horizontal,12)
                 .background(Color.white)
@@ -116,6 +120,7 @@ extension PropertyCellView {
     }
     
     private var investmentInfo: some View {
+   
         VStack(alignment: .leading) {
             Text("\(property.bed ?? 0) Bed in " + (property.location ?? "") )
                 .multilineTextAlignment(.leading)
@@ -129,20 +134,21 @@ extension PropertyCellView {
                         .font(.system(size: 17).weight(.semibold))
                     Spacer()
                     
-                    Text("\(property.invested ?? 0)" + "%")
+                    Text("\(property.invested?.value ?? 0)" + "%")
                         .foregroundColor(.gray)
                         .font(.system(size: 13))
                     
                 }
                 .foregroundColor(.blue)
-                
-                ZStack(alignment: .leading){
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color.lightGray)
-                    
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color.blue)
-                        .frame(width: 50)
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading){
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.lightGray)
+                        
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.blue)
+                            .frame(width: (Double(property.invested?.value ?? 1) / Double(property.totalPrice ?? 1 )) * (geometry.size.width))
+                    }
                 }
                 .frame(height: 4)
                 

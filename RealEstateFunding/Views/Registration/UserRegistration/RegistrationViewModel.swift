@@ -61,6 +61,7 @@ class RegistrationViewModel: ObservableObject {
     
     @Published var worth: NetWorth?
     @Published var user: User?
+    @Published var cities: [String] = []
     
     
     private var subscriptions: Set<AnyCancellable> = []
@@ -69,6 +70,8 @@ class RegistrationViewModel: ObservableObject {
     
     
     init(){
+       let countryList = loadCountryList()
+        cities = countryList.data.flatMap{ return $0.cities}
         
     }
     func getScan(text: String?) {
@@ -146,6 +149,19 @@ class RegistrationViewModel: ObservableObject {
     }
     func newPassword(){
         
+    }
+    
+    func loadCountryList() -> CountryData {
+        if let url = Bundle.main.url(forResource: "country_data", withExtension: "json") {
+                       do {
+                           let data = try Data(contentsOf: url)
+                           let decodedData = try JSONDecoder().decode(CountryData.self, from: data)
+                            return decodedData
+                       } catch {
+                           print("Error decoding JSON: \(error)")
+                       }
+                   }
+         return CountryData(data: [])
     }
 }
 

@@ -21,7 +21,13 @@ struct InvestView: View {
     @EnvironmentObject var vm: PropertiesViewModel
     @State var invest: Int = 500
     @FocusState private var isTextFieldFocused: Bool
-    
+    var isSmall: Binding<Bool> {
+        Binding(get: {
+            UIScreen.screenHeight < 700
+        }) { (newVal) in
+            
+        }
+    }
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -33,8 +39,9 @@ struct InvestView: View {
             
             Color.white.ignoresSafeArea()
             VStack{
-//                ScrollViewReader { proxy in
+             
                     ScrollView(showsIndicators: false) {
+                        ScrollViewReader { scrollReader in
                         ZStack(alignment: .top) {
                             TextField("", value: $invest, formatter: formatter)
                                 .keyboardType(.numberPad)
@@ -55,6 +62,7 @@ struct InvestView: View {
                                     .frame(width: UIScreen.screenWidth - 16)
                                     .frame(height:283)
                                     .cornerRadius(52)
+                                  
                                     
                                     .onAppear{
                                         isTextFieldFocused = true
@@ -68,17 +76,15 @@ struct InvestView: View {
                                 .padding(.top,55)
                         }
                         .padding(.top,8)
-                        .frame(height: 283)
+                       
+                        .frame(height:283)
                         
                         propertyInfo
-//                            .id(1)
-//                            .onAppear{
-//                                proxy.scrollTo(1,anchor: .top)
-//                            }
+                           
                         
-                        Spacer()
                         Button{
-                            //                    vm.createInvoice(userId: appVM.user?.id ?? 14, amount: Double(invest))
+                            print("user \(appVM.user) \n property: \(vm.propertyDetail)")
+                          vm.createInvoice(userId: appVM.user?.id ?? 1, amount: Double(invest))
                         } label: {
                             Text("Invest")
                                 .foregroundColor(.white)
@@ -86,10 +92,21 @@ struct InvestView: View {
                                 .frame(maxWidth: .infinity)
                                 .backgroundColor(.blue)
                                 .cornerRadius(12)
-                            
                         }
+                        .id(2)
+                        .onAppear{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                scrollReader.scrollTo(2, anchor: .center)
+                            }
+                        }
+                        Spacer()
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.white)
+                                .frame(height: 250)
+                               
                     }
-//                }
+                }
             }
             .ignoresSafeArea()
             .padding(.horizontal,8)
@@ -99,7 +116,12 @@ struct InvestView: View {
                 }
             }
         }
-        .adaptsToKeyboard()
+        .sheet(isPresented: $vm.openWebViewToPay) {
+            WebRepresent(user: $appVM.user, url: vm.linkToPayment!)
+                .onDisappear(perform: {
+                    presentation.wrappedValue.dismiss()
+                })
+              }
     }
 }
 
@@ -127,83 +149,87 @@ extension InvestView{
                 }
                 Spacer()
             }
-             Spacer()
+            .padding(.horizontal)
+            
+            Text("Invest")
+                .foregroundColor(.white)
+                .font(.system(size: 15))
+            
             Text("AED ")
                 .font(.system(size: 15).weight(.semibold))
                 .foregroundColor(.white)
             + Text("\(invest)")
                 .foregroundColor(.white)
                 .font(.system(size: 28).weight(.bold))
-            
-            Spacer()
-            
             HStack{
-                Button {
-                    presentation.wrappedValue.dismiss()
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(.white)
-                        .padding(12)
-                        .background(
-                            Circle().fill(Color.black.opacity(0.5))
-                        )
+                ForEach([100,500,1000,5000], id: \.self) { i in
+                    Text("+\(i) AED")
+                        .padding(.horizontal,8)
+                        .padding(.vertical,5)
+                        .background(RoundedCorner()
+                            .stroke(Color.white, lineWidth: 1))
+                        .onTapGesture {
+                            invest += i
+                        }
                 }
-                Spacer()
             }
-            .opacity(0)
+            .foregroundColor(.white)
+            .font(.system(size: 13))
+            .padding(.top,50)
+            
         }
-        .padding(.horizontal)
+        
     }
     
     
     var propertyInfo: some View {
-            VStack{
-                if let property = vm.propertyDetail {
-                    Text("\(property.bed ?? 0) Bed in " + (property.location ?? ""))
-                        .foregroundColor(.black)
-                        .font(.system(size: 20).weight(.semibold))
+        VStack{
+            if let property = vm.propertyDetail {
+                Text("\(property.bed ?? 0) Bed in " + (property.location ?? ""))
+                    .foregroundColor(.black)
+                    .font(.system(size: 20).weight(.semibold))
+                HStack{
                     HStack{
-                        HStack{
-                            Image("graphic_icon")
-                            VStack(alignment: .leading){
-                                Text("Annualised return")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.black)
-                                Text((property.annualProfit ?? "") + "%")
-                                    .foregroundColor(.blue)
-                                    .font(.system(size: 17).weight(.semibold))
-                            }
-                        }
-                        Spacer()
-                        HStack{
-                            Image("calendar_withBack")
-                            VStack(alignment: .leading){
-                                Text("Investment Periiod")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.black)
-                                Text((property.period ?? "") + " Year")
-                                    .foregroundColor(.blue)
-                                    .font(.system(size: 17).weight(.semibold))
-                            }
+                        Image("graphic_icon")
+                        VStack(alignment: .leading){
+                            Text("Annualised return")
+                                .font(.system(size: 13))
+                                .foregroundColor(.black)
+                            Text((property.annualProfit ?? "") + "%")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 17).weight(.semibold))
                         }
                     }
-                    
+                    Spacer()
                     HStack{
-                        ZStack(alignment: .leading){
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.lightGray)
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.blue)
-                                .frame(width: 50)
+                        Image("calendar_withBack")
+                        VStack(alignment: .leading){
+                            Text("Investment Periiod")
+                                .font(.system(size: 13))
+                                .foregroundColor(.black)
+                            Text((property.period ?? "") + " Year")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 17).weight(.semibold))
                         }
-                        .frame(height: 4)
-                        Text("\(property.completed ?? 0) %")
-                            .font(.system(size: 12).weight(.medium))
-                            .foregroundColor(.black)
                     }
                 }
+                
+                HStack{
+                    ZStack(alignment: .leading){
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.lightGray)
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.blue)
+                            .frame(width: 50)
+                    }
+                    .frame(height: 4)
+                    Text("\(property.completed ?? 0) %")
+                        .font(.system(size: 12).weight(.medium))
+                        .foregroundColor(.black)
+                }
             }
-            .modifier(CornerBackground())
-            .frame(height: 150)
+        }
+        .modifier(CornerBackground())
+        .frame(height: 150)
     }
 }
