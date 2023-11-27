@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct WalletView: View {
-    @State var hidden: Bool = true
+    @EnvironmentObject var appVM: AppViewModel
+    @StateObject var vm: WalletViewModel = WalletViewModel()
+    
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
@@ -21,21 +23,33 @@ struct WalletView: View {
                 }
                 .padding(.top,50)
                 .padding(.leading,22)
-                
-                ScrollView(showsIndicators: false) {
-                    
-                    balanceView
-                    transactionsView
-                    
+                if  let account = vm.accountInfo {
+                    ScrollView(showsIndicators: false) {
+                        
+                        balanceView
+                        transactionsView
+                        
+                    }
+                } else {
+                    ProgressView()
+                        .padding(.top,UIScreen.screenHeight * 0.3)
                 }
+                 Spacer()
             }
             .padding(.horizontal,8)
+        }
+        .onAppear{
+            if let user = appVM.user {
+                vm.getAccountInfo(userId: user.id)
+            }
+           
         }
     }
 }
 
 #Preview {
     WalletView()
+        .environmentObject(AppViewModel())
 }
 
 
@@ -45,14 +59,16 @@ extension WalletView{
             Text("Available Balance")
                 .font(.system(size: 15))
                 .foregroundColor(.gray)
-            
-            Text("AED")
-                .font(.system(size: 15))
-                .foregroundColor(.blue)
-            +
-            Text("12,000")
-                .font(.system(size: 28).weight(.bold))
-                .foregroundColor(.blue)
+            if let accountInfo = vm.accountInfo {
+                
+                Text("AED ")
+                    .font(.system(size: 15))
+                    .foregroundColor(.blue)
+                +
+                Text(accountInfo.balance ?? "0")
+                    .font(.system(size: 28).weight(.bold))
+                    .foregroundColor(.blue)
+            }
             
             
             HStack{
@@ -83,7 +99,7 @@ extension WalletView{
             }
         }
         .modifier(CornerBackground())
-
+        
     }
     
     private var transactionsView: some View {
@@ -94,31 +110,29 @@ extension WalletView{
                     .font(.system(size: 20).weight(.bold))
                 Spacer()
             }
-            
-//            VStack{
-//                Image(systemName: "clock.arrow.circlepath")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .foregroundColor(.gray)
-//                    .frame(width: 26)
-//                
-//                Text("No transactions yet")
-//                    .font(.system(size: 15))
-//                    .foregroundColor(.gray)
-//            }
-//            .padding(.vertical, 32)
-
-            
-            ForEach(1..<4){i in
-                TransactionCellView(amount: 5518, withdraw: i % 2 == 0 )
-            }
-            if !hidden {
-                ForEach(1..<10){i in
-                    TransactionCellView(amount: 5518, withdraw: i % 2 != 0 )
+            if vm.transactionsList.wrappedValue.isEmpty {
+                VStack{
+                    Image(systemName: "clock.arrow.circlepath")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.gray)
+                        .frame(width: 26)
+                    
+                    Text("No transactions yet")
+                        .font(.system(size: 15))
+                        .foregroundColor(.gray)
+                }
+                .padding(.vertical, 32)
+            } else {
+                VStack{
+                    ForEach(vm.transactionsList.wrappedValue, id: \.self){ transaction in
+                        TransactionCellView(transaction: transaction)
+                    }
+                    if vm.transactionsList.wrappedValue .count > 4 {
+                        ShowMoreLessButton(tapped: $vm.hidden)
+                    }
                 }
             }
-            
-          ShowMoreLessButton(tapped: $hidden)
         }
         .modifier(CornerBackground())
     }
@@ -126,8 +140,15 @@ extension WalletView{
 
 
 struct TransactionCellView: View {
-    var amount: Int
+    var transaction: Transaction
     var withdraw: Bool
+    
+    init(transaction: Transaction) {
+        self.transaction = transaction
+        self.withdraw = transaction.type == "investment"
+    }
+    //    var amount: Int
+    //    var withdraw: Bool
     var body: some View {
         HStack{
             ZStack{
@@ -147,9 +168,7 @@ struct TransactionCellView: View {
                     .foregroundColor(.black)
                 
                 HStack{
-                    Text("20 April")
-                    Divider()
-                    Text("•••• 2332")
+                    Text(transaction.createdAt ?? "")
                 }
                 .font(.system(size: 11))
                 .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
@@ -157,7 +176,7 @@ struct TransactionCellView: View {
             
             Spacer()
             
-            Text("\(withdraw ? "" : "-" ) AED \(amount)")
+            Text("\(withdraw ? "" : "-" ) AED " + (transaction.amount?.toDouble().rotate(0) ?? "0"))
                 .foregroundColor(withdraw ? .green : .black)
                 .font(.system(size: 13).weight(.semibold))
             

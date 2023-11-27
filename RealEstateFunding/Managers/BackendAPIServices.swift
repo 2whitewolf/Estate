@@ -18,9 +18,17 @@ enum BackendAPIService {
     case getById
     case getInvoice
      case getPortfolio
+     case getInvestmentDetail
+     case addFunds
+     case getWalletTransactions
+     case getCostOfInvestment
+    
+    
+
     var baseURL: String {
         return "https://afehe-hwf.buzz/api"
     }
+
     var path: String {
         switch self {
             
@@ -44,13 +52,21 @@ enum BackendAPIService {
             return "/client/payment/createInvoice"
         case .getPortfolio:
             return "/client/portfolio/getAll"
+        case .getInvestmentDetail:
+            return "/client/portfolio/getOne"
+        case .addFunds:
+            return "/client/wallet/addFunds"
+        case .getWalletTransactions:
+            return "/client/wallet/getAll"
+        case .getCostOfInvestment:
+            return "/client/payment/countInvestments"
         }
     }
     var method: HTTPMethod {
         switch self {
         case .login, .register, .updateUser, .change_password, .forget_password, .login_provider:
             return .post
-        case .getAll, .getById, .getInvoice, .getPortfolio:
+        case .getAll, .getById, .getInvoice, .getPortfolio, .getInvestmentDetail, .addFunds, .getWalletTransactions, .getCostOfInvestment:
             return .get
         }
     }

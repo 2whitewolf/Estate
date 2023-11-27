@@ -57,6 +57,8 @@
 		8B5ECCE02AE146F60068D5D1 /* Double + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */; };
 		8B5ECCE22AE14F7C0068D5D1 /* PropertyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5ECCE12AE14F7C0068D5D1 /* PropertyDetail.swift */; };
 		8B6496C32AE92D0600C0A5A5 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6496C22AE92D0600C0A5A5 /* WebView.swift */; };
+		8B6D016B2B07826F00E9FBCC /* InvestmentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6D016A2B07826F00E9FBCC /* InvestmentDetail.swift */; };
+		8B6D016D2B0792C100E9FBCC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6D016C2B0792C100E9FBCC /* ContentView.swift */; };
 		8B7B0B102AE6884E008C2F19 /* InvestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */; };
 		8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */; };
 		8B955B9D2AFE5F78005E4D0C /* InvestmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */; };
@@ -76,6 +78,9 @@
 		8BA837BE2AD6A59A008DCF3D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA837BD2AD6A59A008DCF3D /* LoginViewModel.swift */; };
 		8BA837C12AD6B07D008DCF3D /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA837C02AD6B07D008DCF3D /* AppViewModel.swift */; };
 		8BA837C32AD6CD0B008DCF3D /* AppMainState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA837C22AD6CD0B008DCF3D /* AppMainState.swift */; };
+		8BA83E992B10CC03005DD78C /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E982B10CC03005DD78C /* Transactions.swift */; };
+		8BA83E9B2B10CC52005DD78C /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */; };
+		8BA83E9D2B10E523005DD78C /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E9C2B10E523005DD78C /* Payment.swift */; };
 		8BA95B812ADFDB0A00FA7D35 /* PropertiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */; };
 		8BA95B832ADFDF1900FA7D35 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA95B822ADFDF1900FA7D35 /* Property.swift */; };
 		8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C4D02AB2FC340040D6B7 /* Date + Ext.swift */; };
@@ -136,6 +141,8 @@
 		8B5ECCDF2AE146F60068D5D1 /* Double + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Ext.swift"; sourceTree = "<group>"; };
 		8B5ECCE12AE14F7C0068D5D1 /* PropertyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDetail.swift; sourceTree = "<group>"; };
 		8B6496C22AE92D0600C0A5A5 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		8B6D016A2B07826F00E9FBCC /* InvestmentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentDetail.swift; sourceTree = "<group>"; };
+		8B6D016C2B0792C100E9FBCC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestView.swift; sourceTree = "<group>"; };
 		8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyImageView.swift; sourceTree = "<group>"; };
 		8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentData.swift; sourceTree = "<group>"; };
@@ -152,6 +159,9 @@
 		8BA837BD2AD6A59A008DCF3D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8BA837C02AD6B07D008DCF3D /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		8BA837C22AD6CD0B008DCF3D /* AppMainState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMainState.swift; sourceTree = "<group>"; };
+		8BA83E982B10CC03005DD78C /* Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
+		8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		8BA83E9C2B10E523005DD78C /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewModel.swift; sourceTree = "<group>"; };
 		8BA95B822ADFDF1900FA7D35 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		8BC2C4D02AB2FC340040D6B7 /* Date + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Ext.swift"; sourceTree = "<group>"; };
@@ -213,6 +223,7 @@
 				8B20CE5E2AB0540300FB3ECA /* Assets.xcassets */,
 				8B20CE602AB0540300FB3ECA /* Preview Content */,
 				8B20CE842AB1D45F00FB3ECA /* Launch Screen.storyboard */,
+				8B6D016C2B0792C100E9FBCC /* ContentView.swift */,
 			);
 			path = RealEstateFunding;
 			sourceTree = "<group>";
@@ -283,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				8B3A23BC2AC4257100EF82E7 /* WalletView.swift */,
+				8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -396,6 +408,9 @@
 				8B5ECCE12AE14F7C0068D5D1 /* PropertyDetail.swift */,
 				8B58D6902AFA859D000EB557 /* Country.swift */,
 				8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */,
+				8B6D016A2B07826F00E9FBCC /* InvestmentDetail.swift */,
+				8BA83E982B10CC03005DD78C /* Transactions.swift */,
+				8BA83E9C2B10E523005DD78C /* Payment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -521,6 +536,7 @@
 				8BA95B832ADFDF1900FA7D35 /* Property.swift in Sources */,
 				8BA8379B2ACEF30F008DCF3D /* RegistrationViewModel.swift in Sources */,
 				8B49CC0E2ABAF59500F1800B /* PropertyLocationView.swift in Sources */,
+				8BA83E9D2B10E523005DD78C /* Payment.swift in Sources */,
 				8B1603E12AF14B3300A68981 /* PasswordResetView.swift in Sources */,
 				8BA837B52AD53B50008DCF3D /* ViewModifiers.swift in Sources */,
 				8BA837592ACAAD85008DCF3D /* TermsAndConditionsView.swift in Sources */,
@@ -540,6 +556,7 @@
 				8BEBC3632AEBB4CA0016FCA4 /* AnnualIncomeView.swift in Sources */,
 				8B49CC012AB86E3C00F1800B /* ProfileView.swift in Sources */,
 				8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */,
+				8BA83E9B2B10CC52005DD78C /* WalletViewModel.swift in Sources */,
 				8BA837B72AD6986F008DCF3D /* BackendAPIServices.swift in Sources */,
 				8B49CC0A2AB9E43B00F1800B /* PropertyDetailView.swift in Sources */,
 				8B1603DF2AF1336100A68981 /* LoginHeader.swift in Sources */,
@@ -567,14 +584,17 @@
 				8B1603DD2AF129C400A68981 /* LoginViewScreen.swift in Sources */,
 				8BC2C5332AB466DC0040D6B7 /* InvestmentDetails.swift in Sources */,
 				8BA8378F2ACEC4FA008DCF3D /* APIManager.swift in Sources */,
+				8BA83E992B10CC03005DD78C /* Transactions.swift in Sources */,
 				8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */,
 				8B20CE7B2AB0900C00FB3ECA /* SignUpView.swift in Sources */,
 				8B49CBEE2AB491FD00F1800B /* ForgotPasswordView.swift in Sources */,
 				8BA8379D2ACEF49D008DCF3D /* RegistrationViewScreen.swift in Sources */,
+				8B6D016D2B0792C100E9FBCC /* ContentView.swift in Sources */,
 				8B20CE6F2AB0676B00FB3ECA /* TabBarViewModifier.swift in Sources */,
 				8B49CBFB2AB856E200F1800B /* EnterNewPasswordView.swift in Sources */,
 				8B955BA32AFE6B9A005E4D0C /* ShowMoreLessButton.swift in Sources */,
 				8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */,
+				8B6D016B2B07826F00E9FBCC /* InvestmentDetail.swift in Sources */,
 				8B49CC152ABB34EA00F1800B /* FavouritesView.swift in Sources */,
 				8B49CBFE2AB8629E00F1800B /* NotificationsListView.swift in Sources */,
 				8BEBC3612AEBA7F40016FCA4 /* EmploymentStatusView.swift in Sources */,

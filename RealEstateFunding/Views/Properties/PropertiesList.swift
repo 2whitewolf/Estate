@@ -20,24 +20,27 @@ struct PropertiesList: View {
                titleView
                     .padding(.top,6)
                 ScrollView(showsIndicators: false) {
-                    LazyVStack {
-                        ForEach(vm.properties, id: \.id) { property in
-                            NavigationLink{
-                                //                            InvestmentDetails()
-                                PropertyDetailView(id: property.id ?? 0)
-                                    .navigationBarHidden(true)
-                                    .environmentObject(vm)
-                                    .environmentObject(appVM)
-                            } label: {
-                                PropertyCellView(property: property, image: "")
+                    if !vm.properties.isEmpty {
+                        LazyVStack {
+                            ForEach(vm.properties, id: \.id) { property in
+                                NavigationLink{
+                                    //                            InvestmentDetails()
+                                    PropertyDetailView(id: property.id ?? 0)
+                                        .navigationBarHidden(true)
+                                        .environmentObject(vm)
+                                        .environmentObject(appVM)
+                                } label: {
+                                    PropertyCellView(property: property, image: "")
+                                }
+                                
                             }
-                            
                         }
+                    } else {
+                        ProgressView()
+                            .padding(.top,UIScreen.screenHeight * 0.3)
                     }
                 }
                 .padding(.top,23)
-                
-             
             }
             .padding(.horizontal,8)
         }

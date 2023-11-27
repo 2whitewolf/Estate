@@ -6,8 +6,6 @@
 //
 
 
-
-
 var sampleProp = Property(id: 1,
                           totalPrice: 122882.0,
                           annualProfit: "123",
@@ -45,8 +43,8 @@ struct Property: Codable {
     var type: String?
     //    let invested: String?
     //    let invested: Int?
-       var  invested: Invested?
-    var investors,funded: Int?
+    var  invested: Invested?
+    var investors,funded: Double?
 //    var invested,investors, funded: Int?
     var images: [ImageData]
     
@@ -57,6 +55,29 @@ struct Property: Codable {
         case period, location, bed, meter, type, invested, investors, funded, images
     }
 }
+
+/*
+{
+            "id": 1,
+            "total_price": 1000000,
+            "annual_profit": "12 - 35",
+            "period": "3 - 5",
+            "location": "Sobha Hartland 2",
+            "bed": 1,
+            "meter": 720,
+            "type": "Off-plan",
+            "invested": "6200.00",
+            "investors": 4,
+            "funded": 16129.032258064515,
+            "images": [
+                {
+                    "id": 8,
+                    "path": "property/1/images/10704.webp",
+                    "main_image": 1
+                }
+            ]
+        }
+ */
 
 // MARK: - Image
 struct ImageData: Codable {

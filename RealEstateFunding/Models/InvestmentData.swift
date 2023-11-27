@@ -14,24 +14,23 @@ struct InvestmentsData: Codable {
 // MARK: - DataClass
 struct InvestmentDataClass: Codable {
     let investments: [Investment]
-    let totalInvested: Int
+       let totalInvested, totalProfitToDate, portfolioValue: Double
+       let expectedProfitAfterYear: Double
 }
 
 // MARK: - Investment
 struct Investment: Codable {
-    let id, amount: Int
-    let property: PropertyInvested
+    let id: Int
+       let name: String
+       let invested: Double
+       let images: [ImageInvested]
 }
 
-// MARK: - Property
-struct PropertyInvested: Codable {
-    let id: Int
-    let name: String
-    let bed: Int
-    let images: [ImageInvested]
-}
 
 // MARK: - Image
 struct ImageInvested: Codable {
     let path: String
 }
+
+
+let sampleInvestment = Investment(id: 1, name: "1BR Apartment Riverside Crescent 310", invested: 500, images: [ImageInvested(path: "property/1/images/10704.webp")])
