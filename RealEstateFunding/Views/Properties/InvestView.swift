@@ -83,8 +83,8 @@ struct InvestView: View {
                            
                         
                         Button{
-                            print("user \(appVM.user) \n property: \(vm.propertyDetail)")
-                          vm.createInvoice(userId: appVM.user?.id ?? 1, amount: Double(invest))
+                            vm.getTransactionsCosts(userId: appVM.user?.id ?? 1, amount: Double(invest))
+//                          vm.createInvoice(userId: appVM.user?.id ?? 1, amount: Double(invest))
                         } label: {
                             Text("Invest")
                                 .foregroundColor(.white)

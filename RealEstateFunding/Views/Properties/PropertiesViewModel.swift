@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 class PropertiesViewModel: ObservableObject {
-     
+    @Published var invetsmentsCost: PaymentAdditionals?
     @Published var properties: [Property] = []
     @Published var propertyDetail: PropertyDetail? {
         didSet{
@@ -90,5 +90,27 @@ class PropertiesViewModel: ObservableObject {
                 .store(in: &subscriptions)
         }
       
+    }
+    
+    func getTransactionsCosts(userId:Int, amount: Double) {
+        
+        if let propertyDetail = propertyDetail {
+            networking.getInvestmentCost(userId: userId, propertyId: propertyDetail.id ?? 1, amount: amount)
+                .sink {[weak self] completion in
+                                guard let self = self else { return }
+                                switch completion {
+                                case .failure(let error):
+                                    print(error.localizedDescription)
+                                case .finished:
+                                    break
+                                }
+                            } receiveValue: {[weak self] value in
+                                guard let self = self else { return }
+                                print(value)
+                                invetsmentsCost = value
+                            }
+                .store(in: &subscriptions)
+        }
+                
     }
 }

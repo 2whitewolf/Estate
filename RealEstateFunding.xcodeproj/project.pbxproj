@@ -81,6 +81,7 @@
 		8BA83E992B10CC03005DD78C /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E982B10CC03005DD78C /* Transactions.swift */; };
 		8BA83E9B2B10CC52005DD78C /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */; };
 		8BA83E9D2B10E523005DD78C /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E9C2B10E523005DD78C /* Payment.swift */; };
+		8BA83EA52B15F62F005DD78C /* InvoiceTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */; };
 		8BA95B812ADFDB0A00FA7D35 /* PropertiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */; };
 		8BA95B832ADFDF1900FA7D35 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA95B822ADFDF1900FA7D35 /* Property.swift */; };
 		8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C4D02AB2FC340040D6B7 /* Date + Ext.swift */; };
@@ -162,6 +163,7 @@
 		8BA83E982B10CC03005DD78C /* Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
 		8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		8BA83E9C2B10E523005DD78C /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTransactionsView.swift; sourceTree = "<group>"; };
 		8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewModel.swift; sourceTree = "<group>"; };
 		8BA95B822ADFDF1900FA7D35 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		8BC2C4D02AB2FC340040D6B7 /* Date + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Ext.swift"; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				8B49CC112ABB224600F1800B /* FinancialsView.swift */,
 				8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */,
 				8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */,
+				8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */,
 			);
 			path = Properties;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				8BC2C5332AB466DC0040D6B7 /* InvestmentDetails.swift in Sources */,
 				8BA8378F2ACEC4FA008DCF3D /* APIManager.swift in Sources */,
 				8BA83E992B10CC03005DD78C /* Transactions.swift in Sources */,
+				8BA83EA52B15F62F005DD78C /* InvoiceTransactionsView.swift in Sources */,
 				8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */,
 				8B20CE7B2AB0900C00FB3ECA /* SignUpView.swift in Sources */,
 				8B49CBEE2AB491FD00F1800B /* ForgotPasswordView.swift in Sources */,

@@ -34,14 +34,19 @@ protocol APIProtocol{
     // MARK: Properties
     func getAll() -> AnyPublisher<PropertyData, AFError>
     func getPropertyById(id: Int ) -> AnyPublisher<PropertyDetailData,AFError>
+    
+     // MARK: Payment && Invoices
     func createInvoice(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<Payment,AFError>
+    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)  -> AnyPublisher<PaymentAdditionals,AFError>
     
     // MARK: Portfolio
     func getPortfolio(userId: Int) -> AnyPublisher<InvestmentsData,AFError>
     func getInvestmentDetail(userId: Int, propertyId: Int) -> AnyPublisher<InvestmentDetailData,AFError>
+    
+    //  MARK: Wallert
     func getWalletTransactions(userId: Int) -> AnyPublisher<AccountInfo,AFError>
     
-    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)
+  
 }
 
 
@@ -50,6 +55,8 @@ class APIManager: APIProtocol{
     
  
     let keychain = KeychainSwift()
+    
+    
     func addFunds(userId: Int, amount: Double) {
         
         let url = makeUrl(make: .addFunds)
@@ -86,7 +93,7 @@ class APIManager: APIProtocol{
         //            .eraseToAnyPublisher()
     }
     
-    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double) {
+    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<PaymentAdditionals,AFError> {
         
         let url = makeUrl(make: .getCostOfInvestment)
         
@@ -103,24 +110,24 @@ class APIManager: APIProtocol{
         ]
         print(url)
         AF.request(url, method: method, parameters: parameters, headers: headers)
-            .responseDecodable(of: PaymentAdditionals.self) {[weak self] response in
-                guard let self = self else {return}
-                
-                switch response.result {
-                case .success(_):
-                    let data = try? self.newJSONDecoder().decode(PaymentAdditionals.self, from: response.data!)
-                    guard let data = data else {return}
-                    print(data)
-                case .failure(let error):
-                    print("Erorr: \(error)")
-                }
-            }
+//            .responseDecodable(of: PaymentAdditionals.self) {[weak self] response in
+//                guard let self = self else {return}
+//                
+//                switch response.result {
+//                case .success(_):
+//                    let data = try? self.newJSONDecoder().decode(PaymentAdditionals.self, from: response.data!)
+//                    guard let data = data else {return}
+//                    print(data)
+//                case .failure(let error):
+//                    print("Erorr: \(error)")
+//                }
+//            }
         
-        //            .validate()
-        //            .publishDecodable(type: AccountInfo.self)
-        //            .value()
-        //            .receive(on: DispatchQueue.main)
-        //            .eraseToAnyPublisher()
+                    .validate()
+                    .publishDecodable(type: PaymentAdditionals.self)
+                    .value()
+                    .receive(on: DispatchQueue.main)
+                    .eraseToAnyPublisher()
     }
     
     func getWalletTransactions(userId: Int)  -> AnyPublisher<AccountInfo,AFError> {
