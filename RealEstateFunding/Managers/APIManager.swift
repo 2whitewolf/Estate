@@ -32,7 +32,7 @@ protocol APIProtocol{
     func login_withProvider(provider: Provider) -> URL
     
     // MARK: Properties
-    func getAll() -> AnyPublisher<PropertyData, AFError>
+    func getAll(id:Int) -> AnyPublisher<PropertyData, AFError>
     func getPropertyById(id: Int ) -> AnyPublisher<PropertyDetailData,AFError>
     
      // MARK: Payment && Invoices
@@ -109,7 +109,7 @@ class APIManager: APIProtocol{
             "amount" : "\(amount)"
         ]
         print(url)
-        AF.request(url, method: method, parameters: parameters, headers: headers)
+       return AF.request(url, method: method, parameters: parameters, headers: headers)
 //            .responseDecodable(of: PaymentAdditionals.self) {[weak self] response in
 //                guard let self = self else {return}
 //                
@@ -307,7 +307,7 @@ class APIManager: APIProtocol{
             .eraseToAnyPublisher()
     }
     
-    func getAll() -> AnyPublisher<PropertyData, Alamofire.AFError> {
+    func getAll(id: Int) -> AnyPublisher<PropertyData, Alamofire.AFError> {
         let url = makeUrl(make: .getAll)
         
         let method = BackendAPIService.getAll.method
@@ -316,7 +316,11 @@ class APIManager: APIProtocol{
         
         let headers: HTTPHeaders = [
                .authorization(bearerToken: token)]
-        return  AF.request(url,method: method, headers: headers)
+        
+        let parameters: [String: Int] = ["user_id": id]
+        
+        
+        return  AF.request(url,method: method,parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: PropertyData.self)
             .value()

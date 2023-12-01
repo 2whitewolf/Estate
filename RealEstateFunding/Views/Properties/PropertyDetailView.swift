@@ -121,6 +121,7 @@ struct PropertyDetailView: View {
                 Divider()
                 NavigationLink{
                     InvestView()
+//                     InvoiceTransactionsView()
                         .environmentObject(vm)
                         .environmentObject(appVM)
                         .navigationBarHidden(true)

@@ -46,7 +46,9 @@ struct PropertiesList: View {
         }
        
         .onAppear{
-            vm.getAllProperties()
+            if let user = appVM.user{
+                vm.getAllProperties(id: user.id)
+            }
         }
     }
 }

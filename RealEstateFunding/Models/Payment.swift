@@ -13,3 +13,6 @@ struct PaymentAdditionals: Codable {
     let registrationFee: Double
     let investmentCost: Double
 }
+
+
+var sampleAdditionalCosts: PaymentAdditionals = PaymentAdditionals(transactionCosts: 20.3, dldFee: 20.5, dubxFee: 20.7, registrationFee: 13, investmentCost: 500.40)

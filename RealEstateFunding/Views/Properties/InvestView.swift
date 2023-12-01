@@ -82,8 +82,12 @@ struct InvestView: View {
                         propertyInfo
                            
                         
-                        Button{
-                            vm.getTransactionsCosts(userId: appVM.user?.id ?? 1, amount: Double(invest))
+                        NavigationLink{
+                            InvoiceTransactionsView(invest: invest)
+                               .environmentObject(vm)
+                               .environmentObject(appVM)
+                               .navigationBarHidden(true)
+//                            vm.getTransactionsCosts(userId: appVM.user?.id ?? 1, amount: Double(invest))
 //                          vm.createInvoice(userId: appVM.user?.id ?? 1, amount: Double(invest))
                         } label: {
                             Text("Invest")

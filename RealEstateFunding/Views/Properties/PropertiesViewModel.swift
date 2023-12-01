@@ -28,8 +28,8 @@ class PropertiesViewModel: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
     
-    func getAllProperties() {
-        networking.getAll()
+    func getAllProperties(id: Int) {
+        networking.getAll(id: id)
             .sink {[weak self] completion in
                             guard let self = self else { return }
                             switch completion {
