@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct InvoiceTransactionsView: View {
     @Environment(\.presentationMode) var presented
     @EnvironmentObject var appVM: AppViewModel
     @EnvironmentObject var vm: PropertiesViewModel
+    @State var isPresented: Bool = false
     var invest: Int
     var body: some View {
         ZStack{
@@ -74,14 +76,31 @@ struct InvoiceTransactionsView: View {
                     .frame(height:220)
                     .overlay(
                         VStack(spacing:24){
-                            DisclosureGroup(
-                                content: { /*@START_MENU_TOKEN@*/Text("Content")/*@END_MENU_TOKEN@*/ },
-                                label: { Text("Payment Method")
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 16,weight: .semibold))
+//                            DisclosureGroup(Text("Payment Method")
+//                                .foregroundColor(.black)
+//                                .font(.system(size: 16,weight: .semibold)), isExpanded: $isPresented){
+//                                    
+//                                }
+//                            
+//                            DisclosureGroup(
+//                                isExpanded: $isPresented,
+//                                label: {
+//                                }
+//                            )
+//                            .accentColor(.black)
+                            HStack{
+                                Text("Payment Method")
+                                                                .foregroundColor(.black)
+                                                                .font(.system(size: 16,weight: .semibold))
+                                 Spacer()
+                                Button{
+                                    isPresented = true
+                                } label:{
+                                Image(systemName: "chevron.down")
                                 }
-                            )
-                            .accentColor(.black)
+                           
+                                 
+                            }
                             .padding(12)
                             .background(RoundedRectangle(cornerRadius: 14)
                                 .stroke(Color.gray, lineWidth: 0.5))
@@ -119,19 +138,27 @@ struct InvoiceTransactionsView: View {
                
             }
             if vm.invetsmentsCost == nil {
-                Color.black.opacity(0.5)
+                Color.black.opacity(0.5).ignoresSafeArea()
                 ProgressView()
             }
         }
+       
         .onAppear{
-            if let user = appVM.user,let  property = vm.propertyDetail {
-                vm.getTransactionsCosts(userId: user.id , amount: Double(invest))
-            }
+                vm.getTransactionsCosts(amount: Double(invest))
+
             if isPreview {
                 vm.propertyDetail = samplePropertyDetail.data?.property
                 vm.invetsmentsCost = sampleAdditionalCosts
             }
         }
+        
+        .popup(isPresented: $isPresented, view: {
+           SelectPaymentMethod()
+                .background(Color.white)
+        },customize: {
+            $0.type(.float)
+        })
+        
     }
 }
 

@@ -29,5 +29,11 @@ struct AccountInfo: Codable {
     let transactions: [Transaction]
 }
 
+struct AccountInfoData: Codable {
+    let responseCode: ResponseCode
+    let data: AccountInfo
+}
+
+
 
 var sampleTransaction: Transaction = Transaction(amount: "500.00", dldFee: "90500.00", appFee: "30000.00", additionalChargesFee: "1200.00", type: "investment", createdAt: "2023-11-13 07:26")

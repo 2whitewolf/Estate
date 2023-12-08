@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FavouritesView: View {
     @Environment(\.presentationMode) var presentation
+    @EnvironmentObject var vm: PropertiesViewModel
+    @EnvironmentObject var appVM: AppViewModel
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
@@ -33,17 +35,31 @@ struct FavouritesView: View {
                     .padding(.leading,22)
                 
                 ScrollView(showsIndicators: false) {
-                    ForEach(1..<5) { _ in
+                    ForEach(vm.properties, id: \.id) { property in
                         NavigationLink{
-                            PropertyDetailView(id: 1)
-                                .navigationBarHidden(true)
+                            if let propertyID = property.id {
+                                PropertyDetailView(id: propertyID)
+                                    .navigationBarHidden(true)
+                                    .environmentObject(vm)
+                                    .environmentObject(appVM)
+                            }
                         } label: {
-                            PropertyCellView(property: sampleProp, image: "")
+
+                            PropertyCellView(property: property, delete: true)
                         }
                     }                    
                 }
             }
             .padding(.horizontal,8)
+            if vm.properties.isEmpty {
+                ProgressView()
+            }
+        }
+        .onAppear{
+//            if let user = appVM.user {
+                vm.properties.removeAll()
+                vm.getFavouriteProperties()
+//            }
         }
     }
 }

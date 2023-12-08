@@ -14,7 +14,7 @@ enum BackendAPIService {
     case forget_password
     case change_password
     case login_provider
-    case getAll
+    case getAllProperties
     case getById
     case getInvoice
      case getPortfolio
@@ -22,6 +22,9 @@ enum BackendAPIService {
      case addFunds
      case getWalletTransactions
      case getCostOfInvestment
+     case addToFavourite
+     case getFavouriteProperties
+     case deletePropertyFromFavourites
     
     
 
@@ -31,7 +34,7 @@ enum BackendAPIService {
 
     var path: String {
         switch self {
-            
+            //MARK: Login\Registration
         case .login:
             return "/login"
         case .register:
@@ -44,14 +47,23 @@ enum BackendAPIService {
             return "/changePassword"
         case .login_provider:
             return "/login"
-        case .getAll:
+            //MARK: Properties
+        case .getAllProperties:
             return "/client/property/getAll"
         case .getById:
             return "/client/property/getOne"
-        case .getInvoice:
-            return "/client/payment/createInvoice"
+        case .addToFavourite:
+            return "/client/favorite/add"
+        case.getFavouriteProperties:
+            return "/client/favorite/getAll"
+        case .deletePropertyFromFavourites:
+            return "/client/favorite/delete"
         case .getPortfolio:
             return "/client/portfolio/getAll"
+            
+            //MARK: INVEST
+        case .getInvoice:
+            return "/client/payment/createInvoice"
         case .getInvestmentDetail:
             return "/client/portfolio/getOne"
         case .addFunds:
@@ -60,14 +72,17 @@ enum BackendAPIService {
             return "/client/wallet/getAll"
         case .getCostOfInvestment:
             return "/client/payment/countInvestments"
+      
         }
     }
     var method: HTTPMethod {
         switch self {
-        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider:
+        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite:
             return .post
-        case .getAll, .getById, .getInvoice, .getPortfolio, .getInvestmentDetail, .addFunds, .getWalletTransactions, .getCostOfInvestment:
+        case .getAllProperties, .getFavouriteProperties, .getById, .getInvoice, .getPortfolio, .getInvestmentDetail, .addFunds, .getWalletTransactions, .getCostOfInvestment:
             return .get
+        case .deletePropertyFromFavourites:
+            return .delete
         }
     }
     

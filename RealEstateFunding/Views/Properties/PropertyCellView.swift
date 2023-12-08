@@ -9,11 +9,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct PropertyCellView: View {
+    @EnvironmentObject var appVM: AppViewModel
+    @EnvironmentObject var vm: PropertiesViewModel
     let columns = [
         GridItem(.adaptive(minimum: 80))
        ]
     var property: Property
-    var image: String
+    var delete: Bool
     var body: some View {
         ZStack{
             
@@ -55,8 +57,15 @@ extension PropertyCellView {
         HStack{
              Spacer()
             Button{
+                if let user = appVM.user{
+                    if delete {
+                        vm.deletePropertyFromFavourites(userId: user.id, propertyId: property.id ?? 0)
+                    } else {
+                        vm.addPropertyToFavourites(userId: user.id, propertyId: property.id ?? 0)
+                    }
+                }
             } label: {
-                Image(systemName: "\(Bool.random() ? "bookmark" : "bookmark.fill")")
+                Image(systemName: "\(delete ?  "bookmark.fill" : "bookmark")")
                     .font(.system(size: 20))
                     .padding(24)
                     .background(Circle().stroke(Color.white, lineWidth: 0.5))
@@ -182,5 +191,5 @@ extension PropertyCellView {
 
 
 #Preview {
-    PropertyCellView(property: sampleProp, image: "")
+    PropertyCellView(property: sampleProp, delete: false)
 }

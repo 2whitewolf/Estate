@@ -9,9 +9,9 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct PropertiesList: View {
- 
-    @StateObject var vm: PropertiesViewModel = PropertiesViewModel()
     @EnvironmentObject var appVM: AppViewModel
+    @StateObject var vm: PropertiesViewModel = PropertiesViewModel()
+
     var body: some View {
         ZStack{
             Color.white
@@ -19,6 +19,7 @@ struct PropertiesList: View {
                headerView
                titleView
                     .padding(.top,6)
+                selectionView
                 ScrollView(showsIndicators: false) {
                     if !vm.properties.isEmpty {
                         LazyVStack {
@@ -30,7 +31,9 @@ struct PropertiesList: View {
                                         .environmentObject(vm)
                                         .environmentObject(appVM)
                                 } label: {
-                                    PropertyCellView(property: property, image: "")
+                                    PropertyCellView(property: property, delete: false)
+                                        .environmentObject(appVM)
+                                        .environmentObject(vm)
                                 }
                                 
                             }
@@ -46,9 +49,10 @@ struct PropertiesList: View {
         }
        
         .onAppear{
-            if let user = appVM.user{
-                vm.getAllProperties(id: user.id)
+            if vm.user == nil {
+                vm.user = appVM.user 
             }
+            vm.getDataOnMain()
         }
     }
 }
@@ -64,6 +68,33 @@ struct PropertiesList_Previews: PreviewProvider {
 
 
 extension PropertiesList {
+    
+    private var selectionView: some View {
+            GeometryReader{ geo in
+                ZStack{
+                    RoundedRectangle(cornerRadius: 32)
+                        .fill(Color(red: 0.46, green: 0.46, blue: 0.5).opacity(0.12))
+                    /*#767680*/
+                    
+                    HStack{
+                        ForEach(PropertiesListEnum.allCases, id: \.self) { el in
+                            Text(el.rawValue.capitalized)
+                                .font(.system(size: 13, weight: .semibold))
+                                .frame(width: (geo.size.width - 4) / 2 , height:30 )
+                                .background( vm.selectedList == el ? Color.white : Color.white.opacity(0.01))
+                                .cornerRadius(32)
+                                .onTapGesture {
+                                    withAnimation(.linear) {
+                                        vm.selectedList = el
+                                    }
+                                }
+                        }
+                    }
+                    .padding(2)
+                }
+            }
+            .frame(height:32)
+    }
     private var headerView: some View {
         HStack{
             Spacer()
@@ -71,6 +102,8 @@ extension PropertiesList {
             NavigationLink{
                 FavouritesView()
                     .navigationBarHidden(true)
+                    .environmentObject(vm)
+                    .environmentObject(appVM)
             } label: {
                 Image(systemName: "bookmark")
                     .font(.system(size: 20))

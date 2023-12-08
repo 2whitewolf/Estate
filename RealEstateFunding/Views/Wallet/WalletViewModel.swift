@@ -41,7 +41,7 @@ class WalletViewModel: ObservableObject {
                 }
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
-                self.accountInfo = value
+                self.accountInfo = value.data
             }
             .store(in: &subscriptions)
            

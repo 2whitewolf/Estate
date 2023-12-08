@@ -34,17 +34,20 @@ protocol APIProtocol{
     // MARK: Properties
     func getAll(id:Int) -> AnyPublisher<PropertyData, AFError>
     func getPropertyById(id: Int ) -> AnyPublisher<PropertyDetailData,AFError>
+    func addToFavourite(userId: Int, propertyId: Int)
+    func getFavouriteProperties(userId: Int) -> AnyPublisher<PropertyData,AFError>
+    func deletePropertyFromFavourites(userId: Int, propertyId:Int)
     
      // MARK: Payment && Invoices
     func createInvoice(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<Payment,AFError>
-    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)  -> AnyPublisher<PaymentAdditionals,AFError>
+    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)  -> AnyPublisher<PaymentAdditionalData,AFError>
     
     // MARK: Portfolio
     func getPortfolio(userId: Int) -> AnyPublisher<InvestmentsData,AFError>
     func getInvestmentDetail(userId: Int, propertyId: Int) -> AnyPublisher<InvestmentDetailData,AFError>
     
     //  MARK: Wallert
-    func getWalletTransactions(userId: Int) -> AnyPublisher<AccountInfo,AFError>
+    func getWalletTransactions(userId: Int) -> AnyPublisher<AccountInfoData,AFError>
     
   
 }
@@ -52,9 +55,75 @@ protocol APIProtocol{
 
 class APIManager: APIProtocol{
 
-    
- 
     let keychain = KeychainSwift()
+    
+    
+    func deletePropertyFromFavourites(userId: Int, propertyId: Int) {
+        
+        let url = makeUrl(make: .deletePropertyFromFavourites)
+        
+        let method = BackendAPIService.deletePropertyFromFavourites.method
+        let token = keychain.get("userToken") ?? ""
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: token)
+        ]
+        
+        let parameters: [String: String] = [
+            "user_id": "\(userId)",
+            "property_id" : "\(propertyId)"
+        ]
+        
+        AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .response{ data in
+                print(data)
+                
+            }
+    }
+    
+    func getFavouriteProperties(userId: Int) -> AnyPublisher<PropertyData, AFError> {
+        let url = makeUrl(make: .getFavouriteProperties)
+        
+        let method = BackendAPIService.getFavouriteProperties.method
+        
+        let token = keychain.get("userToken") ?? ""
+        
+        let headers: HTTPHeaders = [
+               .authorization(bearerToken: token)]
+        
+        let parameters: [String: Int] = ["user_id": userId]
+        
+        
+        return  AF.request(url,method: method,parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: PropertyData.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func addToFavourite(userId: Int, propertyId: Int) {
+        
+        let url = makeUrl(make: .addToFavourite)
+        
+        let method = BackendAPIService.addToFavourite.method
+        let token = keychain.get("userToken") ?? ""
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: token)
+        ]
+        
+        let parameters: [String: String] = [
+            "user_id": "\(userId)",
+            "property_id" : "\(propertyId)"
+        ]
+         print(url)
+        AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .response{ data in
+                print(data)
+                
+            }
+    }
     
     
     func addFunds(userId: Int, amount: Double) {
@@ -71,7 +140,7 @@ class APIManager: APIProtocol{
             "user_id": "\(userId)",
             "amount" : "\(amount)"
         ]
-        print(url)
+      
         AF.request(url, method: method, parameters: parameters, headers: headers)
             .responseDecodable(of: PaymentAdditionals.self) {[weak self] response in
                 guard let self = self else {return}
@@ -85,15 +154,9 @@ class APIManager: APIProtocol{
                     print("Erorr: \(error)")
                 }
             }
-        
-        //            .validate()
-        //            .publishDecodable(type: AccountInfo.self)
-        //            .value()
-        //            .receive(on: DispatchQueue.main)
-        //            .eraseToAnyPublisher()
     }
     
-    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<PaymentAdditionals,AFError> {
+    func getInvestmentCost(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<PaymentAdditionalData,AFError> {
         
         let url = makeUrl(make: .getCostOfInvestment)
         
@@ -108,29 +171,16 @@ class APIManager: APIProtocol{
             "property_id" : "\(propertyId)" ,
             "amount" : "\(amount)"
         ]
-        print(url)
+     
        return AF.request(url, method: method, parameters: parameters, headers: headers)
-//            .responseDecodable(of: PaymentAdditionals.self) {[weak self] response in
-//                guard let self = self else {return}
-//                
-//                switch response.result {
-//                case .success(_):
-//                    let data = try? self.newJSONDecoder().decode(PaymentAdditionals.self, from: response.data!)
-//                    guard let data = data else {return}
-//                    print(data)
-//                case .failure(let error):
-//                    print("Erorr: \(error)")
-//                }
-//            }
-        
                     .validate()
-                    .publishDecodable(type: PaymentAdditionals.self)
+                    .publishDecodable(type: PaymentAdditionalData.self)
                     .value()
                     .receive(on: DispatchQueue.main)
                     .eraseToAnyPublisher()
     }
     
-    func getWalletTransactions(userId: Int)  -> AnyPublisher<AccountInfo,AFError> {
+    func getWalletTransactions(userId: Int)  -> AnyPublisher<AccountInfoData,AFError> {
         let url = makeUrl(make: .getWalletTransactions)
         
         let method = BackendAPIService.getWalletTransactions.method
@@ -142,13 +192,26 @@ class APIManager: APIProtocol{
         let parameters: [String: String] = [
             "user_id": "\(userId)"
         ]
-        print(url)
+      
       return  AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
-            .publishDecodable(type: AccountInfo.self)
+            .publishDecodable(type: AccountInfoData.self)
             .value()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+//        AF.request(url, method: method, parameters: parameters, headers: headers)
+//            .responseDecodable(of: AccountInfoData.self) {[weak self] response in
+//                           guard let self = self else {return}
+//           
+//                           switch response.result {
+//                           case .success(_):
+//                               let data = try? self.newJSONDecoder().decode(AccountInfoData.self, from: response.data!)
+//                               guard let data = data else {return}
+//                               print(data)
+//                           case .failure(let error):
+//                               print("Erorr: \(error)")
+//                           }
+//                       }
     }
     
     func getInvestmentDetail(userId: Int, propertyId: Int) -> AnyPublisher<InvestmentDetailData,AFError> {
@@ -308,9 +371,9 @@ class APIManager: APIProtocol{
     }
     
     func getAll(id: Int) -> AnyPublisher<PropertyData, Alamofire.AFError> {
-        let url = makeUrl(make: .getAll)
+        let url = makeUrl(make: .getAllProperties)
         
-        let method = BackendAPIService.getAll.method
+        let method = BackendAPIService.getAllProperties.method
         
         let token = keychain.get("userToken") ?? ""
         

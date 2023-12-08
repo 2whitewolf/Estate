@@ -20,6 +20,25 @@ struct DataClass: Codable {
     let similar: [Property]?
 }
 
+/*
+ struct Property: Codable {
+     let id: Int
+     let name: String
+     let totalPrice, price: Int
+     let annualProfit: String
+     let sellPrice, appFee, additionalCharges: Int
+     let period, handover, location, coordinateX: String
+     let coordinateY, developer, developerSpecsTitle, developerSpecsSubtitle: String
+     let type: String
+     let bed, meter, sold, completed: Int
+     let about: String
+     let investors, needed: Int
+     let funded, dldFee: Double
+     let dubXfee: Int
+     let propertyDldFee, netIncome: String
+     let images: [PropertyImage]
+ */
+
 // MARK: - Property
 struct PropertyDetail: Codable {
     let id: Int?
@@ -32,7 +51,7 @@ struct PropertyDetail: Codable {
     var type: String?
     var bed, meter, sold, completed: Int?
     var about: String?
-    var investors, needed, funded: Int?
+    var investors, needed, funded: Double?
     var dldFee, dubXfee: Double?
     var registrationFee: Int?
     var netIncome: String?
@@ -52,7 +71,7 @@ struct PropertyDetail: Codable {
         case developer
         case developerSpecsTitle = "developer_specs_title"
         case developerSpecsSubtitle = "developer_specs_subtitle"
-        case type, bed, meter, sold, completed, about, investors, needed, funded, dldFee, dubXfee
+        case type, bed, meter, sold, completed, about,investors, needed, funded, dldFee, dubXfee
         case registrationFee = "registration_fee"
         case netIncome = "net_income"
         case images

@@ -95,7 +95,7 @@ struct PropertyDetailView: View {
                             if let  similars = vm.similar {
                                 VStack(spacing: 10) {
                                     ForEach(similars, id: \.id) { property in
-                                        PropertyCellView(property: property, image: "")
+                                        PropertyCellView(property: property, delete: false)
                                             .onTapGesture {
                                                 withAnimation(.spring()){
                                                     addPropertyToHistory(id: property.id ?? 1)
@@ -120,7 +120,7 @@ struct PropertyDetailView: View {
             VStack{
                 Divider()
                 NavigationLink{
-                    InvestView()
+                   InvestView()
 //                     InvoiceTransactionsView()
                         .environmentObject(vm)
                         .environmentObject(appVM)
@@ -149,7 +149,7 @@ struct PropertyDetailView: View {
         }
         .ignoresSafeArea()
         .onAppear{
-            vm.getPropertyDetail(id: id)
+            vm.getPropertyDetail(id: self.id)
         }
         .onDisappear(perform: {
             SDImageCache().clearMemory()

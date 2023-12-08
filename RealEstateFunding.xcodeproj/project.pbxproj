@@ -47,6 +47,7 @@
 		8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC0F2ABB0ECB00F1800B /* InvestmentCalculatorView.swift */; };
 		8B49CC122ABB224600F1800B /* FinancialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC112ABB224600F1800B /* FinancialsView.swift */; };
 		8B49CC152ABB34EA00F1800B /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC142ABB34EA00F1800B /* FavouritesView.swift */; };
+		8B515E8C2B1DD9C100A678D9 /* SelectPaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */; };
 		8B58D6892AF8DF0F000EB557 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B58D6882AF8DF0F000EB557 /* SwiftSoup */; };
 		8B58D68B2AF9177C000EB557 /* VerifyMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68A2AF9177C000EB557 /* VerifyMail.swift */; };
 		8B58D68D2AFA4454000EB557 /* KeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */; };
@@ -134,6 +135,7 @@
 		8B49CC0F2ABB0ECB00F1800B /* InvestmentCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentCalculatorView.swift; sourceTree = "<group>"; };
 		8B49CC112ABB224600F1800B /* FinancialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsView.swift; sourceTree = "<group>"; };
 		8B49CC142ABB34EA00F1800B /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
+		8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethod.swift; sourceTree = "<group>"; };
 		8B58D68A2AF9177C000EB557 /* VerifyMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMail.swift; sourceTree = "<group>"; };
 		8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModifier.swift; sourceTree = "<group>"; };
 		8B58D68E2AFA8588000EB557 /* country_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = country_data.json; sourceTree = "<group>"; };
@@ -317,13 +319,11 @@
 				8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */,
 				8B20CE722AB07A0A00FB3ECA /* PropertiesList.swift */,
 				8B49CC092AB9E43B00F1800B /* PropertyDetailView.swift */,
-				8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */,
 				8B49CC0D2ABAF59500F1800B /* PropertyLocationView.swift */,
 				8B49CC0F2ABB0ECB00F1800B /* InvestmentCalculatorView.swift */,
 				8B49CC112ABB224600F1800B /* FinancialsView.swift */,
 				8B5ECCD72AE009270068D5D1 /* PropertyCellView.swift */,
 				8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */,
-				8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */,
 			);
 			path = Properties;
 			sourceTree = "<group>";
@@ -336,9 +336,20 @@
 			path = Favourites;
 			sourceTree = "<group>";
 		};
+		8B515E8A2B1DD98900A678D9 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */,
+				8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */,
+				8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		8BA8378C2ACEC4A6008DCF3D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8B515E8A2B1DD98900A678D9 /* Payment */,
 				8BA837B32AD53B32008DCF3D /* ViewModifiers */,
 				8B20CE6A2AB057F800FB3ECA /* OnboardingView.swift */,
 				8B20CE6C2AB065F400FB3ECA /* TabBar.swift */,
@@ -550,6 +561,7 @@
 				8B20CE892AB1EB8800FB3ECA /* Keyboard + Ext.swift in Sources */,
 				8BEBC3652AEBB7A50016FCA4 /* NetWorthView.swift in Sources */,
 				8B58D68B2AF9177C000EB557 /* VerifyMail.swift in Sources */,
+				8B515E8C2B1DD9C100A678D9 /* SelectPaymentMethod.swift in Sources */,
 				8B5ECCE22AE14F7C0068D5D1 /* PropertyDetail.swift in Sources */,
 				8B20CE8B2AB1F32400FB3ECA /* LoginView.swift in Sources */,
 				8B20CE762AB0867B00FB3ECA /* RegistrationStartView.swift in Sources */,

@@ -49,7 +49,7 @@ class PortfolioViewModel: ObservableObject {
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
                 self.investments = value.data
-                print("investments: \(investments)")
+                
             }
             .store(in: &subscriptions)
     }
@@ -66,7 +66,7 @@ class PortfolioViewModel: ObservableObject {
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
                 self.investmentDetail = value.data
-                print("investments: \(value.data)")
+               
             }
             .store(in: &subscriptions)
     }
