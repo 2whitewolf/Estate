@@ -95,7 +95,7 @@ struct PropertyDetailView: View {
                             if let  similars = vm.similar {
                                 VStack(spacing: 10) {
                                     ForEach(similars, id: \.id) { property in
-                                        PropertyCellView(property: property, delete: false)
+                                        PropertyCellView(property: property)
                                             .onTapGesture {
                                                 withAnimation(.spring()){
                                                     addPropertyToHistory(id: property.id ?? 1)

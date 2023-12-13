@@ -31,7 +31,7 @@ struct PropertiesList: View {
                                         .environmentObject(vm)
                                         .environmentObject(appVM)
                                 } label: {
-                                    PropertyCellView(property: property, delete: false)
+                                    PropertyCellView(property: property)
                                         .environmentObject(appVM)
                                         .environmentObject(vm)
                                 }

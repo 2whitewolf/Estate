@@ -7,6 +7,10 @@
 
 import SwiftUI
 import PopupView
+import Stripe
+import StripePaymentSheet
+import StripeApplePay
+
 
 struct InvoiceTransactionsView: View {
     @Environment(\.presentationMode) var presented
@@ -30,7 +34,7 @@ struct InvoiceTransactionsView: View {
                             HStack{
                                 Text("Investment Amount")
                                 Spacer()
-                                Text("AED 500")
+                                Text("AED " + "\(invest)")
                                     .foregroundColor(.black)
                                 //                                .fontWeight(.bold)
                             }
@@ -47,7 +51,7 @@ struct InvoiceTransactionsView: View {
                             HStack{
                                 Text("Transaction fee (4%)")
                                 Spacer()
-                                Text("AED " + cost.dldFee.rotate(0))
+                                Text("AED " + (cost.dldFee?.rotate(0) ?? ""))
                                     .foregroundColor(.black)
                                     .fontWeight(.semibold)
                             }
@@ -55,7 +59,7 @@ struct InvoiceTransactionsView: View {
                             HStack{
                                 Text("[App Name] fee (2%)")
                                 Spacer()
-                                Text("AED " + cost.dubxFee.rotate(0))
+                                Text("AED " + (cost.dubxFee?.rotate(0) ?? ""))
                                     .foregroundColor(.black)
                                     .fontWeight(.semibold)
                             }
@@ -67,58 +71,50 @@ struct InvoiceTransactionsView: View {
                 }
                 .padding(.horizontal,8)
                 Spacer()
-              
-               
-            
+                
+                
+                
                 Rectangle()
                     .fill(Color.white)
                     .ignoresSafeArea()
                     .frame(height:220)
                     .overlay(
                         VStack(spacing:24){
-//                            DisclosureGroup(Text("Payment Method")
-//                                .foregroundColor(.black)
-//                                .font(.system(size: 16,weight: .semibold)), isExpanded: $isPresented){
-//                                    
-//                                }
-//                            
-//                            DisclosureGroup(
-//                                isExpanded: $isPresented,
-//                                label: {
-//                                }
-//                            )
-//                            .accentColor(.black)
                             HStack{
                                 Text("Payment Method")
-                                                                .foregroundColor(.black)
-                                                                .font(.system(size: 16,weight: .semibold))
-                                 Spacer()
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16,weight: .semibold))
+                                Spacer()
+                                if let icon = vm.paymentMethod.image {
+                                    Image(icon)
+                                }
                                 Button{
                                     isPresented = true
                                 } label:{
-                                Image(systemName: "chevron.down")
+                                    Image(systemName: "chevron.down")
                                 }
-                           
-                                 
+                                
+                                
                             }
                             .padding(12)
                             .background(RoundedRectangle(cornerRadius: 14)
                                 .stroke(Color.gray, lineWidth: 0.5))
-//                            .modifier(CornerBackground())
-
+                            //                            .modifier(CornerBackground())
+                            
                             HStack{
                                 Text("Total")
                                     .foregroundColor(.black)
                                     .fontWeight(.semibold)
-                                   
-                                 Spacer()
                                 
-                                Text("AED " + (vm.invetsmentsCost?.investmentCost.rotate(0) ?? "990"))
+                                Spacer()
+                                
+                                Text("AED " + (vm.invetsmentsCost?.investmentCost?.rotate(0) ?? "990"))
                                     .foregroundColor(.black)
                                     .fontWeight(.semibold)
                             }
+                            
                             Button{
-                                
+                                vm.createInvoice(amount: Double(invest))
                             } label: {
                                 Text("Pay via Stripe Checkout")
                                     .fontWeight(.semibold)
@@ -130,33 +126,43 @@ struct InvoiceTransactionsView: View {
                             }
                             
                         }
-                        .padding(.horizontal,24)
-                        .padding(.top)
-                        .padding(.bottom,34)
-                    
+                            .padding(.horizontal,24)
+                            .padding(.top)
+                            .padding(.bottom,34)
+                        
                     )
-               
+                
             }
             if vm.invetsmentsCost == nil {
                 Color.black.opacity(0.5).ignoresSafeArea()
                 ProgressView()
             }
         }
-       
+        
         .onAppear{
-                vm.getTransactionsCosts(amount: Double(invest))
-
             if isPreview {
                 vm.propertyDetail = samplePropertyDetail.data?.property
                 vm.invetsmentsCost = sampleAdditionalCosts
             }
+//            vm.getWalletBalance()
+            vm.getTransactionsCosts(amount: Double(invest))
+            
+            
+            
+            
         }
         
         .popup(isPresented: $isPresented, view: {
-           SelectPaymentMethod()
-                .background(Color.white)
+            SelectPaymentMethod(){
+                isPresented.toggle()
+            }
+            .background(Color.white)
         },customize: {
-            $0.type(.float)
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
         })
         
     }
@@ -194,6 +200,6 @@ extension InvoiceTransactionsView {
         }
     }
     
-     
+    
 }
 

@@ -20,7 +20,9 @@ struct InvestView: View {
     @EnvironmentObject var appVM: AppViewModel
     @EnvironmentObject var vm: PropertiesViewModel
     @State var invest: Int = 500
+    @State var presentAgree: Bool = false
     @FocusState private var isTextFieldFocused: Bool
+    @State var goNext: Bool = false
     var isSmall: Binding<Bool> {
         Binding(get: {
             UIScreen.screenHeight < 700
@@ -36,6 +38,14 @@ struct InvestView: View {
     }()
     var body: some View {
         ZStack {
+             NavigationLink("", destination: InvoiceTransactionsView(invest: invest)
+                .environmentObject(vm)
+                .environmentObject(appVM)
+                .navigationBarHidden(true)
+                .onDisappear{
+                    goNext = false
+                    presentAgree = false
+                }, isActive: $goNext)
             
             Color.white.ignoresSafeArea()
             VStack{
@@ -60,6 +70,7 @@ struct InvestView: View {
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: UIScreen.screenWidth - 16)
+//                                    .frame(maxWidth: .infinity)
                                     .frame(height:283)
                                     .cornerRadius(52)
                                   
@@ -69,26 +80,27 @@ struct InvestView: View {
                                     }
                                 }
                             }
+                                
                             
-                            Color.black.opacity(0.64)
-                                .cornerRadius(52)
-                            imageOverlay
-                                .padding(.top,55)
+                          
+//                                .padding(.top,55)
                         }
-                        .padding(.top,8)
+                       
+                        .overlay(
+                            ZStack{
+                                Color.black.opacity(0.64)
+                                    .cornerRadius(52)
+                                imageOverlay
+                            }
+                        )
+                        .padding(.top,16)
                        
                         .frame(height:283)
                         
                         propertyInfo
                            
-                        
-                        NavigationLink{
-                            InvoiceTransactionsView(invest: invest)
-                               .environmentObject(vm)
-                               .environmentObject(appVM)
-                               .navigationBarHidden(true)
-//                            vm.getTransactionsCosts(userId: appVM.user?.id ?? 1, amount: Double(invest))
-//                          vm.createInvoice(userId: appVM.user?.id ?? 1, amount: Double(invest))
+                            Button{
+                                presentAgree = true
                         } label: {
                             Text("Invest")
                                 .foregroundColor(.white)
@@ -120,12 +132,21 @@ struct InvestView: View {
                 }
             }
         }
-        .sheet(isPresented: $vm.openWebViewToPay) {
-            WebRepresent(user: $appVM.user, url: vm.linkToPayment!)
-                .onDisappear(perform: {
-                    presentation.wrappedValue.dismiss()
-                })
-              }
+        .popup(isPresented: $presentAgree) {
+            PaymentAgree(){
+                DispatchQueue.main.async {
+                    self.goNext = true
+                }
+
+            }
+        } customize: {
+            $0
+                .type(.floater(verticalPadding: 0, useSafeAreaInset: false))
+                .position(.bottom)
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.4))
+        }
+       
     }
 }
 

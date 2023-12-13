@@ -7,13 +7,13 @@
 
 import Foundation
 struct PaymentAdditionals: Codable {
-    let transactionCosts: Double
-    let dldFee: Double
-    let dubxFee: Double
-    let registrationFee: Double
-    let investmentCost: Double
-    let dubxPercent: Double
-    let dldFeePercent: String
+    let transactionCosts: Double?
+    let dldFee: Double?
+    let dubxFee: Double?
+    let registrationFee: Double?
+    let investmentCost: Double?
+    let dubxPercent: Double?
+    let dldFeePercent: String?
 }
 
 struct PaymentAdditionalData: Codable {

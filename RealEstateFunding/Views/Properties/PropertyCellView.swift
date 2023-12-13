@@ -14,8 +14,7 @@ struct PropertyCellView: View {
     let columns = [
         GridItem(.adaptive(minimum: 80))
        ]
-    var property: Property
-    var delete: Bool
+   @State var property: Property
     var body: some View {
         ZStack{
             
@@ -57,15 +56,17 @@ extension PropertyCellView {
         HStack{
              Spacer()
             Button{
-                if let user = appVM.user{
-                    if delete {
-                        vm.deletePropertyFromFavourites(userId: user.id, propertyId: property.id ?? 0)
+                if let favorite = property.favorite {
+                    if favorite {
+                        vm.deletePropertyFromFavourites(propertyId: property.id ?? 0)
                     } else {
-                        vm.addPropertyToFavourites(userId: user.id, propertyId: property.id ?? 0)
+                        vm.addPropertyToFavourites( propertyId: property.id ?? 0)
                     }
-                }
+                    property.favorite?.toggle()
+                } 
+            
             } label: {
-                Image(systemName: "\(delete ?  "bookmark.fill" : "bookmark")")
+                Image(systemName: "\(property.favorite ?? false ?  "bookmark.fill" : "bookmark")")
                     .font(.system(size: 20))
                     .padding(24)
                     .background(Circle().stroke(Color.white, lineWidth: 0.5))
@@ -191,5 +192,5 @@ extension PropertyCellView {
 
 
 #Preview {
-    PropertyCellView(property: sampleProp, delete: false)
+    PropertyCellView(property: sampleProp)
 }

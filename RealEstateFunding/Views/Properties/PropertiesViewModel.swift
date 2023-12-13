@@ -8,34 +8,42 @@
 import Foundation
 import SwiftUI
 import Combine
+import StripePaymentSheet
+import Alamofire
 
 enum PropertiesListEnum: String, CaseIterable{
     case available, funded
 }
 
 class PropertiesViewModel: ObservableObject {
-    @Published var invetsmentsCost: PaymentAdditionals? 
+    @Published var invetsmentsCost: PaymentAdditionals?
     @Published var properties: [Property] = []
-    @Published var propertyDetail: PropertyDetail? {
+    @Published var propertyDetail: PropertyDetail?
+    @Published var similar: [Property]?
+    @Published var selectedList:PropertiesListEnum = .available {
         didSet{
-            if let  propertyDetail = propertyDetail {
-                print(propertyDetail)
-            }
+           getAllProperties()
         }
     }
-    @Published var similar: [Property]?
-    @Published var selectedList:PropertiesListEnum = .available
+    @Published var paymentData: PaymentDataClass?
+    @Published var walletBalance: WalletDataClass?
+    
     
     @Published var propertyPreviewHistory: [Int] = []
-    @Published var linkToPayment: URL?
-    @Published var openWebViewToPay: Bool = false
+//    @Published var linkToPayment: URL?
+//    @Published var openWebViewToPay: Bool = false
+    @Published var paymentMethod: PaymentMethod = .stripe
+    @Published var fcmRegTokenMessage:String = ""
+
     
     var userID: Int = 0
     
    @Published var user: User? {
         didSet{
-            if let user = user {
-                userID = user.id
+            DispatchQueue.main.async { [weak self] in
+                if let user = self?.user {
+                    self?.userID = user.id
+                }
             }
         }
     }
@@ -45,10 +53,7 @@ class PropertiesViewModel: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
     
-    
-    init( ) {
-      
-    }
+
     deinit {
        
         subscriptions.removeAll()
@@ -57,17 +62,14 @@ class PropertiesViewModel: ObservableObject {
  
     
     func getDataOnMain() {
-        switch selectedList {
-        case .available:
-            getAllProperties()
-        case .funded:
-            print()
-        }
+        getAllProperties()
+      
+        paymentMethod = .stripe
     }
     
     func getAllProperties() {
-      
-            networking.getAll(id: userID)
+        
+      getResponseAboutProperties()
                 .sink {[weak self] completion in
                     guard let self = self else { return }
                     switch completion {
@@ -78,9 +80,39 @@ class PropertiesViewModel: ObservableObject {
                     }
                 } receiveValue: {[weak self] value in
                     guard let self = self else { return }
-                    self.properties = value.data//.enumerated().filter{ $0.offset < 3 }.map{ $0.element}
+                    self.properties = value.data
                 }
                 .store(in: &subscriptions)
+    }
+    
+    func getResponseAboutProperties() -> AnyPublisher<PropertyData, AFError>{
+     return    switch selectedList{
+        case .available:
+              networking.getAll(id: userID)
+        case .funded:
+             networking.getFundedProperties(userId: userID)
+        }
+    }
+    
+    func getWalletBalance() {
+        networking.getWalletBalance(userId: self.userID)
+            .sink {[weak self] completion in
+                            guard let self = self else { return }
+                            switch completion {
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            case .finished:
+                                break
+                            }
+                        } receiveValue: {[weak self] value in
+                            guard let self = self else { return }
+                            if let data = value.data {
+                                self.walletBalance = data
+                            }
+                            
+                            
+                        }
+            .store(in: &subscriptions)
     }
     
     func getPropertyDetail(id: Int){
@@ -105,9 +137,10 @@ class PropertiesViewModel: ObservableObject {
     
     func createInvoice(amount: Double) {
        
-        if let propertyDetail = propertyDetail {
+        if let propertyDetail = propertyDetail, let investmentCost = invetsmentsCost {
            
-            networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: amount)
+           // networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: amount)
+            networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 0, amount: amount, transactionCosts: investmentCost.transactionCosts ?? 0, dubxFee: investmentCost.dubxFee ?? 0, dldFee: investmentCost.dldFee ?? 0, registrationFee: investmentCost.registrationFee ?? 0, investmentCost: investmentCost.investmentCost ?? 0)
                 .sink {[weak self] completion in
                                 guard let self = self else { return }
                                 switch completion {
@@ -118,12 +151,8 @@ class PropertiesViewModel: ObservableObject {
                                 }
                             } receiveValue: {[weak self] value in
                                 guard let self = self else { return }
-                                if let link = value.paymentLink {
-                                    if let url  = URL(string: link) {
-                                        linkToPayment = url
-                                        openWebViewToPay.toggle()
-                                    }
-                                }
+                                self.paymentData = value.data
+                                print(value.data)
                             }
                 .store(in: &subscriptions)
         }
@@ -144,7 +173,7 @@ class PropertiesViewModel: ObservableObject {
                                 }
                             } receiveValue: {[weak self] value in
                                 guard let self = self else { return }
-                             
+                                print(value.data)
                                 invetsmentsCost = value.data
                             }
                 .store(in: &subscriptions)
@@ -152,15 +181,23 @@ class PropertiesViewModel: ObservableObject {
                 
     }
     
-    func addPropertyToFavourites(userId:Int,propertyId: Int){
+    func addPropertyToFavourites(propertyId: Int){
         networking.addToFavourite(userId: self.userID, propertyId: propertyId)
+        getAllProperties()
     }
     
-    func deletePropertyFromFavourites(userId:Int,propertyId: Int){
+    func canPayWithWallet() -> Bool {
+            guard let walletBalance = walletBalance?.balance  else { return false }
+            guard let transactionCosts = invetsmentsCost?.transactionCosts else { return false}
+            
+            return walletBalance > transactionCosts
+    }
+    
+    func deletePropertyFromFavourites(propertyId: Int){
         networking.deletePropertyFromFavourites(userId: self.userID, propertyId: propertyId)
-        withAnimation{
-            properties.removeAll(where: {$0.id == propertyId})
-        }
+//        withAnimation{
+//                properties.removeAll(where: {$0.id == propertyId})
+//        }
     }
     
     func getFavouriteProperties() {
@@ -176,8 +213,41 @@ class PropertiesViewModel: ObservableObject {
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
                            
-                            self.properties = value.data//.enumerated().filter{ $0.offset < 3 }.map{ $0.element}
+                            self.properties = value.data.map{
+                                Property(id: $0.id,
+                                         totalPrice: $0.totalPrice,
+                                         annualProfit: $0.annualProfit,
+                                         period: $0.period,
+                                         location: $0.location,
+                                         bed: $0.bed,
+                                         meter: $0.meter,
+                                         type: $0.type,
+                                         favorite: true,
+                                         invested: $0.invested,
+                                         investors: $0.investors,
+                                         funded: $0.funded,
+                                         images: $0.images
+                                )
+                            }
                         }
             .store(in: &subscriptions)
+        
+        
+    }
+}
+enum PaymentMethod {
+    case stripe,wallet,apple,crypto
+    
+    var image: String? {
+        switch self {
+        case .stripe:
+            "stripe_icon"
+        case .wallet:
+            nil
+        case .apple:
+            "apple_pay_icon"
+        case .crypto:
+            "crypto_icon"
+        }
     }
 }

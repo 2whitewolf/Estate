@@ -45,7 +45,7 @@ struct FavouritesView: View {
                             }
                         } label: {
 
-                            PropertyCellView(property: property, delete: true)
+                            PropertyCellView(property: property)
                         }
                     }                    
                 }

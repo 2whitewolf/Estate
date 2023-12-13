@@ -138,6 +138,7 @@ var samplePropertyDetail: PropertyDetailData  =  PropertyDetailData(
                 bed: 3,
                 meter: 120,
                 type: "Ready",
+                favorite: false,
                 invested: nil,
                 investors: nil,
                 funded: nil,
@@ -153,7 +154,16 @@ var samplePropertyDetail: PropertyDetailData  =  PropertyDetailData(
 )
 
 
-struct Payment: Codable {
-    let paymentLink:String?
+struct PaymentData: Codable {
+    let responseCode: ResponseCode?
+        let data: PaymentDataClass?
 }
  
+struct PaymentDataClass: Codable {
+    let clientSecret, publishableKey: String?
+
+    enum CodingKeys: String, CodingKey {
+        case clientSecret = "client_secret"
+        case publishableKey = "publishable_key"
+    }
+}

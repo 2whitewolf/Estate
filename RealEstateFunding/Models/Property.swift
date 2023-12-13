@@ -14,8 +14,8 @@ var sampleProp = Property(id: 1,
                           bed: 2,
                           meter: 120,
                           type: "ready",
+                          favorite: false,
                           invested: nil,
-                          
                           investors: 0,
                           funded: 0,
                           images: [
@@ -41,8 +41,7 @@ struct Property: Codable {
     var  annualProfit, period, location: String?
     var bed, meter: Int?
     var type: String?
-    //    let invested: String?
-    //    let invested: Int?
+    var favorite: Bool?
     var  invested: Invested?
     var investors,funded: Double?
 //    var invested,investors, funded: Int?
@@ -52,7 +51,7 @@ struct Property: Codable {
         case id
         case totalPrice = "total_price"
         case annualProfit = "annual_profit"
-        case period, location, bed, meter, type, invested, investors, funded, images
+        case period, location, bed, meter, type, favorite, invested, investors, funded, images
     }
 }
 

@@ -15,16 +15,18 @@ enum BackendAPIService {
     case change_password
     case login_provider
     case getAllProperties
+    case getFundedProperties
     case getById
     case getInvoice
-     case getPortfolio
-     case getInvestmentDetail
-     case addFunds
-     case getWalletTransactions
-     case getCostOfInvestment
-     case addToFavourite
-     case getFavouriteProperties
-     case deletePropertyFromFavourites
+    case getPortfolio
+    case getInvestmentDetail
+    case addFunds
+    case getWalletTransactions
+    case getWalletBalance
+    case getCostOfInvestment
+    case addToFavourite
+    case getFavouriteProperties
+    case deletePropertyFromFavourites
     
     
 
@@ -50,6 +52,9 @@ enum BackendAPIService {
             //MARK: Properties
         case .getAllProperties:
             return "/client/property/getAll"
+        case.getFundedProperties:
+            return "/client/property/getFunded"
+            
         case .getById:
             return "/client/property/getOne"
         case .addToFavourite:
@@ -72,14 +77,16 @@ enum BackendAPIService {
             return "/client/wallet/getAll"
         case .getCostOfInvestment:
             return "/client/payment/countInvestments"
+        case .getWalletBalance:
+            return "/client/wallet/getBalance"
       
         }
     }
     var method: HTTPMethod {
         switch self {
-        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite:
+        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite, .getInvoice:
             return .post
-        case .getAllProperties, .getFavouriteProperties, .getById, .getInvoice, .getPortfolio, .getInvestmentDetail, .addFunds, .getWalletTransactions, .getCostOfInvestment:
+        case .getAllProperties,.getFundedProperties , .getFavouriteProperties, .getById, .getPortfolio, .getInvestmentDetail, .addFunds, .getWalletTransactions,.getWalletBalance, .getCostOfInvestment:
             return .get
         case .deletePropertyFromFavourites:
             return .delete

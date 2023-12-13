@@ -33,13 +33,14 @@ protocol APIProtocol{
     
     // MARK: Properties
     func getAll(id:Int) -> AnyPublisher<PropertyData, AFError>
+    func getFundedProperties(userId: Int ) -> AnyPublisher< PropertyData,AFError>
     func getPropertyById(id: Int ) -> AnyPublisher<PropertyDetailData,AFError>
     func addToFavourite(userId: Int, propertyId: Int)
     func getFavouriteProperties(userId: Int) -> AnyPublisher<PropertyData,AFError>
     func deletePropertyFromFavourites(userId: Int, propertyId:Int)
     
      // MARK: Payment && Invoices
-    func createInvoice(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<Payment,AFError>
+    func createInvoice(userId: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double) -> AnyPublisher<PaymentData,AFError>
     func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)  -> AnyPublisher<PaymentAdditionalData,AFError>
     
     // MARK: Portfolio
@@ -48,6 +49,7 @@ protocol APIProtocol{
     
     //  MARK: Wallert
     func getWalletTransactions(userId: Int) -> AnyPublisher<AccountInfoData,AFError>
+    func getWalletBalance(userId:Int) -> AnyPublisher<WalletData,AFError>
     
   
 }
@@ -123,6 +125,27 @@ class APIManager: APIProtocol{
                 print(data)
                 
             }
+    }
+    
+    func getWalletBalance(userId: Int)  -> AnyPublisher<WalletData,AFError> {
+        let url = makeUrl(make: .getWalletBalance)
+        
+        let method = BackendAPIService.getWalletBalance.method
+        let token = keychain.get("userToken") ?? ""
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: token)
+        ]
+        
+        let parameters: [String: String] = [
+            "user_id": "\(userId)",
+           
+        ]
+      return  AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: WalletData.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
     
     
@@ -303,7 +326,7 @@ class APIManager: APIProtocol{
             return decoder
         }
     
-    func createInvoice(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<Payment,AFError> {
+    func createInvoice(userId: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double) -> AnyPublisher<PaymentData,AFError> {
         let url = makeUrl(make: .getInvoice)
         
         let method = BackendAPIService.getInvoice.method
@@ -312,41 +335,25 @@ class APIManager: APIProtocol{
                .authorization(bearerToken: token)
         ]
         
-        let parameters: [String: String] = [
-            "user_id": "\(userId)",
-            "property_id": "\(propertyId)",
-            "amount" : "\(amount)",
-            "transactionCosts" : "",
-            "dubxFee":"",
-            "dldFee": "",
-            "registrationFee" : "",
-            "investmentCost" : ""
-]
+        let parameters: [String: Double] = [
+            "user_id": Double(userId),
+            "property_id": Double(propertyId),
+            "amount" : amount,
+            "transactionCosts" : transactionCosts,
+            "dubxFee":dubxFee,
+            "dldFee": dldFee,
+            "registrationFee" : registrationFee,
+            "investmentCost" : investmentCost,
+            "fcm_id": 753243321182
+        ]
+    
     
      return AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
-            .publishDecodable(type: Payment.self)
+            .publishDecodable(type: PaymentData.self)
             .value()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-    
-        
-//        print("url:\(url)\n method: \(method) \n parameters: \(parameters) \n headers \(headers)")
-//        AF.request(url,method: method,parameters: parameters,headers: headers)
-//            .responseDecodable(of: Payment.self) {[weak self] response in
-//                guard let self = self else {return}
-//                
-//                switch response.result {
-//                case .success(_):
-//                    let data = try? self.newJSONDecoder().decode(Payment.self, from: response.data!)
-//                    guard let data = data else {return}
-//                    print(data)
-//                case .failure(let error):
-//                    print("Erorr: \(error)")
-//                }
-//            }
-
-       
     }
     
     func getPropertyById(id: Int ) -> AnyPublisher<PropertyDetailData,AFError> {
@@ -389,24 +396,29 @@ class APIManager: APIProtocol{
             .value()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-        
-//      AF.request(url,method: method, headers: headers)
-//                 .responseDecodable(of: PropertyData.self ) { response in
-//                     switch response.result {
-//                                 case .success(_):
-//                                     let data = try? self.newJSONDecoder().decode(PropertyData.self, from: response.data!)
-//                                     guard let data = data else {return}
-//                         print(data)
-//     //                                completion(data,nil)
-//                                 case .failure(let error):
-//     //                                completion(nil, error)
-//                                     print("Erorr: \(error)")
-//                                 }
-//     
-//     
-//                 }
     }
     
+    
+    func getFundedProperties(userId: Int) -> AnyPublisher<PropertyData,AFError> {
+        let url = makeUrl(make: .getFundedProperties)
+        
+        let method = BackendAPIService.getFundedProperties.method
+        
+        let token = keychain.get("userToken") ?? ""
+        
+        let headers: HTTPHeaders = [
+               .authorization(bearerToken: token)]
+        
+        let parameters: [String: Int] = ["user_id": userId]
+        
+        
+        return  AF.request(url,method: method,parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: PropertyData.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
     func login_withProvider(provider: Provider) -> URL {
         let url = makeUrl(make: .login_provider)
         let method = BackendAPIService.login_provider.method
