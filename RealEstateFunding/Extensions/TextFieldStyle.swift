@@ -21,14 +21,14 @@ struct ImageWithLineStroke: TextFieldStyle {
                 image
                 configuration  
                     .onTapGesture {
-                                   withAnimation {
-//                                       isEditing = true
-                                       color = .blue
-                                   }
-                               }
-//                    .onSubmit {
-//                        color =  .customGray
-//                    }
+                        withAnimation {
+                            //                                       isEditing = true
+                            color = .blue
+                        }
+                    }
+                //                    .onSubmit {
+                //                        color =  .customGray
+                //                    }
                 
             }
             .padding()

@@ -9,7 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 struct InvestmentDetails: View {
     @EnvironmentObject var vm: PortfolioViewModel
-    @EnvironmentObject var appVM: AppViewModel
+//    @EnvironmentObject var appVM: AppViewModel
     @Environment(\.presentationMode) var presentation
     var isPreview: Bool {
         return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
@@ -28,14 +28,7 @@ struct InvestmentDetails: View {
         }
         .padding(.horizontal)
         .onAppear{
-                        
-//            if isPreview{
-//                vm.investmentDetail = sampleInvestmentDetail
-//            }
-            if let user = appVM.user   {
-                vm.getInvestmentDetailData(userId: user.id, propertyId: investment.id)
-            }
-            
+                vm.getInvestmentDetailData( propertyId: investment.id)
         }
     }
 }
@@ -43,7 +36,7 @@ struct InvestmentDetails: View {
 struct InvestmentDetails_Previews: PreviewProvider {
     static var previews: some View {
         InvestmentDetails( investment: sampleInvestment)
-            .environmentObject(AppViewModel())
+//            .environmentObject(AppViewModel())
             .environmentObject(PortfolioViewModel())
     }
 }

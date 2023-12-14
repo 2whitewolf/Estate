@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Firebase
-import FirebaseMessaging
+
 
 @main
 struct RealEstateFundingApp: App {

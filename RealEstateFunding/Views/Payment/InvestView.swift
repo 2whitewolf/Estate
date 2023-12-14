@@ -39,12 +39,14 @@ struct InvestView: View {
     var body: some View {
         ZStack {
              NavigationLink("", destination: InvoiceTransactionsView(invest: invest)
+//            NavigationLink("",destination: InvestedSuccesView()
                 .environmentObject(vm)
                 .environmentObject(appVM)
                 .navigationBarHidden(true)
                 .onDisappear{
                     goNext = false
                     presentAgree = false
+                   
                 }, isActive: $goNext)
             
             Color.white.ignoresSafeArea()
@@ -133,12 +135,7 @@ struct InvestView: View {
             }
         }
         .popup(isPresented: $presentAgree) {
-            PaymentAgree(){
-                DispatchQueue.main.async {
-                    self.goNext = true
-                }
-
-            }
+            PaymentAgree(presentAgree:$presentAgree,goNext: $goNext)
         } customize: {
             $0
                 .type(.floater(verticalPadding: 0, useSafeAreaInset: false))

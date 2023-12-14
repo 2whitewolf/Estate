@@ -137,6 +137,19 @@ struct InvoiceTransactionsView: View {
                 Color.black.opacity(0.5).ignoresSafeArea()
                 ProgressView()
             }
+            if let paymentSheet = vm.paymentSheet {
+                PaymentSheet.PaymentButton(
+                    paymentSheet: paymentSheet,
+                    onCompletion: vm.onPaymentCompletion
+                ) {
+                    Text("Buy")
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $vm.showSuccesView){
+            InvestedSuccesView()
+                .background(Color.white)
+            .environmentObject(vm)
         }
         
         .onAppear{
@@ -150,6 +163,9 @@ struct InvoiceTransactionsView: View {
             
             
             
+        }
+        .onDisappear{
+            vm.cleanVMAfterPayment()
         }
         
         .popup(isPresented: $isPresented, view: {

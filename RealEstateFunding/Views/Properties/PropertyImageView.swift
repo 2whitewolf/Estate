@@ -18,6 +18,7 @@ struct PropertyImageView: View {
                 if let path =  images[index].path {
                     WebImage(url: URL(string: "https://afehe-hwf.buzz/storage" + "/" + path)).placeholder(
                         Image("propertyBackImage")
+                            .resizable()
                         
                     )
                     .resizable()

@@ -20,16 +20,15 @@ extension Date {
         return "\(day) / \(month) / \(year)"
     }
     
-//    var date_and_Month: String {
-//        let currentDate = self
-//        
-//        // Create a Calendar object to work with dates
-//        let calendar = Calendar.current
-//        
-//        // Extract the year and month from the Date
-//        let year = calendar.component(.year, from: currentDate)
-//        let month = calendar.component(.month, from: currentDate)
-//        let day = calendar.component(.day, from: currentDate)
-//        return "\(day) / \(month) / \(year)"
-//    }
+    var dateWithTime: String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy h:mm a"
+        
+        let currentDate = Date()
+        
+        let formattedDateString = dateFormatter.string(from: currentDate)
+        
+        return formattedDateString
+    }
 }

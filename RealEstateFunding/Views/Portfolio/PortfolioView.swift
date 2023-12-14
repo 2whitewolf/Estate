@@ -50,9 +50,12 @@ struct PortfolioView: View {
             .padding(.horizontal,8)
         }
         .onAppear{
-            if let user = appVM.user {
-                vm.getPortfolioData(userId: user.id)
+            if vm.appViewModel == nil {
+                vm.appViewModel = appVM
             }
+//            if let user = appVM.user {
+                vm.getPortfolioData()
+//            }
         }
         
     }

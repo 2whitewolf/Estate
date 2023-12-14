@@ -19,5 +19,5 @@ extension CaseIterable where Self: Equatable {
         let idx = all.firstIndex(of: self)!
         let next = all.index(after: idx)
         return all[next == all.endIndex ? all.startIndex : next]
-       }
+    }
 }

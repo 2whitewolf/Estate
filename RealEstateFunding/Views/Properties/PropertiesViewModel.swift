@@ -16,8 +16,18 @@ enum PropertiesListEnum: String, CaseIterable{
 }
 
 class PropertiesViewModel: ObservableObject {
+    @Published var paymentSheet: PaymentSheet?
     @Published var invetsmentsCost: PaymentAdditionals?
+    @Published var paymentData: PaymentDataClass?
+    @Published var walletBalance: WalletDataClass?
+    @Published var paymentResult: PaymentSheetResult?
+    @Published var showSuccesView: Bool = false
+//    @Published var paymentIntentParams: STPPaymentIntentParams?
+
+    
+    
     @Published var properties: [Property] = []
+    @Published var favoriteProperties: [Property] = []
     @Published var propertyDetail: PropertyDetail?
     @Published var similar: [Property]?
     @Published var selectedList:PropertiesListEnum = .available {
@@ -25,26 +35,21 @@ class PropertiesViewModel: ObservableObject {
            getAllProperties()
         }
     }
-    @Published var paymentData: PaymentDataClass?
-    @Published var walletBalance: WalletDataClass?
+  
     
     
     @Published var propertyPreviewHistory: [Int] = []
-//    @Published var linkToPayment: URL?
-//    @Published var openWebViewToPay: Bool = false
     @Published var paymentMethod: PaymentMethod = .stripe
     @Published var fcmRegTokenMessage:String = ""
 
     
-    var userID: Int = 0
+   private var userID: Int = 0
     
-   @Published var user: User? {
+   @Published var appViewModel: AppViewModel? {
         didSet{
-            DispatchQueue.main.async { [weak self] in
-                if let user = self?.user {
-                    self?.userID = user.id
+                if let user = self.appViewModel?.user {
+                    self.userID = user.id
                 }
-            }
         }
     }
     
@@ -60,7 +65,7 @@ class PropertiesViewModel: ObservableObject {
     }
     
  
-    
+//    @MainActor
     func getDataOnMain() {
         getAllProperties()
       
@@ -151,8 +156,14 @@ class PropertiesViewModel: ObservableObject {
                                 }
                             } receiveValue: {[weak self] value in
                                 guard let self = self else { return }
-                                self.paymentData = value.data
-                                print(value.data)
+                               print("invoice \(value)")
+                                if let payment = value.data {
+                                    self.paymentData = payment
+                                    print(payment)
+                                   
+                                    configureStripe(payment: payment)
+                                }
+                               
                             }
                 .store(in: &subscriptions)
         }
@@ -195,9 +206,9 @@ class PropertiesViewModel: ObservableObject {
     
     func deletePropertyFromFavourites(propertyId: Int){
         networking.deletePropertyFromFavourites(userId: self.userID, propertyId: propertyId)
-//        withAnimation{
-//                properties.removeAll(where: {$0.id == propertyId})
-//        }
+        withAnimation{
+          favoriteProperties.removeAll(where: {$0.id == propertyId})
+        }
     }
     
     func getFavouriteProperties() {
@@ -213,7 +224,7 @@ class PropertiesViewModel: ObservableObject {
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
                            
-                            self.properties = value.data.map{
+                            self.favoriteProperties = value.data.map{
                                 Property(id: $0.id,
                                          totalPrice: $0.totalPrice,
                                          annualProfit: $0.annualProfit,
@@ -234,6 +245,45 @@ class PropertiesViewModel: ObservableObject {
         
         
     }
+    
+    func configureStripe (payment: PaymentDataClass) {
+
+        STPAPIClient.shared.publishableKey = payment.publishableKey
+        var configuration = PaymentSheet.Configuration()
+//        configuration.applePa
+        configuration.merchantDisplayName = "iOS Sample, Inc."
+        configuration.allowsDelayedPaymentMethods = true
+               DispatchQueue.main.async {
+                   self.paymentSheet = PaymentSheet(paymentIntentClientSecret: payment.clientSecret ?? "", configuration: configuration)
+               }
+    }
+    
+    
+    
+    func onPaymentCompletion(result: PaymentSheetResult) {
+      self.paymentResult = result
+        print(result)
+        switch result {
+        case .completed:
+            DispatchQueue.main.async {[weak self] in
+                self?.showSuccesView.toggle()
+            }
+        case .canceled:
+            print("")
+        case .failed(let error):
+            print(error.localizedDescription)
+        }
+
+    }
+    
+    func cleanVMAfterPayment(){
+        self.paymentSheet = nil
+        self.invetsmentsCost = nil
+        self.paymentData = nil
+        self.walletBalance = nil
+        self.paymentResult =  nil
+        self.showSuccesView = false
+    }
 }
 enum PaymentMethod {
     case stripe,wallet,apple,crypto
@@ -251,3 +301,20 @@ enum PaymentMethod {
         }
     }
 }
+
+
+//extension PaymentSheetResult:Equatable{
+//    public static func == (lhs: StripePaymentSheet.PaymentSheetResult, rhs: StripePaymentSheet.PaymentSheetResult) -> Bool {
+//        switch (lhs, rhs) {
+//        case (.completed, .completed):
+//                // Compare relevant properties of completed cases
+//                return lhs == rhs
+//            case (.canceled, .canceled):
+//                // Both are canceled, consider them equal
+//                return true
+//            default:
+//                // Other cases are not equal
+//                return false
+//            }
+//    }
+//}

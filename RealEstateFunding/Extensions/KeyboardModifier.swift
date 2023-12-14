@@ -23,17 +23,17 @@ struct AdaptsToKeyboard: ViewModifier {
                             withAnimation(.easeOut(duration: 0.16)) {
                                 notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
                             }
-                    }
-                    .map { rect in
-                        rect.height - geometry.safeAreaInsets.bottom
-                    }
-                    .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
+                        }
+                        .map { rect in
+                            rect.height - geometry.safeAreaInsets.bottom
+                        }
+                        .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
                     
                     NotificationCenter.Publisher(center: NotificationCenter.default, name: UIResponder.keyboardWillHideNotification)
                         .compactMap { notification in
                             CGFloat.zero
-                    }
-                    .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
+                        }
+                        .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
                 })
         }
     }

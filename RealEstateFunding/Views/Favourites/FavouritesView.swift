@@ -10,12 +10,12 @@ import SwiftUI
 struct FavouritesView: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var vm: PropertiesViewModel
-    @EnvironmentObject var appVM: AppViewModel
+//    @EnvironmentObject var appVM: AppViewModel
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
             VStack(alignment: .leading){
-              
+                HStack{
                     Button {
                         presentation.wrappedValue.dismiss()
                     } label: {
@@ -24,9 +24,11 @@ struct FavouritesView: View {
                             .padding(12)
                             .background(
                                 Circle().stroke(Color.gray, lineWidth: 0.5)
-                             
+                                
                             )
                     }
+                     Spacer()
+                }
                  
                 
                 Text("Favourites")
@@ -35,13 +37,13 @@ struct FavouritesView: View {
                     .padding(.leading,22)
                 
                 ScrollView(showsIndicators: false) {
-                    ForEach(vm.properties, id: \.id) { property in
+                    ForEach(vm.favoriteProperties, id: \.id) { property in
                         NavigationLink{
                             if let propertyID = property.id {
                                 PropertyDetailView(id: propertyID)
                                     .navigationBarHidden(true)
                                     .environmentObject(vm)
-                                    .environmentObject(appVM)
+//                                    .environmentObject(appVM)
                             }
                         } label: {
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomTabBar: View {
-    @State var selectedTab: Tabs = .properties
+    @EnvironmentObject var appVM: AppViewModel
     @State var firstLaunch: Bool = false
     
     
@@ -27,15 +27,19 @@ struct CustomTabBar: View {
             
             VStack(spacing:0){
                 Group {
-                    switch selectedTab {
+                    switch appVM.selectedTab {
                     case .properties:
                         PropertiesList()
+                            .environmentObject(appVM)
                     case .portfolio:
                         PortfolioView()
+                            .environmentObject(appVM)
                     case .wallet:
                         WalletView()
+                            .environmentObject(appVM)
                     case .profile:
                         ProfileView()
+                            .environmentObject(appVM)
                     }
                 }
                 Divider()
@@ -44,16 +48,16 @@ struct CustomTabBar: View {
                     ForEach(Tabs.allCases, id: \.self) { i in
                         Button {
                             withAnimation(.easeInOut) {
-                                selectedTab = i
+                                appVM.selectedTab = i
                             }
                         } label: {
                             VStack(spacing: 4) {
-                                Image(i.image + (selectedTab == i ? "On" : ""))
+                                Image(i.image + (appVM.selectedTab == i ? "On" : ""))
                                     .renderingMode(.template)
                                 Text(i.title)
                                     .font(.system(size: 12))
                             }
-                            .foregroundColor(selectedTab == i ? Color.blue : Color.black)
+                            .foregroundColor(appVM.selectedTab == i ? Color.blue : Color.black)
                             .frame(height: 80)
                             .frame(maxWidth: .infinity)
                         }
@@ -62,6 +66,7 @@ struct CustomTabBar: View {
                 .background(Color.white)
                 
             }
+            .environmentObject(appVM)
         }
         
     }

@@ -16,14 +16,16 @@ struct PropertyDetailView: View {
     
     @EnvironmentObject var vm: PropertiesViewModel
     @EnvironmentObject var appVM: AppViewModel
+
     var id: Int
     
     var body: some View {
         ZStack(alignment: .bottom){
             Color.white.ignoresSafeArea()
             VStack{
+                ScrollView(showsIndicators: false) {
                 ScrollViewReader { value in
-                    ScrollView(showsIndicators: false) {
+                  
                         LazyVStack {
                             ZStack(alignment: .top){
                                 if let property = vm.propertyDetail {

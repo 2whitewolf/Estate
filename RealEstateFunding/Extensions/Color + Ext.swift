@@ -12,7 +12,7 @@ extension Color{
         .init("hexF2F2F7")
     }
     static var customGray: Color {
-//        .init("hex3C3C43")
+        //        .init("hex3C3C43")
         Color.gray
     }
     static var lightBlue: Color {

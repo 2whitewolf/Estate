@@ -49,8 +49,8 @@ struct PropertiesList: View {
         }
        
         .onAppear{
-            if vm.user == nil {
-                vm.user = appVM.user 
+            if vm.appViewModel == nil {
+                vm.appViewModel = appVM
             }
             vm.getDataOnMain()
         }

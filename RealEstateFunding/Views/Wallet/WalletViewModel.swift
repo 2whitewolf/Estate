@@ -26,11 +26,21 @@ class WalletViewModel: ObservableObject {
     @Published var accountInfo: AccountInfo?
     @Published var hidden: Bool = true
     
+    @Published var appViewModel : AppViewModel?{
+        didSet{
+                if let user = self.appViewModel?.user{
+                    self.userID = user.id
+                }
+        }
+    }
+    private var userID: Int = 0
+    
     private var subscriptions: Set<AnyCancellable> = []
     private let networking: APIProtocol = APIManager()
     
-    func getAccountInfo(userId: Int){
-        networking.getWalletTransactions(userId: userId)
+    func getAccountInfo(){
+        print(self.userID)
+        networking.getWalletTransactions(userId: self.userID)
             .sink {[weak self] completion in
                 guard let self = self else { return }
                 switch completion {

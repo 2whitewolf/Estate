@@ -39,10 +39,10 @@ struct WalletView: View {
             .padding(.horizontal,8)
         }
         .onAppear{
-            if let user = appVM.user {
-                vm.getAccountInfo(userId: user.id)
+            if vm.appViewModel == nil {
+                vm.appViewModel = appVM
             }
-           
+                vm.getAccountInfo()
         }
     }
 }
@@ -128,7 +128,7 @@ extension WalletView{
                     ForEach(vm.transactionsList.wrappedValue, id: \.self){ transaction in
                         TransactionCellView(transaction: transaction)
                     }
-                    if vm.transactionsList.wrappedValue .count > 4 {
+                    if vm.transactionsList.wrappedValue .count > 3 {
                         ShowMoreLessButton(tapped: $vm.hidden)
                     }
                 }

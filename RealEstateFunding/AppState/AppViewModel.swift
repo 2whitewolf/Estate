@@ -27,6 +27,8 @@ class AppViewModel: ObservableObject {
     
     @Published var userToken: String = ""
     
+    @Published var selectedTab: Tabs = .properties
+    
     
     var userDefaults = UserDefaultsManager.shared
     let keychain = KeychainSwift()
@@ -34,6 +36,7 @@ class AppViewModel: ObservableObject {
     
     
     init(){
+        print("!!!!!initialization AppViewModel !!!!!!!")
       user = userDefaults.user
         print("userId: \(user?.id)")
         userToken = keychain.get("userToken") ?? ""

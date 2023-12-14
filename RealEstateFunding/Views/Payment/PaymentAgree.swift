@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct PaymentAgree: View {
-    var onClose: () -> Void
+    @Binding var presentAgree: Bool
+    @Binding var goNext: Bool
+    
     var body: some View {
         VStack{
             HStack{
                 Spacer()
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.gray)
+                Button{
+                    presentAgree.toggle()
+                } label: {
+                    
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.gray)
+                }
             }
             .padding(.horizontal,20)
             VStack(spacing:24){
@@ -36,7 +43,7 @@ struct PaymentAgree: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
                 Button{
-                    onClose()
+                    goNext.toggle()
                 } label: {
                     Text("I Agree")
                         .foregroundColor(.white)
