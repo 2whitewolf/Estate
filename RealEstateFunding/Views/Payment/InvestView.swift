@@ -16,13 +16,16 @@ var isPreview: Bool {
 
 
 struct InvestView: View {
+    
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var appVM: AppViewModel
-    @EnvironmentObject var vm: PropertiesViewModel
-    @State var invest: Int = 500
+    @EnvironmentObject var vm: PaymentViewModel
+    
     @State var presentAgree: Bool = false
+    
     @FocusState private var isTextFieldFocused: Bool
+    
     @State var goNext: Bool = false
+    
     var isSmall: Binding<Bool> {
         Binding(get: {
             UIScreen.screenHeight < 700
@@ -38,10 +41,8 @@ struct InvestView: View {
     }()
     var body: some View {
         ZStack {
-             NavigationLink("", destination: InvoiceTransactionsView(invest: invest)
-//            NavigationLink("",destination: InvestedSuccesView()
+             NavigationLink("", destination: InvoiceTransactionsView()
                 .environmentObject(vm)
-                .environmentObject(appVM)
                 .navigationBarHidden(true)
                 .onDisappear{
                     goNext = false
@@ -55,7 +56,7 @@ struct InvestView: View {
                     ScrollView(showsIndicators: false) {
                         ScrollViewReader { scrollReader in
                         ZStack(alignment: .top) {
-                            TextField("", value: $invest, formatter: formatter)
+                            TextField("", value: $vm.invest, formatter: formatter)
                                 .keyboardType(.numberPad)
                                 .focused($isTextFieldFocused)
                                 .foregroundColor(.white)
@@ -100,6 +101,7 @@ struct InvestView: View {
                         .frame(height:283)
                         
                         propertyInfo
+                                .padding(.top,8)
                            
                             Button{
                                 presentAgree = true
@@ -128,14 +130,11 @@ struct InvestView: View {
             }
             .ignoresSafeArea()
             .padding(.horizontal,8)
-            .onAppear{
-                if isPreview {
-                    vm.propertyDetail = samplePropertyDetail.data?.property
-                }
-            }
+
         }
         .popup(isPresented: $presentAgree) {
             PaymentAgree(presentAgree:$presentAgree,goNext: $goNext)
+               
         } customize: {
             $0
                 .type(.floater(verticalPadding: 0, useSafeAreaInset: false))
@@ -180,7 +179,7 @@ extension InvestView{
             Text("AED ")
                 .font(.system(size: 15).weight(.semibold))
                 .foregroundColor(.white)
-            + Text("\(invest)")
+            + Text("\(vm.invest)")
                 .foregroundColor(.white)
                 .font(.system(size: 28).weight(.bold))
             HStack{
@@ -191,7 +190,7 @@ extension InvestView{
                         .background(RoundedCorner()
                             .stroke(Color.white, lineWidth: 1))
                         .onTapGesture {
-                            invest += i
+                            vm.invest += i
                         }
                 }
             }

@@ -14,10 +14,8 @@ import StripeApplePay
 
 struct InvoiceTransactionsView: View {
     @Environment(\.presentationMode) var presented
-    @EnvironmentObject var appVM: AppViewModel
-    @EnvironmentObject var vm: PropertiesViewModel
+    @EnvironmentObject var vm: PaymentViewModel
     @State var isPresented: Bool = false
-    var invest: Int
     var body: some View {
         ZStack{
             Color.appBackground
@@ -34,7 +32,7 @@ struct InvoiceTransactionsView: View {
                             HStack{
                                 Text("Investment Amount")
                                 Spacer()
-                                Text("AED " + "\(invest)")
+                                Text("AED " + "\(vm.invest)")
                                     .foregroundColor(.black)
                                 //                                .fontWeight(.bold)
                             }
@@ -114,7 +112,7 @@ struct InvoiceTransactionsView: View {
                             }
                             
                             Button{
-                                vm.createInvoice(amount: Double(invest))
+                                vm.createInvoice()
                             } label: {
                                 Text("Pay via Stripe Checkout")
                                     .fontWeight(.semibold)
@@ -158,15 +156,15 @@ struct InvoiceTransactionsView: View {
                 vm.invetsmentsCost = sampleAdditionalCosts
             }
 //            vm.getWalletBalance()
-            vm.getTransactionsCosts(amount: Double(invest))
+            vm.getTransactionsCosts(amount: Double(vm.invest))
             
             
             
             
         }
-        .onDisappear{
-            vm.cleanVMAfterPayment()
-        }
+//        .onDisappear{
+//            vm.cleanVMAfterPayment()
+//        }
         
         .popup(isPresented: $isPresented, view: {
             SelectPaymentMethod(){
@@ -185,7 +183,7 @@ struct InvoiceTransactionsView: View {
 }
 
 #Preview {
-    InvoiceTransactionsView(invest: 200)
+    InvoiceTransactionsView()
         .environmentObject(PropertiesViewModel())
 }
 

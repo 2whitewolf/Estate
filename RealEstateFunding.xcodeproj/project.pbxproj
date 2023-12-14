@@ -49,6 +49,7 @@
 		8B49CC122ABB224600F1800B /* FinancialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC112ABB224600F1800B /* FinancialsView.swift */; };
 		8B49CC152ABB34EA00F1800B /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49CC142ABB34EA00F1800B /* FavouritesView.swift */; };
 		8B515E8C2B1DD9C100A678D9 /* SelectPaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */; };
+		8B569E752B2B1F310098515B /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B569E742B2B1F310098515B /* PaymentViewModel.swift */; };
 		8B58D6892AF8DF0F000EB557 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B58D6882AF8DF0F000EB557 /* SwiftSoup */; };
 		8B58D68B2AF9177C000EB557 /* VerifyMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68A2AF9177C000EB557 /* VerifyMail.swift */; };
 		8B58D68D2AFA4454000EB557 /* KeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */; };
@@ -178,6 +179,7 @@
 		8B49CC112ABB224600F1800B /* FinancialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsView.swift; sourceTree = "<group>"; };
 		8B49CC142ABB34EA00F1800B /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethod.swift; sourceTree = "<group>"; };
+		8B569E742B2B1F310098515B /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		8B58D68A2AF9177C000EB557 /* VerifyMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMail.swift; sourceTree = "<group>"; };
 		8B58D68C2AFA4454000EB557 /* KeyboardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModifier.swift; sourceTree = "<group>"; };
 		8B58D68E2AFA8588000EB557 /* country_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = country_data.json; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */,
 				8B49215B2B27097D008CC130 /* PaymentAgree.swift */,
 				8BD3B2622B2AF53A006393EE /* InvestedSuccesView.swift */,
+				8B569E742B2B1F310098515B /* PaymentViewModel.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -753,6 +756,7 @@
 				8BA95B812ADFDB0A00FA7D35 /* PropertiesViewModel.swift in Sources */,
 				8B3A23BD2AC4257100EF82E7 /* WalletView.swift in Sources */,
 				8B20CE6D2AB065F400FB3ECA /* TabBar.swift in Sources */,
+				8B569E752B2B1F310098515B /* PaymentViewModel.swift in Sources */,
 				8B20CE8D2AB1F3D300FB3ECA /* TextFieldStyle.swift in Sources */,
 				8B49CC062AB9A90B00F1800B /* String + Ext.swift in Sources */,
 				8BA837BE2AD6A59A008DCF3D /* LoginViewModel.swift in Sources */,

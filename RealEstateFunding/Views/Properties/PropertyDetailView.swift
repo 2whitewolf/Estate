@@ -123,9 +123,7 @@ struct PropertyDetailView: View {
                 Divider()
                 NavigationLink{
                    InvestView()
-//                     InvoiceTransactionsView()
-                        .environmentObject(vm)
-                        .environmentObject(appVM)
+                        .environmentObject(vm.createPaymentViewModel())
                         .navigationBarHidden(true)
                     
                 } label: {

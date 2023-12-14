@@ -16,6 +16,10 @@ enum PropertiesListEnum: String, CaseIterable{
 }
 
 class PropertiesViewModel: ObservableObject {
+   
+
+    
+    
     @Published var paymentSheet: PaymentSheet?
     @Published var invetsmentsCost: PaymentAdditionals?
     @Published var paymentData: PaymentDataClass?
@@ -39,7 +43,6 @@ class PropertiesViewModel: ObservableObject {
     
     
     @Published var propertyPreviewHistory: [Int] = []
-    @Published var paymentMethod: PaymentMethod = .stripe
     @Published var fcmRegTokenMessage:String = ""
 
     
@@ -65,11 +68,9 @@ class PropertiesViewModel: ObservableObject {
     }
     
  
-//    @MainActor
+    @MainActor
     func getDataOnMain() {
         getAllProperties()
-      
-        paymentMethod = .stripe
     }
     
     func getAllProperties() {
@@ -98,28 +99,6 @@ class PropertiesViewModel: ObservableObject {
              networking.getFundedProperties(userId: userID)
         }
     }
-    
-    func getWalletBalance() {
-        networking.getWalletBalance(userId: self.userID)
-            .sink {[weak self] completion in
-                            guard let self = self else { return }
-                            switch completion {
-                            case .failure(let error):
-                                print(error.localizedDescription)
-                            case .finished:
-                                break
-                            }
-                        } receiveValue: {[weak self] value in
-                            guard let self = self else { return }
-                            if let data = value.data {
-                                self.walletBalance = data
-                            }
-                            
-                            
-                        }
-            .store(in: &subscriptions)
-    }
-    
     func getPropertyDetail(id: Int){
         networking.getPropertyById(id: id)
             .sink {[weak self] completion in
@@ -140,68 +119,121 @@ class PropertiesViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
-    func createInvoice(amount: Double) {
-       
-        if let propertyDetail = propertyDetail, let investmentCost = invetsmentsCost {
-           
-           // networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: amount)
-            networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 0, amount: amount, transactionCosts: investmentCost.transactionCosts ?? 0, dubxFee: investmentCost.dubxFee ?? 0, dldFee: investmentCost.dldFee ?? 0, registrationFee: investmentCost.registrationFee ?? 0, investmentCost: investmentCost.investmentCost ?? 0)
-                .sink {[weak self] completion in
-                                guard let self = self else { return }
-                                switch completion {
-                                case .failure(let error):
-                                    print(error.localizedDescription)
-                                case .finished:
-                                    break
-                                }
-                            } receiveValue: {[weak self] value in
-                                guard let self = self else { return }
-                               print("invoice \(value)")
-                                if let payment = value.data {
-                                    self.paymentData = payment
-                                    print(payment)
-                                   
-                                    configureStripe(payment: payment)
-                                }
-                               
-                            }
-                .store(in: &subscriptions)
-        }
+//    func getWalletBalance() {
+//        networking.getWalletBalance(userId: self.userID)
+//            .sink {[weak self] completion in
+//                            guard let self = self else { return }
+//                            switch completion {
+//                            case .failure(let error):
+//                                print(error.localizedDescription)
+//                            case .finished:
+//                                break
+//                            }
+//                        } receiveValue: {[weak self] value in
+//                            guard let self = self else { return }
+//                            if let data = value.data {
+//                                self.walletBalance = data
+//                            }
+//                            
+//                            
+//                        }
+//            .store(in: &subscriptions)
+//    }
+//    
+//   
+    
+//    func createInvoice(amount: Double) {
+//       
+//        if let propertyDetail = propertyDetail, let investmentCost = invetsmentsCost {
+//           
+//           // networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: amount)
+//            networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 0, amount: amount, transactionCosts: investmentCost.transactionCosts ?? 0, dubxFee: investmentCost.dubxFee ?? 0, dldFee: investmentCost.dldFee ?? 0, registrationFee: investmentCost.registrationFee ?? 0, investmentCost: investmentCost.investmentCost ?? 0)
+//                .sink {[weak self] completion in
+//                                guard let self = self else { return }
+//                                switch completion {
+//                                case .failure(let error):
+//                                    print(error.localizedDescription)
+//                                case .finished:
+//                                    break
+//                                }
+//                            } receiveValue: {[weak self] value in
+//                                guard let self = self else { return }
+//                               print("invoice \(value)")
+//                                if let payment = value.data {
+//                                    self.paymentData = payment
+//                                    print(payment)
+//                                   
+//                                    configureStripe(payment: payment)
+//                                }
+//                               
+//                            }
+//                .store(in: &subscriptions)
+//        }
+//      
+//    }
+    
+//    func getTransactionsCosts( amount: Double) {
+//        
+//        if let propertyDetail = propertyDetail {
+//            networking.getInvestmentCost(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: amount)
+//                .sink {[weak self] completion in
+//                                guard let self = self else { return }
+//                                switch completion {
+//                                case .failure(let error):
+//                                    print(error.localizedDescription)
+//                                case .finished:
+//                                    break
+//                                }
+//                            } receiveValue: {[weak self] value in
+//                                guard let self = self else { return }
+//                                print(value.data)
+//                                invetsmentsCost = value.data
+//                            }
+//                .store(in: &subscriptions)
+//        }
+//                
+//    }
+    
+   
+    
+//    func canPayWithWallet() -> Bool {
+//            guard let walletBalance = walletBalance?.balance  else { return false }
+//            guard let transactionCosts = invetsmentsCost?.transactionCosts else { return false}
+//            
+//            return walletBalance > transactionCosts
+//    }
+//    
+//    func configureStripe (payment: PaymentDataClass) {
+//          STPAPIClient.shared.publishableKey = payment.publishableKey
+//          var configuration = PaymentSheet.Configuration()
+//          configuration.merchantDisplayName = "iOS Sample, Inc."
+//          configuration.allowsDelayedPaymentMethods = true
+//                 DispatchQueue.main.async {
+//                     self.paymentSheet = PaymentSheet(paymentIntentClientSecret: payment.clientSecret ?? "", configuration: configuration)
+//                 }
+//      }
+//      
       
-    }
-    
-    func getTransactionsCosts( amount: Double) {
-        
-        if let propertyDetail = propertyDetail {
-            networking.getInvestmentCost(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: amount)
-                .sink {[weak self] completion in
-                                guard let self = self else { return }
-                                switch completion {
-                                case .failure(let error):
-                                    print(error.localizedDescription)
-                                case .finished:
-                                    break
-                                }
-                            } receiveValue: {[weak self] value in
-                                guard let self = self else { return }
-                                print(value.data)
-                                invetsmentsCost = value.data
-                            }
-                .store(in: &subscriptions)
-        }
-                
-    }
-    
+      
+//      func onPaymentCompletion(result: PaymentSheetResult) {
+//        self.paymentResult = result
+//          print(result)
+//          switch result {
+//          case .completed:
+//              DispatchQueue.main.async {[weak self] in
+//                  self?.showSuccesView.toggle()
+//              }
+//          case .canceled:
+//              print("")
+//          case .failed(let error):
+//              print(error.localizedDescription)
+//          }
+//  
+//      }
+//    
     func addPropertyToFavourites(propertyId: Int){
         networking.addToFavourite(userId: self.userID, propertyId: propertyId)
         getAllProperties()
-    }
-    
-    func canPayWithWallet() -> Bool {
-            guard let walletBalance = walletBalance?.balance  else { return false }
-            guard let transactionCosts = invetsmentsCost?.transactionCosts else { return false}
-            
-            return walletBalance > transactionCosts
     }
     
     func deletePropertyFromFavourites(propertyId: Int){
@@ -246,34 +278,11 @@ class PropertiesViewModel: ObservableObject {
         
     }
     
-    func configureStripe (payment: PaymentDataClass) {
-
-        STPAPIClient.shared.publishableKey = payment.publishableKey
-        var configuration = PaymentSheet.Configuration()
-//        configuration.applePa
-        configuration.merchantDisplayName = "iOS Sample, Inc."
-        configuration.allowsDelayedPaymentMethods = true
-               DispatchQueue.main.async {
-                   self.paymentSheet = PaymentSheet(paymentIntentClientSecret: payment.clientSecret ?? "", configuration: configuration)
-               }
-    }
-    
-    
-    
-    func onPaymentCompletion(result: PaymentSheetResult) {
-      self.paymentResult = result
-        print(result)
-        switch result {
-        case .completed:
-            DispatchQueue.main.async {[weak self] in
-                self?.showSuccesView.toggle()
-            }
-        case .canceled:
-            print("")
-        case .failed(let error):
-            print(error.localizedDescription)
-        }
-
+    func createPaymentViewModel() -> PaymentViewModel {
+         let viewModel = PaymentViewModel()
+        viewModel.propertyDetail = self.propertyDetail
+        viewModel.appViewModel = self.appViewModel
+        return viewModel
     }
     
     func cleanVMAfterPayment(){
@@ -284,6 +293,8 @@ class PropertiesViewModel: ObservableObject {
         self.paymentResult =  nil
         self.showSuccesView = false
     }
+    
+    
 }
 enum PaymentMethod {
     case stripe,wallet,apple,crypto

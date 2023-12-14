@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InvestedSuccesView: View {
-    @EnvironmentObject var vm: PropertiesViewModel
+    @EnvironmentObject var paymentViewModel: PaymentViewModel
     var body: some View {
         VStack{
             Text("Receipt")
@@ -62,7 +62,7 @@ struct InvestedSuccesView: View {
                         .foregroundColor(.black)
                         .font(.system(size: 16,weight: .semibold))
                     Spacer()
-                    if let icon = vm.paymentMethod.image {
+                    if let icon = paymentViewModel.paymentMethod.image {
                         Image(icon)
                     }
                 }
@@ -71,9 +71,7 @@ struct InvestedSuccesView: View {
                     .stroke(Color.gray, lineWidth: 0.5))
                 
                 Button{
-                    if let appViewModel = vm.appViewModel {
-                        appViewModel.selectedTab = .portfolio
-                    }
+                    paymentViewModel.goBack()
                 } label: {
                   Text("View Portfolio")
                         .font(.system(size: 17).weight(.semibold))
@@ -88,13 +86,13 @@ struct InvestedSuccesView: View {
             
             
             VStack(alignment: .leading){
-                if let property = vm.propertyDetail{
+                if let property = paymentViewModel.propertyDetail{
                     Text(property.about ?? "")
                         .font(.system(size: 17).weight(.semibold))
                             .foregroundColor(.black)
                     PropertyAboutCell(title: "Annualised return", detail: (property.annualProfit ?? "") + " %")
                     PropertyAboutCell(title: "Investment Period", detail: (property.period ?? "") + " Year")
-                    if let investition = vm.invetsmentsCost {
+                    if let investition = paymentViewModel.invetsmentsCost {
                         PropertyAboutCell(title: "Investment Amount", detail: "AED " + (investition.investmentCost?.rotate(2) ?? "0"))
                     }
                      

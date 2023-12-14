@@ -43,7 +43,7 @@ struct PaymentAgree: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
                 Button{
-                    goNext.toggle()
+                    confirmation()
                 } label: {
                     Text("I Agree")
                         .foregroundColor(.white)
@@ -59,6 +59,10 @@ struct PaymentAgree: View {
         .padding(.vertical,20)
         .background(Color.white)
         .cornerRadius(40)
+    }
+    @MainActor
+    fileprivate func confirmation() {
+       goNext = true
     }
 }
 

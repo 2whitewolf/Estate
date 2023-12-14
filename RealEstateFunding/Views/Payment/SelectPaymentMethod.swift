@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SelectPaymentMethod: View {
-    @EnvironmentObject var vm: PropertiesViewModel
+    @EnvironmentObject var vm: PaymentViewModel
     var onClose: () -> Void
     var body: some View {
         VStack{
