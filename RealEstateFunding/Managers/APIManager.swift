@@ -42,6 +42,7 @@ protocol APIProtocol{
      // MARK: Payment && Invoices
     func createInvoice(userId: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double) -> AnyPublisher<PaymentData,AFError>
     func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)  -> AnyPublisher<PaymentAdditionalData,AFError>
+    func addFunds(userId: Int, amount: Double) -> AnyPublisher<PaymentData,AFError>
     
     // MARK: Portfolio
     func getPortfolio(userId: Int) -> AnyPublisher<InvestmentsData,AFError>
@@ -58,6 +59,10 @@ protocol APIProtocol{
 class APIManager: APIProtocol{
 
     let keychain = KeychainSwift()
+    
+    
+    
+ 
     
     
     func deletePropertyFromFavourites(userId: Int, propertyId: Int) {
@@ -149,7 +154,7 @@ class APIManager: APIProtocol{
     }
     
     
-    func addFunds(userId: Int, amount: Double) {
+    func addFunds(userId: Int, amount: Double) -> AnyPublisher<PaymentData,AFError> {
         
         let url = makeUrl(make: .addFunds)
         
@@ -159,24 +164,18 @@ class APIManager: APIProtocol{
             .authorization(bearerToken: token)
         ]
         
-        let parameters: [String: String] = [
-            "user_id": "\(userId)",
-            "amount" : "\(amount)"
+        let parameters: [String: Double] = [
+            "user_id": Double(userId),
+            "amount" : amount
         ]
+       
       
-        AF.request(url, method: method, parameters: parameters, headers: headers)
-            .responseDecodable(of: PaymentAdditionals.self) {[weak self] response in
-                guard let self = self else {return}
-                
-                switch response.result {
-                case .success(_):
-                    let data = try? self.newJSONDecoder().decode(PaymentAdditionals.self, from: response.data!)
-                    guard let data = data else {return}
-                    print(data)
-                case .failure(let error):
-                    print("Erorr: \(error)")
-                }
-            }
+       return AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: PaymentData.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
     
     func getInvestmentCost(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<PaymentAdditionalData,AFError> {

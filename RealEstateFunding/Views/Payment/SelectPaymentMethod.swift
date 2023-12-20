@@ -181,5 +181,5 @@ struct SelectPaymentMethod: View {
 
 #Preview {
     SelectPaymentMethod(onClose: {})
-        .environmentObject(PropertiesViewModel())
+        .environmentObject(PaymentViewModel())
 }

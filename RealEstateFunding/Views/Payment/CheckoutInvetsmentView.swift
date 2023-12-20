@@ -12,7 +12,7 @@ import StripePaymentSheet
 import StripeApplePay
 
 
-struct InvoiceTransactionsView: View {
+struct CheckoutInvetsmentView: View {
     @Environment(\.presentationMode) var presented
     @EnvironmentObject var vm: PaymentViewModel
     @State var isPresented: Bool = false
@@ -131,19 +131,12 @@ struct InvoiceTransactionsView: View {
                     )
                 
             }
-            if vm.invetsmentsCost == nil {
+            if vm.isLoading {
                 Color.black.opacity(0.5).ignoresSafeArea()
                 ProgressView()
             }
-            if let paymentSheet = vm.paymentSheet {
-                PaymentSheet.PaymentButton(
-                    paymentSheet: paymentSheet,
-                    onCompletion: vm.onPaymentCompletion
-                ) {
-                    Text("Buy")
-                }
-            }
         }
+        .paymentSheet(isPresented: $vm.presentPaymentSheet, paymentSheet: vm.paymentSheet ?? PaymentSheet(setupIntentClientSecret: "", configuration: PaymentSheet.Configuration()), onCompletion: vm.onPaymentCompletion)
         .fullScreenCover(isPresented: $vm.showSuccesView){
             InvestedSuccesView()
                 .background(Color.white)
@@ -155,17 +148,13 @@ struct InvoiceTransactionsView: View {
                 vm.propertyDetail = samplePropertyDetail.data?.property
                 vm.invetsmentsCost = sampleAdditionalCosts
             }
-//            vm.getWalletBalance()
+            vm.getWalletBalance()
             vm.getTransactionsCosts(amount: Double(vm.invest))
             
             
             
             
         }
-//        .onDisappear{
-//            vm.cleanVMAfterPayment()
-//        }
-        
         .popup(isPresented: $isPresented, view: {
             SelectPaymentMethod(){
                 isPresented.toggle()
@@ -183,12 +172,12 @@ struct InvoiceTransactionsView: View {
 }
 
 #Preview {
-    InvoiceTransactionsView()
-        .environmentObject(PropertiesViewModel())
+    CheckoutInvetsmentView()
+        .environmentObject(PaymentViewModel())
 }
 
 
-extension InvoiceTransactionsView {
+extension CheckoutInvetsmentView {
     private var headerView: some View {
         HStack{
             Button{

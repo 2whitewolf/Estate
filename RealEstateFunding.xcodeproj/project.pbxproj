@@ -62,6 +62,9 @@
 		8B6496C32AE92D0600C0A5A5 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6496C22AE92D0600C0A5A5 /* WebView.swift */; };
 		8B6D016B2B07826F00E9FBCC /* InvestmentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6D016A2B07826F00E9FBCC /* InvestmentDetail.swift */; };
 		8B6D016D2B0792C100E9FBCC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6D016C2B0792C100E9FBCC /* ContentView.swift */; };
+		8B7045062B31EC4D00C0E2D4 /* AddFundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045052B31EC4D00C0E2D4 /* AddFundsView.swift */; };
+		8B7045082B31F45100C0E2D4 /* CheckoutFundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045072B31F45100C0E2D4 /* CheckoutFundsView.swift */; };
+		8B7045342B3345A200C0E2D4 /* WalletDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045332B3345A200C0E2D4 /* WalletDepositView.swift */; };
 		8B7B0B102AE6884E008C2F19 /* InvestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */; };
 		8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */; };
 		8B955B9D2AFE5F78005E4D0C /* InvestmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */; };
@@ -84,7 +87,7 @@
 		8BA83E992B10CC03005DD78C /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E982B10CC03005DD78C /* Transactions.swift */; };
 		8BA83E9B2B10CC52005DD78C /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */; };
 		8BA83E9D2B10E523005DD78C /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83E9C2B10E523005DD78C /* Payment.swift */; };
-		8BA83EA52B15F62F005DD78C /* InvoiceTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */; };
+		8BA83EA52B15F62F005DD78C /* CheckoutInvetsmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA83EA42B15F62F005DD78C /* CheckoutInvetsmentView.swift */; };
 		8BA95B812ADFDB0A00FA7D35 /* PropertiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */; };
 		8BA95B832ADFDF1900FA7D35 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA95B822ADFDF1900FA7D35 /* Property.swift */; };
 		8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C4D02AB2FC340040D6B7 /* Date + Ext.swift */; };
@@ -190,6 +193,9 @@
 		8B6496C22AE92D0600C0A5A5 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		8B6D016A2B07826F00E9FBCC /* InvestmentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentDetail.swift; sourceTree = "<group>"; };
 		8B6D016C2B0792C100E9FBCC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8B7045052B31EC4D00C0E2D4 /* AddFundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFundsView.swift; sourceTree = "<group>"; };
+		8B7045072B31F45100C0E2D4 /* CheckoutFundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFundsView.swift; sourceTree = "<group>"; };
+		8B7045332B3345A200C0E2D4 /* WalletDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositView.swift; sourceTree = "<group>"; };
 		8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestView.swift; sourceTree = "<group>"; };
 		8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyImageView.swift; sourceTree = "<group>"; };
 		8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentData.swift; sourceTree = "<group>"; };
@@ -209,7 +215,7 @@
 		8BA83E982B10CC03005DD78C /* Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
 		8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		8BA83E9C2B10E523005DD78C /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
-		8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTransactionsView.swift; sourceTree = "<group>"; };
+		8BA83EA42B15F62F005DD78C /* CheckoutInvetsmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutInvetsmentView.swift; sourceTree = "<group>"; };
 		8BA95B802ADFDB0A00FA7D35 /* PropertiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewModel.swift; sourceTree = "<group>"; };
 		8BA95B822ADFDF1900FA7D35 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		8BC2C4D02AB2FC340040D6B7 /* Date + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Ext.swift"; sourceTree = "<group>"; };
@@ -425,12 +431,15 @@
 		8B515E8A2B1DD98900A678D9 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				8BA83EA42B15F62F005DD78C /* InvoiceTransactionsView.swift */,
+				8B7045052B31EC4D00C0E2D4 /* AddFundsView.swift */,
+				8BA83EA42B15F62F005DD78C /* CheckoutInvetsmentView.swift */,
 				8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */,
 				8B515E8B2B1DD9C000A678D9 /* SelectPaymentMethod.swift */,
 				8B49215B2B27097D008CC130 /* PaymentAgree.swift */,
 				8BD3B2622B2AF53A006393EE /* InvestedSuccesView.swift */,
 				8B569E742B2B1F310098515B /* PaymentViewModel.swift */,
+				8B7045072B31F45100C0E2D4 /* CheckoutFundsView.swift */,
+				8B7045332B3345A200C0E2D4 /* WalletDepositView.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -741,6 +750,7 @@
 				8BEBC3632AEBB4CA0016FCA4 /* AnnualIncomeView.swift in Sources */,
 				8B49CC012AB86E3C00F1800B /* ProfileView.swift in Sources */,
 				8BC2C4D12AB2FC340040D6B7 /* Date + Ext.swift in Sources */,
+				8B7045342B3345A200C0E2D4 /* WalletDepositView.swift in Sources */,
 				8BA83E9B2B10CC52005DD78C /* WalletViewModel.swift in Sources */,
 				8BA837B72AD6986F008DCF3D /* BackendAPIServices.swift in Sources */,
 				8B49CC0A2AB9E43B00F1800B /* PropertyDetailView.swift in Sources */,
@@ -760,7 +770,9 @@
 				8B20CE8D2AB1F3D300FB3ECA /* TextFieldStyle.swift in Sources */,
 				8B49CC062AB9A90B00F1800B /* String + Ext.swift in Sources */,
 				8BA837BE2AD6A59A008DCF3D /* LoginViewModel.swift in Sources */,
+				8B7045062B31EC4D00C0E2D4 /* AddFundsView.swift in Sources */,
 				8BD3B2632B2AF53A006393EE /* InvestedSuccesView.swift in Sources */,
+				8B7045082B31F45100C0E2D4 /* CheckoutFundsView.swift in Sources */,
 				8B20CE712AB06D4B00FB3ECA /* View + Ext.swift in Sources */,
 				8B7B0B102AE6884E008C2F19 /* InvestView.swift in Sources */,
 				8BA837C32AD6CD0B008DCF3D /* AppMainState.swift in Sources */,
@@ -774,7 +786,7 @@
 				8BC2C5332AB466DC0040D6B7 /* InvestmentDetails.swift in Sources */,
 				8BA8378F2ACEC4FA008DCF3D /* APIManager.swift in Sources */,
 				8BA83E992B10CC03005DD78C /* Transactions.swift in Sources */,
-				8BA83EA52B15F62F005DD78C /* InvoiceTransactionsView.swift in Sources */,
+				8BA83EA52B15F62F005DD78C /* CheckoutInvetsmentView.swift in Sources */,
 				8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */,
 				8B20CE7B2AB0900C00FB3ECA /* SignUpView.swift in Sources */,
 				8B49CBEE2AB491FD00F1800B /* ForgotPasswordView.swift in Sources */,

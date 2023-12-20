@@ -21,8 +21,24 @@ class PaymentViewModel: ObservableObject {
     @Published var showSuccesView: Bool = false
     @Published var paymentMethod: PaymentMethod = .stripe
     @Published var paymentCase: PaymentCase = .investition
+    @Published var title = "Checkout"
     
-    @Published var invest: Int = 500
+    @Published var isLoading: Bool = false
+    
+    
+    @Published var presentPaymentSheet: Bool = false
+    
+    @Published var invest: Double = 500.00 {
+        didSet{
+            if invest >= 500 {
+                amountWrong = false
+            } else {
+                amountWrong = true
+            }
+        }
+    }
+    
+    @Published var amountWrong: Bool = false
 
     
     private var subscriptions: Set<AnyCancellable> = []
@@ -40,8 +56,33 @@ class PaymentViewModel: ObservableObject {
     var userID: Int = 0
     
     
-    init() {
-        
+    
+    init(){
+        print("initialization Payment")
+    }
+    func addFunds() {
+        self.isLoading = true
+        networking.addFunds(userId: self.userID, amount: invest)
+            .sink {[weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .finished:
+                    break
+                }
+            } receiveValue: {[weak self] value in
+                guard let self = self else { return }
+                print("invoice \(value)")
+                if let payment = value.data {
+                    self.paymentData = payment
+                    print(payment)
+                    
+                    configureStripe(payment: payment)
+                }
+                
+            }
+            .store(in: &subscriptions)
     }
     
     
@@ -75,8 +116,12 @@ class PaymentViewModel: ObservableObject {
         configuration.allowsDelayedPaymentMethods = true
                DispatchQueue.main.async {
                    self.paymentSheet = PaymentSheet(paymentIntentClientSecret: payment.clientSecret ?? "", configuration: configuration)
+                   self.presentPaymentSheet = true
+                   self.isLoading = false
                }
     }
+    
+    
     
     func onPaymentCompletion(result: PaymentSheetResult) {
       self.paymentResult = result
@@ -85,6 +130,7 @@ class PaymentViewModel: ObservableObject {
         case .completed:
             DispatchQueue.main.async {[weak self] in
                 self?.showSuccesView.toggle()
+                self?.title = "Wallet Deposit"
             }
         case .canceled:
             print("")
@@ -104,6 +150,7 @@ class PaymentViewModel: ObservableObject {
     func createInvoice() {
             
             if let propertyDetail = propertyDetail, let investmentCost = invetsmentsCost {
+                isLoading = true
                 
                 networking.createInvoice(userId: self.userID, propertyId: propertyDetail.id ?? 0, amount: Double(invest), transactionCosts: investmentCost.transactionCosts ?? 0, dubxFee: investmentCost.dubxFee ?? 0, dldFee: investmentCost.dldFee ?? 0, registrationFee: investmentCost.registrationFee ?? 0, investmentCost: investmentCost.investmentCost ?? 0)
                     .sink {[weak self] completion in
@@ -145,11 +192,14 @@ class PaymentViewModel: ObservableObject {
                                 guard let self = self else { return }
                                 print(value.data)
                                 invetsmentsCost = value.data
+                                isLoading = false
                             }
                 .store(in: &subscriptions)
         }
                 
     }
+    
+    
     func goBack(){
         if let appViewModel = appViewModel {
             appViewModel.selectedTab = .portfolio
@@ -162,13 +212,15 @@ enum PaymentCase{
     case investition, doubleInvestition, addFunds
 }
 
-//protocol Payment {
-//    var invest: Double { get set }
-//    func getWalletBalance()
-//    func getTransactionsCosts( amount: Double)
-//    func createInvoice(amount: Double)
-//    func canPayWithWallet() -> Bool
-//    func onPaymentCompletion(result: PaymentSheetResult)
-//    func configureStripe (payment: PaymentDataClass)
-//}
+protocol Payment {
+    var invest: Double { get set }
+    func getWalletBalance()
+    func getTransactionsCosts( amount: Double)
+    func createInvoice(amount: Double)
+    func canPayWithWallet() -> Bool
+    func onPaymentCompletion(result: PaymentSheetResult)
+    func configureStripe (payment: PaymentDataClass)
+}
+
+
 

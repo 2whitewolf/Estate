@@ -75,7 +75,7 @@ extension PropertyCellView {
         }
     }
     private var propertyInfo: some View {
-        HStack(spacing: 8){
+       HStack(spacing: 8){
             HStack{
                 Circle()
                     .fill(Color.blue)

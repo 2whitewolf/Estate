@@ -122,8 +122,8 @@ struct PropertyDetailView: View {
             VStack{
                 Divider()
                 NavigationLink{
-                   InvestView()
-                        .environmentObject(vm.createPaymentViewModel())
+                    InvestView(vm: vm.createPaymentViewModel())
+                       
                         .navigationBarHidden(true)
                     
                 } label: {

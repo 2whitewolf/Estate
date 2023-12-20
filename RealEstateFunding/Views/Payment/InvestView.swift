@@ -18,7 +18,7 @@ var isPreview: Bool {
 struct InvestView: View {
     
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var vm: PaymentViewModel
+    @StateObject var vm: PaymentViewModel
     
     @State var presentAgree: Bool = false
     
@@ -41,7 +41,7 @@ struct InvestView: View {
     }()
     var body: some View {
         ZStack {
-             NavigationLink("", destination: InvoiceTransactionsView()
+             NavigationLink("", destination: CheckoutInvetsmentView()
                 .environmentObject(vm)
                 .navigationBarHidden(true)
                 .onDisappear{
@@ -147,8 +147,8 @@ struct InvestView: View {
 }
 
 #Preview {
-    InvestView()
-        .environmentObject(PropertiesViewModel())
+    InvestView( vm: PaymentViewModel())
+        
 }
 
 
@@ -179,12 +179,12 @@ extension InvestView{
             Text("AED ")
                 .font(.system(size: 15).weight(.semibold))
                 .foregroundColor(.white)
-            + Text("\(vm.invest)")
+            + Text(vm.invest.rotate(0))
                 .foregroundColor(.white)
                 .font(.system(size: 28).weight(.bold))
             HStack{
                 ForEach([100,500,1000,5000], id: \.self) { i in
-                    Text("+\(i) AED")
+                    Text("+" + i.rotate(0) + " AED")
                         .padding(.horizontal,8)
                         .padding(.vertical,5)
                         .background(RoundedCorner()

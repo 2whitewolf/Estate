@@ -38,6 +38,18 @@ struct WalletView: View {
             }
             .padding(.horizontal,8)
         }
+        .popup(isPresented: $vm.presentAddingFunds, view: {
+            AddFundsView(vm: vm.getPaymentViewModel()){
+                vm.presentAddingFunds.toggle()
+            }
+           
+        },customize: {
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+        })
         .onAppear{
             if vm.appViewModel == nil {
                 vm.appViewModel = appVM
@@ -73,7 +85,7 @@ extension WalletView{
             
             HStack{
                 Button{
-                    
+                    vm.presentAddingFunds = true
                 } label: {
                     Label("Add Funds", systemImage: "plus.circle.fill")
                         .foregroundColor(.white)
@@ -145,7 +157,7 @@ struct TransactionCellView: View {
     
     init(transaction: Transaction) {
         self.transaction = transaction
-        self.withdraw = transaction.type == "investment"
+        self.withdraw = transaction.type != "investment"
     }
     //    var amount: Int
     //    var withdraw: Bool
@@ -176,7 +188,7 @@ struct TransactionCellView: View {
             
             Spacer()
             
-            Text("\(withdraw ? "" : "-" ) AED " + (transaction.amount?.toDouble().rotate(0) ?? "0"))
+            Text("\(withdraw ? "+" : "-" ) AED " + (transaction.amount?.toDouble().rotate(0) ?? "0"))
                 .foregroundColor(withdraw ? .green : .black)
                 .font(.system(size: 13).weight(.semibold))
             

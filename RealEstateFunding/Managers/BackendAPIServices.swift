@@ -72,7 +72,7 @@ enum BackendAPIService {
         case .getInvestmentDetail:
             return "/client/portfolio/getOne"
         case .addFunds:
-            return "/client/wallet/addFunds"
+            return "/client/payment/addFunds"
         case .getWalletTransactions:
             return "/client/wallet/getAll"
         case .getCostOfInvestment:
@@ -84,9 +84,9 @@ enum BackendAPIService {
     }
     var method: HTTPMethod {
         switch self {
-        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite, .getInvoice:
+        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite, .getInvoice , .addFunds:
             return .post
-        case .getAllProperties,.getFundedProperties , .getFavouriteProperties, .getById, .getPortfolio, .getInvestmentDetail, .addFunds, .getWalletTransactions,.getWalletBalance, .getCostOfInvestment:
+        case .getAllProperties,.getFundedProperties , .getFavouriteProperties, .getById, .getPortfolio, .getInvestmentDetail,  .getWalletTransactions,.getWalletBalance, .getCostOfInvestment:
             return .get
         case .deletePropertyFromFavourites:
             return .delete

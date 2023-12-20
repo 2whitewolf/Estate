@@ -10,13 +10,13 @@ import SwiftUI
 struct InvestedSuccesView: View {
     @EnvironmentObject var paymentViewModel: PaymentViewModel
     var body: some View {
-        VStack{
+        VStack(spacing: 8){
             Text("Receipt")
                 .foregroundColor(.black)
                 .font(.system(size: 17).weight(.semibold))
             
             
-            Group{
+            VStack{
                 Text("Investment\nConfirmed!")
                 .font(.system(size: 34).weight(.bold))
                 .multilineTextAlignment(.center)
@@ -37,9 +37,8 @@ struct InvestedSuccesView: View {
             RoundedRectangle(cornerRadius: 32)
             .inset(by: 0.5)
             .stroke(Color(red: 0.2, green: 0.78, blue: 0.35), lineWidth: 1)
-
             )
-             Spacer()
+            .padding(.top,10)
             VStack{
                 Group{
                     Text("Total Investment amount")
@@ -50,6 +49,7 @@ struct InvestedSuccesView: View {
                     Text("AED 500.00")
                         .font(.system(size: 28).weight(.bold))
                         .foregroundColor(.blue)
+                        .padding(.vertical,8)
                     
                     Text(Date().dateWithTime)
                     .font(Font.custom("SF Pro Text", size: 12))
@@ -69,6 +69,7 @@ struct InvestedSuccesView: View {
                 .padding(12)
                 .background(RoundedRectangle(cornerRadius: 14)
                     .stroke(Color.gray, lineWidth: 0.5))
+                .padding(.top,24)
                 
                 Button{
                     paymentViewModel.goBack()
@@ -99,6 +100,8 @@ struct InvestedSuccesView: View {
                      }
             }
             .modifier(CornerBackground())
+            
+            Spacer()
         }
         .padding(.horizontal,8)
     }

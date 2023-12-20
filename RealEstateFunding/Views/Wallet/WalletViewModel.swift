@@ -26,6 +26,8 @@ class WalletViewModel: ObservableObject {
     @Published var accountInfo: AccountInfo?
     @Published var hidden: Bool = true
     
+    @Published var presentAddingFunds: Bool = false
+    
     @Published var appViewModel : AppViewModel?{
         didSet{
                 if let user = self.appViewModel?.user{
@@ -55,6 +57,12 @@ class WalletViewModel: ObservableObject {
             }
             .store(in: &subscriptions)
            
+    }
+    
+    func getPaymentViewModel () -> PaymentViewModel {
+        let viewModel = PaymentViewModel()
+       viewModel.appViewModel = self.appViewModel
+       return viewModel
     }
    
 }
