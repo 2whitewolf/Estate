@@ -64,6 +64,7 @@ struct AddFundsView: View {
                 Text("Minimum amount is 500 AED")
                     .font(.system(size: 12))
                     .foregroundColor(.black.opacity(0.8))
+                
                 NavigationLink{
                  CheckoutFundsView()
                         .environmentObject(vm)
@@ -86,15 +87,17 @@ struct AddFundsView: View {
             }
             .modifier(CornerBackground())
 
-            Spacer()
+          Spacer()
         }
         .padding(.horizontal,8)
         .background(Color.white)
+        .cornerRadius(20)
+        .padding(.top,60)
 
     }
 }
 
-//#Preview {
-//    AddFundsView(onClose: {})
-////        .environmentObject(PaymentViewModel())
-//}
+#Preview {
+    AddFundsView(vm: PaymentViewModel(),onClose: {})
+
+}

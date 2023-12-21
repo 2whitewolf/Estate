@@ -15,14 +15,17 @@ struct PropertyDetailView: View {
     @Environment(\.scenePhase) var scenePhase
     
     @EnvironmentObject var vm: PropertiesViewModel
-    @EnvironmentObject var appVM: AppViewModel
+//    @EnvironmentObject var appVM: AppViewModel
 
-    var id: Int
+   @State var property: Property
     
     var body: some View {
         ZStack(alignment: .bottom){
             Color.white.ignoresSafeArea()
             VStack{
+                
+//               headerView
+                
                 ScrollView(showsIndicators: false) {
                 ScrollViewReader { value in
                   
@@ -36,41 +39,7 @@ struct PropertyDetailView: View {
                                     
                                 }
                                 
-                                HStack{
-                                    Button {
-                                        if vm.propertyPreviewHistory.count <= 1 {
-                                            presentation.wrappedValue.dismiss()
-                                            vm.propertyDetail = nil
-                                        } else {
-                                            backToPreviously()
-                                        }
-                                    } label: {
-                                        Image(systemName: "arrow.left")
-                                            .foregroundColor(.white)
-                                            .padding(12)
-                                            .background(
-                                                Circle().fill(Color.black.opacity(0.5))
-                                            )
-                                    }
-                                    Spacer()
-                                    Image(systemName: "bookmark.fill")
-                                        .foregroundColor(.white)
-                                        .padding(12)
-                                        .background(
-                                            Circle().fill(Color.black.opacity(0.5))
-                                        )
-                                    
-                                    Image(systemName: "arkit")
-                                        .foregroundColor(.white)
-                                        .padding(12)
-                                        .background(
-                                            Circle().fill(Color.black.opacity(0.5))
-                                        )
-                                    
-                                    
-                                }
-                                .padding(.top,55)
-                                .padding(.horizontal)
+                               headerView
                             }
                             .id(1)
                             
@@ -100,8 +69,7 @@ struct PropertyDetailView: View {
                                         PropertyCellView(property: property)
                                             .onTapGesture {
                                                 withAnimation(.spring()){
-                                                    addPropertyToHistory(id: property.id ?? 1)
-                                                    //                                                vm.getPropertyDetail(id: property.id ?? 1)
+                                                    vm.addPropertyToHistory(property:property)
                                                     value.scrollTo(1)
                                                 }
                                             }
@@ -145,11 +113,16 @@ struct PropertyDetailView: View {
             .background(Color.white)
             .ignoresSafeArea()
             
+            if vm.isLoading{
+                Color.black.opacity(0.4)
+                ProgressView()
+            }
+            
             
         }
         .ignoresSafeArea()
         .onAppear{
-            vm.getPropertyDetail(id: self.id)
+                vm.getPropertyDetail(property: property)
         }
         .onDisappear(perform: {
             SDImageCache().clearMemory()
@@ -157,25 +130,7 @@ struct PropertyDetailView: View {
         
     }
     
-    func addPropertyToHistory(id: Int){
-        print ("ids: \(vm.propertyPreviewHistory)")
-        if vm.propertyPreviewHistory.isEmpty {
-            vm.propertyPreviewHistory.append(self.id)
-            vm.propertyPreviewHistory.append(id)
-        } else {
-            vm.propertyPreviewHistory.append(id)
-        }
-        print ("ids: \(vm.propertyPreviewHistory)")
-        vm.getPropertyDetail(id: id)
-    }
-    
-    func backToPreviously() {
-        print ("ids: \(vm.propertyPreviewHistory)")
-        vm.propertyPreviewHistory.removeLast()
-        vm.getPropertyDetail(id: vm.propertyPreviewHistory.last ?? 1)
-        
-        print ("ids: \(vm.propertyPreviewHistory)")
-    }
+   
 }
 
 
@@ -184,20 +139,20 @@ extension PropertyDetailView{
         HStack{
             if let property = vm.propertyDetail {
                 
-                Text("\(property.funded ?? 0)% funded")
+                Text((property.funded?.rotate(0) ?? "0") + "% funded")
                     .padding(.vertical,4)
                     .padding(.horizontal,8)
                     .background(RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.gray, lineWidth: 0.5))
                 
-                Text("AED " + "\(property.needed ?? 0)" + " needed")
+                Text("AED " + (property.needed?.rotate(0) ?? "0")  + " needed")
                     .padding(.vertical,4)
                     .padding(.horizontal,8)
                     .background(RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.gray, lineWidth: 0.5))
                 
                 
-                Text("\(property.investors ?? 0) investors")
+                Text((property.investors?.rotate(0) ?? "0") + " investors")
                     .padding(.vertical,4)
                     .padding(.horizontal,8)
                     .background(RoundedRectangle(cornerRadius: 12)
@@ -293,18 +248,6 @@ extension PropertyDetailView{
                 .background(Color(red: 0.95, green: 0.95, blue: 0.97))
                 .cornerRadius(12)
                 
-                
-                HStack{
-                    Text("AE".countryFlag)
-                    Text("Dubai")
-                        .font(.system(size: 11))
-                        .foregroundColor(.black)
-                }
-                .frame(height:21)
-                .padding(.horizontal,8)
-                .background(Color(red: 0.95, green: 0.95, blue: 0.97))
-                .cornerRadius(12)
-                
                 HStack{
                     Image(systemName: "bed.double.fill")
                         .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
@@ -384,6 +327,41 @@ extension PropertyDetailView{
         .modifier(CornerBackground())
     }
     
+    private var headerView: some View {
+        HStack{
+            Button {
+        
+                if vm.backButtonTapped(){
+                    presentation.wrappedValue.dismiss()
+                }
+//                vm.backToPreviously()
+            } label: {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.white)
+                    .padding(12)
+                    .background(
+                        Circle().fill(Color.black.opacity(0.5))
+                    )
+            }
+            Spacer()
+            
+            Button {
+                vm.favoriteButtonPressed(property: property)
+                property.favorite?.toggle()
+            } label: {
+                Image(systemName: "\(property.favorite ?? false ?  "heart.fill" : "heart")")
+                    .foregroundColor(.white)
+                    .padding(12)
+                    .background(
+                        Circle().fill(Color.black.opacity(0.5))
+                    )
+            }
+            
+        }
+        .padding(.top,55)
+        .padding(.horizontal)
+    }
+    
 }
 
 
@@ -419,8 +397,6 @@ private struct PropertyInfoDetailCellView: View {
 
 
 #Preview{
-    
-    PropertyDetailView(id: 25)
+    PropertyDetailView(property: sampleProp)
         .environmentObject(PropertiesViewModel())
-        .environmentObject(AppViewModel())
 }

@@ -9,10 +9,9 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct PropertyCellView: View {
-    @EnvironmentObject var appVM: AppViewModel
     @EnvironmentObject var vm: PropertiesViewModel
     let columns = [
-        GridItem(.adaptive(minimum: 80))
+        GridItem(.flexible(minimum: 50, maximum: 200))
        ]
    @State var property: Property
     var body: some View {
@@ -56,17 +55,10 @@ extension PropertyCellView {
         HStack{
              Spacer()
             Button{
-                if let favorite = property.favorite {
-                    if favorite {
-                        vm.deletePropertyFromFavourites(propertyId: property.id ?? 0)
-                    } else {
-                        vm.addPropertyToFavourites( propertyId: property.id ?? 0)
-                    }
-                    property.favorite?.toggle()
-                } 
-            
+                vm.favoriteButtonPressed(property: property)
+                property.favorite?.toggle()
             } label: {
-                Image(systemName: "\(property.favorite ?? false ?  "bookmark.fill" : "bookmark")")
+                Image(systemName: "\(property.favorite ?? false ?  "heart.fill" : "heart")")
                     .font(.system(size: 20))
                     .padding(24)
                     .background(Circle().stroke(Color.white, lineWidth: 0.5))
@@ -74,13 +66,14 @@ extension PropertyCellView {
             }
         }
     }
+    
     private var propertyInfo: some View {
-       HStack(spacing: 8){
+        var status: some View {
             HStack{
                 Circle()
                     .fill(Color.blue)
                     .frame(width: 8)
-                Text("\(property.type ?? "")")
+                Text("\(property.type ?? "")".capitalized)
                     .font(.system(size: 11))
                     .foregroundColor(.black)
             }
@@ -88,19 +81,25 @@ extension PropertyCellView {
             .padding(.horizontal,8)
             .background(Color.white)
             .cornerRadius(12)
-            
-            
+        }
+        
+        var country :some View {
             HStack{
+                Spacer().frame(width: 8)
                 Text("AE".countryFlag)
                 Text(property.location ?? "")
                     .font(.system(size: 11))
                     .foregroundColor(.black)
+                    .lineLimit(1)
+                Spacer().frame(width: 8)
             }
             .frame(height:21)
-            .padding(.horizontal,8)
+//            .padding(.horizontal,8)
             .background(Color.white)
             .cornerRadius(12)
-            
+        }
+        
+        var bed: some View {
             HStack{
                 Image(systemName: "bed.double.fill")
                     .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
@@ -112,7 +111,9 @@ extension PropertyCellView {
             .padding(.horizontal,8)
             .background(Color.white)
             .cornerRadius(12)
-            
+        }
+        
+        var space: some View {
             HStack{
                 Image("size")
                     .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
@@ -124,7 +125,12 @@ extension PropertyCellView {
             .padding(.horizontal,8)
             .background(Color.white)
             .cornerRadius(12)
-            Spacer()
+        }
+        
+        let array: [AnyView] = [AnyView( status),AnyView( country),AnyView( bed), AnyView(space)]
+        
+      return  FlexibleView(data: array.indices, spacing: 8, alignment: .leading) { item in
+            array[item]
             
         }
     }
@@ -164,6 +170,7 @@ extension PropertyCellView {
                 
                 
             }
+
         }
     }
     

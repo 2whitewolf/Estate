@@ -33,10 +33,13 @@ struct PortfolioView: View {
                         portfolioValue
                         
                         listOfInvestments
-                    } else {
-                        ProgressView()
-                            .padding(.top,UIScreen.screenHeight * 0.3)
-                    }
+                    } 
+//                    else {
+//                        ProgressView()
+//                            .padding(.top,UIScreen.screenHeight * 0.3)
+//                    }
+                    
+                  
                     
 //                    transactionsView
                     
@@ -48,6 +51,11 @@ struct PortfolioView: View {
                 
             }
             .padding(.horizontal,8)
+            
+            if vm.isLoading {
+                ProgressView()
+                   
+            }
         }
         .onAppear{
             if vm.appViewModel == nil {

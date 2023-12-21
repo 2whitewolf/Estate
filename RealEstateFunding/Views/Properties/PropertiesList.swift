@@ -21,12 +21,11 @@ struct PropertiesList: View {
                     .padding(.top,6)
                 selectionView
                 ScrollView(showsIndicators: false) {
-                    if !vm.properties.isEmpty {
                         LazyVStack {
                             ForEach(vm.properties, id: \.id) { property in
                                 NavigationLink{
                                     //                            InvestmentDetails()
-                                    PropertyDetailView(id: property.id ?? 0)
+                                    PropertyDetailView(property: property)
                                         .navigationBarHidden(true)
                                         .environmentObject(vm)
                                         .environmentObject(appVM)
@@ -38,14 +37,16 @@ struct PropertiesList: View {
                                 
                             }
                         }
-                    } else {
-                        ProgressView()
-                            .padding(.top,UIScreen.screenHeight * 0.3)
-                    }
                 }
                 .padding(.top,23)
             }
             .padding(.horizontal,8)
+            if vm.isLoading {
+//                Color.black.opacity(0.4).ignoresSafeArea()
+                ProgressView()
+            }
+              
+        
         }
        
         .onAppear{
@@ -103,9 +104,12 @@ extension PropertiesList {
                 FavouritesView()
                     .navigationBarHidden(true)
                     .environmentObject(vm)
-                    .environmentObject(appVM)
+                    .onDisappear{
+                        vm.getDataOnMain()
+                    }
+                   
             } label: {
-                Image(systemName: "bookmark")
+                Image(systemName: "heart")
                     .font(.system(size: 20))
                     .frame(width: 44, height: 44)
                     .background(Circle().stroke(Color.gray, lineWidth: 0.5))

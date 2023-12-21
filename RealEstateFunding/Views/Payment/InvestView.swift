@@ -47,89 +47,90 @@ struct InvestView: View {
                 .onDisappear{
                     goNext = false
                     presentAgree = false
+                    presentation.wrappedValue.dismiss()
                    
                 }, isActive: $goNext)
             
             Color.white.ignoresSafeArea()
-            VStack{
-             
+            if !vm.isLoading {
+                VStack{
+                    
                     ScrollView(showsIndicators: false) {
                         ScrollViewReader { scrollReader in
-                        ZStack(alignment: .top) {
-                            TextField("", value: $vm.invest, formatter: formatter)
-                                .keyboardType(.numberPad)
-                                .focused($isTextFieldFocused)
-                                .foregroundColor(.white)
-                                .font(.system(size: 28).weight(.bold))
-                                .frame(width: 100)
-                                .opacity(0)
-                            
-                            if let property = vm.propertyDetail {
-                                if let image = property.images?.first?.path {
-                                    
-                                    WebImage(url: URL(string: "https://afehe-hwf.buzz/storage" + "/" + image)).placeholder(
-                                        Image("propertyBackImage")
-                                    )
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: UIScreen.screenWidth - 16)
-//                                    .frame(maxWidth: .infinity)
-                                    .frame(height:283)
-                                    .cornerRadius(52)
-                                  
-                                    
-                                    .onAppear{
-                                        isTextFieldFocused = true
+                            ZStack(alignment: .top) {
+                                TextField("", value: $vm.invest, formatter: formatter)
+                                    .keyboardType(.numberPad)
+                                    .focused($isTextFieldFocused)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 28).weight(.bold))
+                                    .frame(width: 100)
+                                    .opacity(0)
+                                
+                                if let property = vm.propertyDetail {
+                                    if let image = property.images?.first?.path {
+                                        
+                                        WebImage(url: URL(string: "https://afehe-hwf.buzz/storage" + "/" + image)).placeholder(
+                                            Image("propertyBackImage")
+                                        )
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.screenWidth - 16)
+                                        //                                    .frame(maxWidth: .infinity)
+                                        .frame(height:283)
+                                        .cornerRadius(52)
+                                        
+                                        
+                                        .onAppear{
+                                            isTextFieldFocused = true
+                                        }
                                     }
                                 }
                             }
-                                
+                            .overlay(
+                                ZStack{
+                                    Color.black.opacity(0.64)
+                                        .cornerRadius(52)
+                                    imageOverlay
+                                }
+                            )
+                            .padding(.top,16)
                             
-                          
-//                                .padding(.top,55)
-                        }
-                       
-                        .overlay(
-                            ZStack{
-                                Color.black.opacity(0.64)
-                                    .cornerRadius(52)
-                                imageOverlay
-                            }
-                        )
-                        .padding(.top,16)
-                       
-                        .frame(height:283)
-                        
-                        propertyInfo
+                            .frame(height:283)
+                            
+                            propertyInfo
                                 .padding(.top,8)
-                           
+                            
                             Button{
                                 presentAgree = true
-                        } label: {
-                            Text("Invest")
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .backgroundColor(.blue)
-                                .cornerRadius(12)
-                        }
-                        .id(2)
-                        .onAppear{
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                scrollReader.scrollTo(2, anchor: .center)
+                            } label: {
+                                Text("Invest")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .backgroundColor(.blue)
+                                    .cornerRadius(12)
                             }
-                        }
-                        Spacer()
+                            .id(2)
+                            .onAppear{
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    scrollReader.scrollTo(2, anchor: .center)
+                                }
+                            }
+                            Spacer()
                             
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color.white)
                                 .frame(height: 250)
-                               
+                            
+                        }
                     }
                 }
+                .ignoresSafeArea()
+                .padding(.horizontal,8)
             }
-            .ignoresSafeArea()
-            .padding(.horizontal,8)
+            else {
+                ProgressView()
+            }
 
         }
         .popup(isPresented: $presentAgree) {

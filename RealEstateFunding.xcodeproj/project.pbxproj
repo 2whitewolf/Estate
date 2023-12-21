@@ -65,6 +65,10 @@
 		8B7045062B31EC4D00C0E2D4 /* AddFundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045052B31EC4D00C0E2D4 /* AddFundsView.swift */; };
 		8B7045082B31F45100C0E2D4 /* CheckoutFundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045072B31F45100C0E2D4 /* CheckoutFundsView.swift */; };
 		8B7045342B3345A200C0E2D4 /* WalletDepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045332B3345A200C0E2D4 /* WalletDepositView.swift */; };
+		8B7045362B343AB500C0E2D4 /* CustomBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045352B343AB500C0E2D4 /* CustomBottom.swift */; };
+		8B7045392B34529A00C0E2D4 /* _FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7045382B34529A00C0E2D4 /* _FlexibleView.swift */; };
+		8B70453B2B3452BF00C0E2D4 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70453A2B3452BF00C0E2D4 /* FlexibleView.swift */; };
+		8B70453D2B3452E300C0E2D4 /* SizeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70453C2B3452E300C0E2D4 /* SizeReader.swift */; };
 		8B7B0B102AE6884E008C2F19 /* InvestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */; };
 		8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */; };
 		8B955B9D2AFE5F78005E4D0C /* InvestmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */; };
@@ -196,6 +200,10 @@
 		8B7045052B31EC4D00C0E2D4 /* AddFundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFundsView.swift; sourceTree = "<group>"; };
 		8B7045072B31F45100C0E2D4 /* CheckoutFundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFundsView.swift; sourceTree = "<group>"; };
 		8B7045332B3345A200C0E2D4 /* WalletDepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositView.swift; sourceTree = "<group>"; };
+		8B7045352B343AB500C0E2D4 /* CustomBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottom.swift; sourceTree = "<group>"; };
+		8B7045382B34529A00C0E2D4 /* _FlexibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _FlexibleView.swift; sourceTree = "<group>"; };
+		8B70453A2B3452BF00C0E2D4 /* FlexibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
+		8B70453C2B3452E300C0E2D4 /* SizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeReader.swift; sourceTree = "<group>"; };
 		8B7B0B0F2AE6884E008C2F19 /* InvestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestView.swift; sourceTree = "<group>"; };
 		8B7B0B112AE69F48008C2F19 /* PropertyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyImageView.swift; sourceTree = "<group>"; };
 		8B955B9C2AFE5F78005E4D0C /* InvestmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentData.swift; sourceTree = "<group>"; };
@@ -347,6 +355,7 @@
 		8B20CE7C2AB0910A00FB3ECA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8B7045372B34527700C0E2D4 /* FlexibleView */,
 				8B20CE6E2AB0676B00FB3ECA /* TabBarViewModifier.swift */,
 				8B20CE702AB06D4B00FB3ECA /* View + Ext.swift */,
 				8B20CE7D2AB0912100FB3ECA /* Color + Ext.swift */,
@@ -391,6 +400,7 @@
 			children = (
 				8B3A23BC2AC4257100EF82E7 /* WalletView.swift */,
 				8BA83E9A2B10CC52005DD78C /* WalletViewModel.swift */,
+				8B7045352B343AB500C0E2D4 /* CustomBottom.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -442,6 +452,16 @@
 				8B7045332B3345A200C0E2D4 /* WalletDepositView.swift */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		8B7045372B34527700C0E2D4 /* FlexibleView */ = {
+			isa = PBXGroup;
+			children = (
+				8B7045382B34529A00C0E2D4 /* _FlexibleView.swift */,
+				8B70453A2B3452BF00C0E2D4 /* FlexibleView.swift */,
+				8B70453C2B3452E300C0E2D4 /* SizeReader.swift */,
+			);
+			path = FlexibleView;
 			sourceTree = "<group>";
 		};
 		8BA8378C2ACEC4A6008DCF3D /* Views */ = {
@@ -771,6 +791,7 @@
 				8B49CC062AB9A90B00F1800B /* String + Ext.swift in Sources */,
 				8BA837BE2AD6A59A008DCF3D /* LoginViewModel.swift in Sources */,
 				8B7045062B31EC4D00C0E2D4 /* AddFundsView.swift in Sources */,
+				8B7045362B343AB500C0E2D4 /* CustomBottom.swift in Sources */,
 				8BD3B2632B2AF53A006393EE /* InvestedSuccesView.swift in Sources */,
 				8B7045082B31F45100C0E2D4 /* CheckoutFundsView.swift in Sources */,
 				8B20CE712AB06D4B00FB3ECA /* View + Ext.swift in Sources */,
@@ -790,14 +811,17 @@
 				8B49CC102ABB0ECB00F1800B /* InvestmentCalculatorView.swift in Sources */,
 				8B20CE7B2AB0900C00FB3ECA /* SignUpView.swift in Sources */,
 				8B49CBEE2AB491FD00F1800B /* ForgotPasswordView.swift in Sources */,
+				8B70453D2B3452E300C0E2D4 /* SizeReader.swift in Sources */,
 				8BA8379D2ACEF49D008DCF3D /* RegistrationViewScreen.swift in Sources */,
 				8BD3B20D2B28988A006393EE /* PropertiesGatewayType.swift in Sources */,
 				8B6D016D2B0792C100E9FBCC /* ContentView.swift in Sources */,
 				8B20CE6F2AB0676B00FB3ECA /* TabBarViewModifier.swift in Sources */,
+				8B70453B2B3452BF00C0E2D4 /* FlexibleView.swift in Sources */,
 				8B49CBFB2AB856E200F1800B /* EnterNewPasswordView.swift in Sources */,
 				8B955BA32AFE6B9A005E4D0C /* ShowMoreLessButton.swift in Sources */,
 				8B7B0B122AE69F49008C2F19 /* PropertyImageView.swift in Sources */,
 				8B6D016B2B07826F00E9FBCC /* InvestmentDetail.swift in Sources */,
+				8B7045392B34529A00C0E2D4 /* _FlexibleView.swift in Sources */,
 				8B49CC152ABB34EA00F1800B /* FavouritesView.swift in Sources */,
 				8B49CBFE2AB8629E00F1800B /* NotificationsListView.swift in Sources */,
 				8BEBC3612AEBA7F40016FCA4 /* EmploymentStatusView.swift in Sources */,

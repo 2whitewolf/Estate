@@ -15,6 +15,8 @@ class PortfolioViewModel: ObservableObject {
     @Published var transactionsListOpened: Bool = false
     @Published var investmentDetail: InvestmentDetail?
     
+    @Published var isLoading: Bool = false
+    
     @Published var appViewModel: AppViewModel? {
         didSet{
                 if let user = self.appViewModel?.user {
@@ -42,6 +44,7 @@ class PortfolioViewModel: ObservableObject {
     private let networking: APIProtocol = APIManager()
     
     func getPortfolioData(){
+         isLoading = true
         networking.getPortfolio(userId:self.userID)
             .sink {[weak self] completion in
                 guard let self = self else { return }
@@ -54,11 +57,13 @@ class PortfolioViewModel: ObservableObject {
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
                 self.investments = value.data
+                self.isLoading = false
                 
             }
             .store(in: &subscriptions)
     }
     func getInvestmentDetailData( propertyId: Int){
+         isLoading = true
         networking.getInvestmentDetail(userId: self.userID, propertyId: propertyId)
             .sink {[weak self] completion in
                 guard let self = self else { return }
@@ -71,8 +76,15 @@ class PortfolioViewModel: ObservableObject {
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
                 self.investmentDetail = value.data
-               
+                self.isLoading = false
             }
             .store(in: &subscriptions)
+    }
+    
+    func getPaymentViewModel(id: Int) -> PaymentViewModel {
+        let viewModel = PaymentViewModel()
+        viewModel.appViewModel = self.appViewModel
+        viewModel.getPropertyDetail(propertyId:id)
+       return viewModel
     }
 }

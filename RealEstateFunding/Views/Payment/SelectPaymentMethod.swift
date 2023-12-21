@@ -153,12 +153,6 @@ struct SelectPaymentMethod: View {
                 RoundedRectangle(cornerRadius: 32)
                     .stroke( Color.blue,lineWidth: vm.paymentMethod == .crypto || vm.paymentMethod == .apple ? 1 : 0)
             )
-//            .onTapGesture {
-//                withAnimation{
-//                    vm.paymentMethod = .other
-//                }
-//            }
-            
             Spacer()
             Button{
                 onClose()
@@ -175,6 +169,7 @@ struct SelectPaymentMethod: View {
             .padding(.bottom,22)
         }
         .padding(.horizontal,8)
+        .cornerRadius(20)
     }
         
 }

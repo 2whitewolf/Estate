@@ -35,33 +35,48 @@ struct FavouritesView: View {
                     .foregroundColor(.black)
                     .font(.system(size: 34).weight(.bold))
                     .padding(.leading,22)
-                
-                ScrollView(showsIndicators: false) {
-                    ForEach(vm.favoriteProperties, id: \.id) { property in
-                        NavigationLink{
-                            if let propertyID = property.id {
-                                PropertyDetailView(id: propertyID)
+                if !vm.favoriteProperties.isEmpty{
+                    ScrollView(showsIndicators: false) {
+                        ForEach(vm.favoriteProperties, id: \.id) { property in
+                            NavigationLink{
+                                PropertyDetailView(property: property)
                                     .navigationBarHidden(true)
                                     .environmentObject(vm)
-//                                    .environmentObject(appVM)
+                            } label: {
+                                
+                                PropertyCellView(property: property)
                             }
-                        } label: {
-
-                            PropertyCellView(property: property)
                         }
-                    }                    
+                    }
+                } else {
+                    VStack{
+                        VStack(spacing: 8){
+                            Image(systemName: "info.circle")
+                            Text("No properties in favorites")
+                                .font(.system (size: 15))
+                                .padding(.top,8)
+                           
+                            
+                        }
+                        .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
+                        .padding(.vertical,32)
+                        .frame(maxWidth: .infinity)
+                        .modifier(CornerBackground())
+                         Spacer()
+                        
+                    }
+                    
+                    
                 }
             }
             .padding(.horizontal,8)
-            if vm.properties.isEmpty {
+            if vm.isLoading {
+                Color.black.opacity(0.4).ignoresSafeArea()
                 ProgressView()
             }
         }
         .onAppear{
-//            if let user = appVM.user {
-                vm.properties.removeAll()
                 vm.getFavouriteProperties()
-//            }
         }
     }
 }

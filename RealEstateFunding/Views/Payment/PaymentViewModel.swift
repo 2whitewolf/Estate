@@ -23,6 +23,8 @@ class PaymentViewModel: ObservableObject {
     @Published var paymentCase: PaymentCase = .investition
     @Published var title = "Checkout"
     
+    @Published var dismiss:Bool = false
+    
     @Published var isLoading: Bool = false
     
     
@@ -59,6 +61,33 @@ class PaymentViewModel: ObservableObject {
     
     init(){
         print("initialization Payment")
+    }
+    
+    
+    deinit{
+        print("payment View model closed")
+    }
+    
+    func getPropertyDetail(propertyId: Int ) {
+        self.isLoading = true
+        networking.getPropertyById(id: propertyId)
+            .sink {[weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .finished:
+                    break
+                }
+            } receiveValue: {[weak self] value in
+                guard let self = self else { return }
+                print("invoice \(value)")
+                if let data = value.data?.property {
+                    self.propertyDetail = data
+                isLoading = false
+                }
+            }
+            .store(in: &subscriptions)
     }
     func addFunds() {
         self.isLoading = true
@@ -99,6 +128,7 @@ class PaymentViewModel: ObservableObject {
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
                             if let data = value.data {
+                                print("wallet \(data)")
                                 self.walletBalance = data
                             }
                             
@@ -177,7 +207,7 @@ class PaymentViewModel: ObservableObject {
     }
     
     func getTransactionsCosts( amount: Double) {
-        
+        isLoading = true
         if let propertyDetail = propertyDetail {
             networking.getInvestmentCost(userId: self.userID, propertyId: propertyDetail.id ?? 1, amount: Double(self.invest))
                 .sink {[weak self] completion in
@@ -202,7 +232,18 @@ class PaymentViewModel: ObservableObject {
     
     func goBack(){
         if let appViewModel = appViewModel {
-            appViewModel.selectedTab = .portfolio
+            switch appViewModel.selectedTab{
+            case .properties:
+                appViewModel.selectedTab = .portfolio
+            case .portfolio :
+                 dismiss = true
+//                appViewModel.selectedTab = .properties
+//                appViewModel.selectedTab = .portfolio
+            default:
+                print()
+                
+            }
+           
         }
     }
 }

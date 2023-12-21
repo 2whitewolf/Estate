@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct WalletView: View {
     @EnvironmentObject var appVM: AppViewModel
@@ -37,19 +38,45 @@ struct WalletView: View {
                  Spacer()
             }
             .padding(.horizontal,8)
-        }
-        .popup(isPresented: $vm.presentAddingFunds, view: {
-            AddFundsView(vm: vm.getPaymentViewModel()){
-                vm.presentAddingFunds.toggle()
+            if vm.presentAddingFunds {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
             }
-           
-        },customize: {
+        }
+        .popup(isPresented:  $vm.presentAddingFunds) {
+            AddFundsView(vm: vm.getPaymentViewModel()){
+                           vm.presentAddingFunds.toggle()
+                       }
+        } customize: {
             $0
                 .type(.toast)
                 .position(.bottom)
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
-        })
+        }
+//        .sheet(isPresented: $vm.presentAddingFunds, content: {
+//            AddFundsView(vm: vm.getPaymentViewModel()){
+//                vm.presentAddingFunds.toggle()
+//            }
+//        })
+//        .popup(isPresented: $vm.presentAddingFunds) {
+//            AddFundsView(vm: vm.getPaymentViewModel()){
+//                vm.presentAddingFunds.toggle()
+//            }
+//           
+//        }
+//        .popup(isPresented: $vm.presentAddingFunds, view: {
+//            AddFundsView(vm: vm.getPaymentViewModel()){
+//                vm.presentAddingFunds.toggle()
+//            }
+//           
+//        },customize: {
+//            $0
+//                .type(.toast)
+//                .position(.bottom)
+//                .closeOnTap(false)
+//                .backgroundColor(.black.opacity(0.4))
+//        })
         .onAppear{
             if vm.appViewModel == nil {
                 vm.appViewModel = appVM

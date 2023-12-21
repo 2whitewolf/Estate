@@ -16,17 +16,22 @@ struct InvestmentDetails: View {
     }
     var investment: Investment
     var body: some View {
-        VStack{
-            headerView
-            ScrollView(showsIndicators: false) {
-                mainView
-                
-                totalInvestmentAmountView
-                
+        ZStack{
+            VStack{
+                headerView
+                ScrollView(showsIndicators: false) {
+                    mainView
+                    
+                    totalInvestmentAmountView
+                    
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(.horizontal)
+            if vm.isLoading {
+                ProgressView()
+            }
         }
-        .padding(.horizontal)
         .onAppear{
                 vm.getInvestmentDetailData( propertyId: investment.id)
         }
@@ -80,8 +85,9 @@ extension InvestmentDetails {
                 InvestmentCell(image: "graphic_icon", title: "Experted profit after 1 Year", secondLine: "AED \(investmentDetail.expectedProfitAfterYear)")
                 
             }
-            Button {
-                
+            NavigationLink {
+                InvestView(vm: vm.getPaymentViewModel(id: self.investment.id))
+                    .navigationBarHidden(true)
             } label: {
                 Text("Invest more")
                     .fontWeight(.semibold)

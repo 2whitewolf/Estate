@@ -20,7 +20,7 @@ struct InvestmentDataClass: Codable {
 
 // MARK: - Investment
 struct Investment: Codable {
-    let id: Int
+       let id: Int
        let name: String
        let invested: Double
        let images: [ImageInvested]

@@ -136,6 +136,11 @@ struct CheckoutInvetsmentView: View {
                 ProgressView()
             }
         }
+        .onChange(of: vm.dismiss) { new in
+            if new {
+                presented.wrappedValue.dismiss()
+            }
+        }
         .paymentSheet(isPresented: $vm.presentPaymentSheet, paymentSheet: vm.paymentSheet ?? PaymentSheet(setupIntentClientSecret: "", configuration: PaymentSheet.Configuration()), onCompletion: vm.onPaymentCompletion)
         .fullScreenCover(isPresented: $vm.showSuccesView){
             InvestedSuccesView()
@@ -167,6 +172,7 @@ struct CheckoutInvetsmentView: View {
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
         })
+       
         
     }
 }
