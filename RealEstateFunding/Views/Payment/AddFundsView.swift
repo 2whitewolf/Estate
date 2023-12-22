@@ -23,7 +23,7 @@ struct AddFundsView: View {
                 Image(systemName: "xmark.circle.fill")
                     .opacity(0)
                 Spacer()
-                Text("Add Funds")
+                Text("Add Funds".localized)
                     .fontWeight(.bold)
                 Spacer()
                 Button{
@@ -40,7 +40,7 @@ struct AddFundsView: View {
             
             
             VStack(alignment: .leading, spacing: 16){
-                Text("Add Funds")
+                Text("Add Funds".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
                 HStack{
@@ -61,7 +61,7 @@ struct AddFundsView: View {
                     .stroke( vm.amountWrong ? Color.red :  Color(red: 0.82, green: 0.82, blue: 0.84), lineWidth: 1)
                 )
                
-                Text("Minimum amount is 500 AED")
+                Text("Minimum amount is 500 AED".localized)
                     .font(.system(size: 12))
                     .foregroundColor(.black.opacity(0.8))
                 
@@ -73,7 +73,7 @@ struct AddFundsView: View {
                             onClose()
                         }
                 } label: {
-                    Text("Chose Payment Method")
+                    Text("Chose Payment Method".localized)
                         .foregroundColor(.white)
                         .font(.system(size: 17).weight(.semibold))
                         .frame(maxWidth: .infinity)

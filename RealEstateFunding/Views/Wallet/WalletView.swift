@@ -17,7 +17,7 @@ struct WalletView: View {
             Color.white.ignoresSafeArea()
             VStack{
                 HStack{
-                    Text("Wallet")
+                    Text("Wallet".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 34).weight(.bold))
                     Spacer()
@@ -54,29 +54,6 @@ struct WalletView: View {
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
         }
-//        .sheet(isPresented: $vm.presentAddingFunds, content: {
-//            AddFundsView(vm: vm.getPaymentViewModel()){
-//                vm.presentAddingFunds.toggle()
-//            }
-//        })
-//        .popup(isPresented: $vm.presentAddingFunds) {
-//            AddFundsView(vm: vm.getPaymentViewModel()){
-//                vm.presentAddingFunds.toggle()
-//            }
-//           
-//        }
-//        .popup(isPresented: $vm.presentAddingFunds, view: {
-//            AddFundsView(vm: vm.getPaymentViewModel()){
-//                vm.presentAddingFunds.toggle()
-//            }
-//           
-//        },customize: {
-//            $0
-//                .type(.toast)
-//                .position(.bottom)
-//                .closeOnTap(false)
-//                .backgroundColor(.black.opacity(0.4))
-//        })
         .onAppear{
             if vm.appViewModel == nil {
                 vm.appViewModel = appVM
@@ -95,7 +72,7 @@ struct WalletView: View {
 extension WalletView{
     private var balanceView: some View {
         VStack{
-            Text("Available Balance")
+            Text("Available Balance".localized)
                 .font(.system(size: 15))
                 .foregroundColor(.gray)
             if let accountInfo = vm.accountInfo {
@@ -114,7 +91,7 @@ extension WalletView{
                 Button{
                     vm.presentAddingFunds = true
                 } label: {
-                    Label("Add Funds", systemImage: "plus.circle.fill")
+                    Label("Add Funds".localized, systemImage: "plus.circle.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 17).weight(.bold))
                         .frame(maxWidth: .infinity)
@@ -126,7 +103,7 @@ extension WalletView{
                 Button{
                     
                 } label: {
-                    Text("Withdraw")
+                    Text("Withdraw".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 17).weight(.bold))
                         .frame(maxWidth: .infinity)
@@ -144,7 +121,7 @@ extension WalletView{
     private var transactionsView: some View {
         VStack{
             HStack{
-                Text("Transactions")
+                Text("Transactions".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.bold))
                 Spacer()
@@ -157,7 +134,7 @@ extension WalletView{
                         .foregroundColor(.gray)
                         .frame(width: 26)
                     
-                    Text("No transactions yet")
+                    Text("No transactions yet".localized)
                         .font(.system(size: 15))
                         .foregroundColor(.gray)
                 }
@@ -202,7 +179,7 @@ struct TransactionCellView: View {
                     .foregroundColor(withdraw ? .green : .gray)
             }
             VStack(alignment: .leading,spacing: 0){
-                Text("Balance \(withdraw ? "Top Up" : "Withdraw")")
+                Text("Balance".localized +  " \(withdraw ? "Top Up".localized : "Withdraw".localized)")
                     .font(.system(size: 13))
                     .foregroundColor(.black)
                 

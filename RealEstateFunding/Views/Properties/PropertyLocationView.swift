@@ -22,7 +22,7 @@ struct PropertyLocationView: View {
      
     var body: some View {
         VStack(alignment: .leading){
-            Text("Location")
+            Text("Location".localized)
                 .foregroundColor(.black)
                 .font(.system(size: 20).weight(.semibold))
             
@@ -41,7 +41,7 @@ struct PropertyLocationView: View {
             } label: {
                 HStack{
                     Image(systemName: "mappin")
-                    Text("View on  theMap")
+                    Text("View on the Map".localized)
                 }
                     .foregroundColor(.blue)
                     .padding(.vertical)

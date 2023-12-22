@@ -84,11 +84,11 @@ extension CheckoutFundsView {
             Group{
                 VStack(alignment: .leading, spacing: 8){
                     
-                    Text("Add Funds")
+                    Text("Add Funds".localized)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
                     HStack{
-                        Text("Balance Top Up Amount")
+                        Text("Balance Top Up Amount".localized)
                         Spacer()
                         Text("AED " + vm.invest.rotate(0))
                             .foregroundColor(.black)
@@ -101,11 +101,11 @@ extension CheckoutFundsView {
                 
                 VStack(alignment: .leading, spacing: 8){
                     
-                    Text("Payment Method")
+                    Text("Payment Method".localized)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
                     
-                    Text("Retail investors can only use debit cards for payment")
+                    Text("Retail investors can only use debit cards for payment".localized)
                         .font(.system(size: 13))
                         .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
                     PaymentCellMethod(method: .stripe)
@@ -142,7 +142,7 @@ extension CheckoutFundsView {
                         Button{
                             vm.addFunds()
                         } label: {
-                            Text("Pay via " + vm.paymentMethod.name + " Checkout")
+                            Text("Pay via".localized + " " + vm.paymentMethod.name.localized + " Checkout".localized)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                                 .padding(.vertical,14)

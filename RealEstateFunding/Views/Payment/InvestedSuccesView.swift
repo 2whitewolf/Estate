@@ -11,18 +11,18 @@ struct InvestedSuccesView: View {
     @EnvironmentObject var paymentViewModel: PaymentViewModel
     var body: some View {
         VStack(spacing: 8){
-            Text("Receipt")
+            Text("Receipt".localized)
                 .foregroundColor(.black)
                 .font(.system(size: 17).weight(.semibold))
             
             
             VStack{
-                Text("Investment\nConfirmed!")
+                Text("Investment\nConfirmed!".localized)
                 .font(.system(size: 34).weight(.bold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
                 
-                Text("An email confirmation including information about your investment and the property will be sent to you shortly.")
+                Text("An email confirmation including information about your investment and the property will be sent to you shortly.".localized)
                     .font(.system(size: 12))
                 .multilineTextAlignment(.center)
                 .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
@@ -41,24 +41,24 @@ struct InvestedSuccesView: View {
             .padding(.top,10)
             VStack{
                 Group{
-                    Text("Total Investment amount")
+                    Text("Total Investment amount".localized)
                         .font(.system(size: 15).weight(.semibold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.black)
                     
-                    Text("AED 500.00")
+                    Text("AED " + paymentViewModel.invest.rotate(2))
                         .font(.system(size: 28).weight(.bold))
                         .foregroundColor(.blue)
                         .padding(.vertical,8)
                     
                     Text(Date().dateWithTime)
-                    .font(Font.custom("SF Pro Text", size: 12))
+                        .font(.system(size: 12))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
                 }
                 
                 HStack{
-                    Text("Payment Method")
+                    Text("Payment Method".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 16,weight: .semibold))
                     Spacer()
@@ -74,7 +74,7 @@ struct InvestedSuccesView: View {
                 Button{
                     paymentViewModel.goBack()
                 } label: {
-                  Text("View Portfolio")
+                    Text("View Portfolio".localized)
                         .font(.system(size: 17).weight(.semibold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -91,10 +91,10 @@ struct InvestedSuccesView: View {
                     Text(property.about ?? "")
                         .font(.system(size: 17).weight(.semibold))
                             .foregroundColor(.black)
-                    PropertyAboutCell(title: "Annualised return", detail: (property.annualProfit ?? "") + " %")
-                    PropertyAboutCell(title: "Investment Period", detail: (property.period ?? "") + " Year")
+                    PropertyAboutCell(title: "Annualised return".localized, detail: (property.annualProfit ?? "") + " %")
+                    PropertyAboutCell(title: "Investment Period".localized, detail: (property.period ?? "") + " Year")
                     if let investition = paymentViewModel.invetsmentsCost {
-                        PropertyAboutCell(title: "Investment Amount", detail: "AED " + (investition.investmentCost?.rotate(2) ?? "0"))
+                        PropertyAboutCell(title: "Investment Amount".localized, detail: "AED " + (investition.investmentCost?.rotate(2) ?? "0"))
                     }
                      
                      }

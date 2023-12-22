@@ -18,7 +18,7 @@ struct PortfolioView: View {
             VStack{
                 ScrollView(showsIndicators: false){
                     HStack{
-                        Text("Portfolio")
+                        Text("Portfolio".localized)
                             .font(.system(size: 34).weight(.bold))
                             .foregroundColor(.black)
                         Spacer()
@@ -86,7 +86,7 @@ extension PortfolioView {
             .cornerRadius(32)
             .overlay(
                 VStack(spacing: 4){
-                    Text("Total invested")
+                    Text("Total invested".localized)
                     Text("AED")
                     + Text(vm.investments?.totalInvested.rotate(0) ?? "0")
                         .font(.system(size: 28))
@@ -100,7 +100,7 @@ extension PortfolioView {
         VStack(spacing: 24){
             if let invested = vm.investments {
                 VStack(spacing: 8){
-                    Text("Portfolio Value")
+                    Text("Portfolio Value".localized)
                         .foregroundColor(.gray)
                         .font(.system(size: 15))
                     
@@ -117,7 +117,7 @@ extension PortfolioView {
                         HStack{
                             Image( "money_icon")
                             VStack(alignment: .leading){
-                                Text("Total Profit to Date")
+                                Text("Total Profit to Date".localized)
                                     .font(.system(size: 15))
                                     .foregroundColor(.black)
                                 Text("AED " + invested.totalProfitToDate.rotate(0))
@@ -128,7 +128,7 @@ extension PortfolioView {
                         HStack{
                             Image( "graphic_icon")
                             VStack(alignment: .leading){
-                                Text("Expected Profit after 1 Year")
+                                Text("Expected Profit after 1 Year".localized)
                                     .font(.system(size: 15))
                                     .foregroundColor(.black)
                                 Text("AED " + invested.expectedProfitAfterYear.rotate(0))
@@ -148,7 +148,7 @@ extension PortfolioView {
     private var listOfInvestments: some View {
         VStack(spacing: 16){
             HStack{
-                Text("List of Investments")
+                Text("List of Investments".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
                 Spacer()
@@ -186,7 +186,7 @@ extension PortfolioView {
                         .foregroundColor(.gray)
                         .frame(width: 26)
                     
-                    Text("No investments yet")
+                    Text("No investments yet".localized)
                         .font(.system(size: 15))
                         .foregroundColor(.gray)
                    
@@ -199,7 +199,7 @@ extension PortfolioView {
     private var transactionsView : some View {
         VStack{
             HStack{
-                Text("Transactions")
+                Text("Transactions".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
                 Spacer()
@@ -210,7 +210,7 @@ extension PortfolioView {
                 .foregroundColor(.gray)
                 .frame(width: 26)
             
-            Text("No transactions yet")
+            Text("No transactions yet".localized)
                 .font(.system(size: 15))
                 .foregroundColor(.gray)
             
@@ -224,7 +224,7 @@ extension PortfolioView {
         VStack{
             if let invested = vm.investments {
                 HStack{
-                    Text("Annual Investment Limit")
+                    Text("Annual Investment Limit".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 20).weight(.semibold))
                     Spacer()

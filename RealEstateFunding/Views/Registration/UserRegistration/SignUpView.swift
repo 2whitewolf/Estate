@@ -21,10 +21,10 @@ struct SignUpView: View {
             Color.white.ignoresSafeArea()
             VStack(alignment: .leading){
                 
-                Text("Sign Up")
+                Text("Sign Up".localized)
                     .font(.system(size: 28).weight(.bold))
                     .foregroundColor(.black)
-                Text("In Less Than 5 Minutes, You Can Start Growing Your Wealth.")
+                Text("In Less Than 5 Minutes, You Can Start Growing Your Wealth.".localized)
                     .foregroundColor(.customGray)
                 
                 textFields
@@ -33,14 +33,14 @@ struct SignUpView: View {
                 
                 
                 
-                Text("Passwords must be at least 6 characters and contain at least one letter and one number.")
+                Text("Passwords must be at least 6 characters and contain at least one letter and one number.".localized)
                     .foregroundColor(.customGray)
                     .font(.system(size: 12))
                 
                 HStack{
                     Spacer()
-                    Text("Already have an account?")
-                        .foregroundColor(.customGray) + Text(" Sign in")
+                    Text("Already have an account?".localized)
+                        .foregroundColor(.customGray) + Text(" " + "Sign in".localized)
                         .foregroundColor(.blue)
                     Spacer()
                 }
@@ -51,7 +51,7 @@ struct SignUpView: View {
                 
                 buttonsView
                 VStack{
-                    Text("By logging in, you have agreed to the") + Text(" Terms And Conditions")   .foregroundColor(.blue) + Text(" and ") + Text("Privacy Policy.")
+                    Text("By logging in, you have agreed to the".localized) + Text(" " + "Terms And Conditions".localized)   .foregroundColor(.blue) + Text(" " + "and".localized + " ") + Text("Privacy Policy.".localized)
                         .foregroundColor(.blue)
                 }
                 .multilineTextAlignment(.center)
@@ -82,10 +82,10 @@ extension SignUpView {
     private var textFields: some View {
         VStack{
             TextField("email@example", text: $vm.email)
-                .textFieldStyle(ImageWithLineStroke(title: "Email", image: Image("email")))
+                .textFieldStyle(ImageWithLineStroke(title: "Email".localized, image: Image("email")))
             
-            SecureField("Password", text: $vm.password)
-                .textFieldStyle(ImageWithLineStroke(title: "Password", image: Image("password")))
+            SecureField("Password".localized, text: $vm.password)
+                .textFieldStyle(ImageWithLineStroke(title: "Password".localized, image: Image("password")))
             
             
         }
@@ -97,7 +97,7 @@ extension SignUpView {
 //                vm.register()
                 vm.verifyEmail.toggle()
             } label: {
-                Text("Create account")
+                Text("Create account".localized)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
@@ -113,7 +113,7 @@ extension SignUpView {
                     Image(systemName: "apple.logo")
                         .foregroundColor(.black)
                     
-                    Text("Sign up with Apple")
+                    Text("Sign up with Apple".localized)
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.black)
@@ -130,7 +130,7 @@ extension SignUpView {
                 HStack{
                     Image("googleLogo")
                     
-                    Text("Sign up with Google")
+                    Text("Sign up with Google".localized)
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.black)

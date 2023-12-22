@@ -21,7 +21,7 @@ class PaymentViewModel: ObservableObject {
     @Published var showSuccesView: Bool = false
     @Published var paymentMethod: PaymentMethod = .stripe
     @Published var paymentCase: PaymentCase = .investition
-    @Published var title = "Checkout"
+    @Published var title = "Checkout".localized
     
     @Published var dismiss:Bool = false
     
@@ -65,6 +65,7 @@ class PaymentViewModel: ObservableObject {
     
     
     deinit{
+        subscriptions.removeAll()
         print("payment View model closed")
     }
     
@@ -81,7 +82,6 @@ class PaymentViewModel: ObservableObject {
                 }
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
-                print("invoice \(value)")
                 if let data = value.data?.property {
                     self.propertyDetail = data
                 isLoading = false
@@ -102,11 +102,8 @@ class PaymentViewModel: ObservableObject {
                 }
             } receiveValue: {[weak self] value in
                 guard let self = self else { return }
-                print("invoice \(value)")
                 if let payment = value.data {
                     self.paymentData = payment
-                    print(payment)
-                    
                     configureStripe(payment: payment)
                 }
                 
@@ -128,7 +125,6 @@ class PaymentViewModel: ObservableObject {
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
                             if let data = value.data {
-                                print("wallet \(data)")
                                 self.walletBalance = data
                             }
                             
@@ -155,12 +151,11 @@ class PaymentViewModel: ObservableObject {
     
     func onPaymentCompletion(result: PaymentSheetResult) {
       self.paymentResult = result
-        print(result)
         switch result {
         case .completed:
             DispatchQueue.main.async {[weak self] in
                 self?.showSuccesView.toggle()
-                self?.title = "Wallet Deposit"
+                self?.title = "Wallet Deposit".localized
             }
         case .canceled:
             print("")
@@ -193,11 +188,8 @@ class PaymentViewModel: ObservableObject {
                         }
                     } receiveValue: {[weak self] value in
                         guard let self = self else { return }
-                        print("invoice \(value)")
                         if let payment = value.data {
                             self.paymentData = payment
-                            print(payment)
-                            
                             configureStripe(payment: payment)
                         }
                         
@@ -237,8 +229,6 @@ class PaymentViewModel: ObservableObject {
                 appViewModel.selectedTab = .portfolio
             case .portfolio :
                  dismiss = true
-//                appViewModel.selectedTab = .properties
-//                appViewModel.selectedTab = .portfolio
             default:
                 print()
                 
@@ -263,5 +253,34 @@ protocol Payment {
     func configureStripe (payment: PaymentDataClass)
 }
 
+
+enum PaymentMethod {
+    case stripe,wallet,apple,crypto
+    var name: String{
+        switch self {
+        case .stripe:
+            "Stripe"
+        case .wallet:
+            "Wallet"
+        case .apple:
+            "Apple Pay"
+        case .crypto:
+            "Crypto"
+        }
+    }
+    
+    var image: String? {
+        switch self {
+        case .stripe:
+            "stripe_icon"
+        case .wallet:
+            nil
+        case .apple:
+            "apple_pay_icon"
+        case .crypto:
+            "crypto_icon"
+        }
+    }
+}
 
 

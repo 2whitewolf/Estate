@@ -103,7 +103,7 @@ struct InvestView: View {
                             Button{
                                 presentAgree = true
                             } label: {
-                                Text("Invest")
+                                Text("Invest".localized)
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(maxWidth: .infinity)
@@ -173,7 +173,7 @@ extension InvestView{
             }
             .padding(.horizontal)
             
-            Text("Invest")
+            Text("Invest".localized)
                 .foregroundColor(.white)
                 .font(.system(size: 15))
             
@@ -214,7 +214,7 @@ extension InvestView{
                     HStack{
                         Image("graphic_icon")
                         VStack(alignment: .leading){
-                            Text("Annualised return")
+                            Text("Annualised return".localized)
                                 .font(.system(size: 13))
                                 .foregroundColor(.black)
                             Text((property.annualProfit ?? "") + "%")
@@ -226,10 +226,10 @@ extension InvestView{
                     HStack{
                         Image("calendar_withBack")
                         VStack(alignment: .leading){
-                            Text("Investment Periiod")
+                            Text("Investment Period".localized)
                                 .font(.system(size: 13))
                                 .foregroundColor(.black)
-                            Text((property.period ?? "") + " Year")
+                            Text((property.period ?? "") + " " + "Year".localized)
                                 .foregroundColor(.blue)
                                 .font(.system(size: 17).weight(.semibold))
                         }

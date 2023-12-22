@@ -54,7 +54,7 @@ struct CustomTabBar: View {
                             VStack(spacing: 4) {
                                 Image(i.image + (appVM.selectedTab == i ? "On" : ""))
                                     .renderingMode(.template)
-                                Text(i.title)
+                                Text(i.title.localized)
                                     .font(.system(size: 12))
                             }
                             .foregroundColor(appVM.selectedTab == i ? Color.blue : Color.black)

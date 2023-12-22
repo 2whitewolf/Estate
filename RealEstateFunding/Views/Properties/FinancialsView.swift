@@ -14,19 +14,19 @@ struct FinancialsView: View {
     
     var body: some View {
         VStack (alignment: .leading,spacing : 8){
-            Text("Financials")
+            Text("Financials".localized)
                 .font(.system(size: 20).weight(.semibold))
                 .foregroundColor(.black)
-            Picker("What is your favorite color?", selection: $selected) {
-                Text("Acquisition").tag(0)
-                Text("Return on Investment").tag(1)
+            Picker("What", selection: $selected) {
+                Text("Acquisition".localized).tag(0)
+                Text("Return on Investment".localized).tag(1)
             }
             .pickerStyle(.segmented)
             if let property = vm.propertyDetail {
                 if selected == 0 {
-                    FinancialsCellView(title: "Property Price", second: "AED " +  (property.price?.rotate(1) ?? ""))
+                    FinancialsCellView(title: "Property Price".localized, second: "AED " +  (property.price?.rotate(1) ?? ""))
                     HStack{
-                        Text("Transaction Costs")
+                        Text("Transaction Costs".localized)
                             .font(.system(size: 13))
                         Button{
                             withAnimation(.linear) {
@@ -49,11 +49,11 @@ struct FinancialsView: View {
                         }
                         .padding(.leading)
                     }
-                    FinancialsCellView(title: "Investment cost", second: "")
+                    FinancialsCellView(title: "Investment cost".localized, second: "")
                 } else {
                     FinancialsCellView(title: "Annual Gross ROI (at least 10%)", second: "AED 1,595,518")
-                    FinancialsCellView(title: "Outgoings", second: "AED 638,702.20")
-                    FinancialsCellView(title: "Net Income", second: "AED 63,870.22")
+                    FinancialsCellView(title: "Outgoings".localized, second: "AED 638,702.20")
+                    FinancialsCellView(title: "Net Income".localized, second: "AED 63,870.22")
                 }
             }
         }

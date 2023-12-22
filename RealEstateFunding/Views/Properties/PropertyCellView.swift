@@ -24,7 +24,7 @@ struct PropertyCellView: View {
                 Spacer()
                 propertyInfo
                
-                VStack(alignment: .leading){
+                VStack(alignment: .leading, spacing: 16){
                     investmentInfo
                     investmentAnnalize
                 }
@@ -137,8 +137,8 @@ extension PropertyCellView {
     
     private var investmentInfo: some View {
    
-        VStack(alignment: .leading) {
-            Text("\(property.bed ?? 0) Bed in " + (property.location ?? "") )
+        VStack(alignment: .leading, spacing: 16) {
+            Text("\(property.bed ?? 0) " + "Bed in".localized + " " + (property.location ?? "") )
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.black)
                 .font(.system(size: 20).weight(.semibold))
@@ -146,7 +146,8 @@ extension PropertyCellView {
             VStack(spacing: 4) {
                 HStack{
                     Text("AED ")
-                        .font(.system(size: 13).weight(.semibold)) + Text(property.totalPrice?.rotate(2) ?? "")
+                        .font(.system(size: 13).weight(.semibold))
+                    + Text(property.totalPrice?.rotate(2) ?? "")
                         .font(.system(size: 17).weight(.semibold))
                     Spacer()
                     
@@ -176,7 +177,7 @@ extension PropertyCellView {
     
     private var investmentAnnalize: some View {
         HStack{
-            Text("Annual profit ")
+            Text("Annual profit ".localized)
                 .foregroundColor(.gray)
                 .font(.system(size: 13).weight(.medium))
             +
@@ -186,7 +187,7 @@ extension PropertyCellView {
             
             Spacer()
             
-            Text("Handover ")
+            Text("Handover ".localized)
                 .foregroundColor(.gray)
                 .font(.system(size: 13).weight(.medium))
             +

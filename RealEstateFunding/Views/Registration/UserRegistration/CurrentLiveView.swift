@@ -28,20 +28,20 @@ struct CurrentLiveView: View {
             Color.white.ignoresSafeArea()
             VStack{
                 HStack{
-                    Text("[FirstName], where do you currently live?")
+                    Text("[FirstName], where do you currently live?".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 28).weight(.bold))
                     
                     Spacer()
                 }
                 HStack{
-                    Text("Before we begin, we'd like to get to know you better.")
+                    Text("Before we begin, we'd like to get to know you better.".localized)
                     Spacer()
                 }
                 Button {
                     
                 } label: {
-                    Label("Why we ask", systemImage: "info.circle")
+                    Label("Why we ask".localized, systemImage: "info.circle")
                         .foregroundColor(.black)
                         .font(.system(size: 13).weight(.semibold))
                         .frame(maxWidth: .infinity)
@@ -54,12 +54,12 @@ struct CurrentLiveView: View {
                     
                     selectCity
                     
-                    TextField("Enter your address", text: $vm.address)
-                        .textFieldStyle(ImageWithLineStroke(title: "Addres",image: Image("address")))
+                    TextField("Enter your address".localized, text: $vm.address)
+                        .textFieldStyle(ImageWithLineStroke(title: "Addres".localized,image: Image("address")))
                 }
                 .padding(.vertical)
                 
-                Text("If you are an expat living in the UAE, you will be asked to submit a proof of residency (Emirates ID and Passport Visa Page) upon completing your first investment.")
+                Text("If you are an expat living in the UAE, you will be asked to submit a proof of residency (Emirates ID and Passport Visa Page) upon completing your first investment.".localized)
                     .foregroundColor(.gray)
                     .font(.system(size: 13))
                 
@@ -71,7 +71,7 @@ struct CurrentLiveView: View {
                     }
                   
                 } label: {
-                    Text("Next")
+                    Text("Next".localized)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
@@ -131,14 +131,14 @@ struct CurrentLiveView: View {
 extension CurrentLiveView {
     private var selectCountry: some View {
         VStack(alignment: .leading, spacing: 8){
-            Text("Country")
+            Text("Country".localized)
             
             if vm.currentCountryCode.isEmpty {
                 HStack{
                     Image(systemName: "globe")
                         .foregroundColor(.blue)
                     
-                    Text("Select your country")
+                    Text("Select your country".localized)
                         .foregroundColor(.gray)
                     Spacer()
                     Image(systemName: "chevron.down")
@@ -174,14 +174,14 @@ extension CurrentLiveView {
     
     private var selectCity: some View {
         VStack(alignment: .leading, spacing: 8){
-            Text("City")
+            Text("City".localized)
             
             if vm.cityCode.isEmpty {
                 HStack{
                     Image(systemName: "globe")
                         .foregroundColor(.blue)
                     
-                    Text("Select your city")
+                    Text("Select your city".localized)
                         .foregroundColor(.gray)
                     Spacer()
                     Image(systemName: "chevron.down")

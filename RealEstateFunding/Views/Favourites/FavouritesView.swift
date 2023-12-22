@@ -31,7 +31,7 @@ struct FavouritesView: View {
                 }
                  
                 
-                Text("Favourites")
+                Text("Favourites".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 34).weight(.bold))
                     .padding(.leading,22)
@@ -52,7 +52,7 @@ struct FavouritesView: View {
                     VStack{
                         VStack(spacing: 8){
                             Image(systemName: "info.circle")
-                            Text("No properties in favorites")
+                            Text("No properties in favorites".localized)
                                 .font(.system (size: 15))
                                 .padding(.top,8)
                            

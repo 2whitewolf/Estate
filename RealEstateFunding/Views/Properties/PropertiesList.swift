@@ -130,7 +130,7 @@ extension PropertiesList {
     
     private var titleView : some View {
         HStack{
-             Text("Properties")
+            Text("Properties".localized)
                 .font(.system(size: 34).weight(.bold))
                 .foregroundColor(.black)
           Spacer()

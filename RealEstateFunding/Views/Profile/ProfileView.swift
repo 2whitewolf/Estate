@@ -16,7 +16,7 @@ struct ProfileView: View {
             
             VStack{
                 HStack{
-                    Text("My Profile")
+                    Text("My Profile".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 34).weight(.bold))
                     Spacer()
@@ -33,7 +33,7 @@ struct ProfileView: View {
                     Button {
                         appVM.logout()
                     } label: {
-                        Label("Delete Account", systemImage: "trash")
+                        Label("Delete Account".localized, systemImage: "trash")
                             .foregroundColor(.red)
                             .padding(.bottom,20)
                             .padding(.top, 30)
@@ -58,14 +58,14 @@ extension ProfileView {
         VStack{
             if let user = appVM.user {
                 HStack{
-                    Text("Personal Information")
+                    Text("Personal Information".localized)
                         .font(.system(size: 20).weight(.semibold))
                         .foregroundColor(.black)
                     Spacer()
                 }
                 
                 HStack{
-                    Text("Full name")
+                    Text("Full name".localized)
                         .font(.system(size: 15))
                     Spacer()
                     
@@ -77,7 +77,7 @@ extension ProfileView {
                 .padding(.top)
                 
                 HStack{
-                    Text("Email")
+                    Text("Email".localized)
                         .font(.system(size: 15))
                     Spacer()
                     
@@ -91,7 +91,7 @@ extension ProfileView {
                 .padding(.top)
                 
                 HStack{
-                    Text("Phone number")
+                    Text("Phone number".localized)
                         .font(.system(size: 15))
                     Spacer()
                     
@@ -105,11 +105,11 @@ extension ProfileView {
                 .padding(.top)
                 
                 HStack{
-                    Text("Investor Type")
+                    Text("Investor Type".localized)
                         .font(.system(size: 15))
                     Spacer()
                     
-                    Text("Retail")
+                    Text("Retail".localized)
                         .font(.system(size: 16).weight(.semibold))
                     Image(systemName: "info.circle")
                         .foregroundColor(.gray)
@@ -121,7 +121,7 @@ extension ProfileView {
                 Button{
                     appVM.logout()
                 } label: {
-                    Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
+                    Label("Log Out".localized, systemImage: "rectangle.portrait.and.arrow.right")
                         .foregroundColor(.red)
                 }
                 .padding(.top)
@@ -133,7 +133,7 @@ extension ProfileView {
     private var preferencesView: some View {
         VStack{
             HStack{
-                Text("Preferences")
+                Text("Preferences".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.bold))
                 
@@ -141,7 +141,7 @@ extension ProfileView {
             }
             
             VStack(alignment: .leading, spacing: 4){
-                Text("Currency")
+                Text("Currency".localized)
                     
                 HStack{
                     Image("person")
@@ -156,10 +156,10 @@ extension ProfileView {
             }
             .foregroundColor(.black)
             VStack(alignment: .leading, spacing: 4){
-                Text("Language")
+                Text("Language".localized)
                 HStack{
                     Image("person")
-                     Text("English")
+                    Text("English".localized)
                     Spacer()
                     Image(systemName: "chevron.down")
                         .foregroundColor(.gray)
@@ -174,12 +174,12 @@ extension ProfileView {
             
             VStack(alignment: .leading){
                 HStack{
-                    Text("App notifications")
+                    Text("App notifications".localized)
                         .font(.system(size: 16))
                      Spacer()
                      Toggle("", isOn: $notify)
                 }
-                 Text("Receive notifications when  you're paid rent, when new properties are launched, and more.")
+                Text("Receive notifications when  you're paid rent, when new properties are launched, and more.".localized)
             }
             .padding()
             .background(RoundedRectangle(cornerRadius: 20)
@@ -205,7 +205,7 @@ extension ProfileView {
             HStack{
                 Image(systemName: "doc.text")
                     .foregroundColor(.blue)
-                 Text("Submit Feedback")
+                Text("Submit Feedback".localized)
                     .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
@@ -219,7 +219,7 @@ extension ProfileView {
             HStack{
                 Image(systemName: "doc.text")
                     .foregroundColor(.blue)
-                 Text("Terms and Conditions")
+                Text("Terms and Conditions".localized)
                     .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
@@ -233,7 +233,7 @@ extension ProfileView {
             HStack{
                 Image(systemName: "shield")
                     .foregroundColor(.blue)
-                 Text("Privacy and Conditions")
+                Text("Privacy and Conditions".localized)
                     .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")
@@ -246,7 +246,7 @@ extension ProfileView {
             HStack{
                 Image(systemName: "star.fill")
                     .foregroundColor(.blue)
-                 Text("Rate the App")
+                Text("Rate the App".localized)
                     .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "chevron.right")

@@ -29,13 +29,19 @@ struct VerifyMail: View {
                         .frame(width:72)
                         .foregroundColor(.blue)
                     
-                    Text("Your email hasn't been verified yet")
+                    Text("Your email hasn't been verified yet".localized)
                         .font(.system(size: 20).weight(.semibold))
                         .foregroundColor(.black)
                     
-                    Text("We have sent you a link at email@example.com.\nPlease click on the link your inbox to reset your password.")
+                    Text("We have sent you a link at".localized  + " ")
                         .font(.system(size: 12))
-                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray) +
+                    Text(vm.email + " ")
+                        .font(.system(size: 12))
+                        .foregroundColor(.blue)
+                    +
+                    Text("Please click on the link your inbox to reset your password.".localized)
+                        .font(.system(size: 12))
                         .foregroundColor(.gray)
                     
                 }
@@ -50,7 +56,7 @@ struct VerifyMail: View {
                     openInbox.toggle()
                     //   vm.changePassword()
                 } label: {
-                    Text("Open Inbox")
+                    Text("Open Inbox".localized)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -61,8 +67,8 @@ struct VerifyMail: View {
                 .padding(.horizontal)
                 .padding(.bottom,50)
                
-                .confirmationDialog("Open mail app\nWhich app would you like to open?", isPresented: $openInbox, titleVisibility: .visible) {
-                    Button("Mail") {
+                .confirmationDialog("Open mail app\nWhich app would you like to open?".localized, isPresented: $openInbox, titleVisibility: .visible) {
+                    Button("Mail".localized) {
                         vm.currentState.next()
                         if let url = URL(string: "mailto:") {
                             UIApplication.shared.open(url)
@@ -70,7 +76,7 @@ struct VerifyMail: View {
                         
                     }
                     
-                    Button("Gmail") {
+                    Button("Gmail".localized) {
                         vm.currentState.next()
                         if let url = URL(string: "googlegmail:") {
                             UIApplication.shared.open(url)

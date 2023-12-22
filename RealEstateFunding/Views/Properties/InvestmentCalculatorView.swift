@@ -19,14 +19,14 @@ struct InvestmentCalculatorView: View {
     var body: some View {
         VStack(spacing: 16){
             HStack{
-                Text("Investment Calculator")
+                Text("Investment Calculator".localized)
                     .font(.system(size: 20).weight(.semibold))
                     .foregroundColor(.black)
                  Spacer()
                  Image(systemName: "info.circle")
                     .foregroundColor(.gray)
             }
-            Text("Projected Return On Investment in 1 year")
+            Text("Projected Return On Investment in 1 year".localized)
                 .font(.system(size: 15))
                 .foregroundColor(.gray)
               
@@ -44,7 +44,7 @@ struct InvestmentCalculatorView: View {
                
             VStack(spacing: 0) {
                 HStack{
-                    Text("Initial investment")
+                    Text("Initial investment".localized)
                         .foregroundColor(.gray)
                     Spacer()
                     Text("AED " + slider1.rotate(0))
@@ -57,7 +57,7 @@ struct InvestmentCalculatorView: View {
             
             VStack(spacing: 0) {
                 HStack{
-                    Text("Property Value Growth (1 Year)")
+                    Text("Property Value Growth (1 Year)".localized)
                         .foregroundColor(.gray)
                     Spacer()
                     Text(slider2.rotate(0) + "%")

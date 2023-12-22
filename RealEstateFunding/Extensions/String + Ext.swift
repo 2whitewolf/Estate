@@ -21,4 +21,9 @@ extension String {
         return Int(self) ?? 0
     }
     
+    var localized: String {
+        
+        return NSLocalizedString(self, comment: "")
+        
+    }
 }

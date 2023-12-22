@@ -1,0 +1,266 @@
+/* 
+  Localizable.strings
+  RealEstateFunding
+
+  Created by iMacRoman on 22.12.2023.
+  
+*/
+ //OnBoarding
+"Safe & Secure" = "Safe & Secure";
+"Digital Property Investing" = "Digital Property Investing";
+"[AppName] is the first regulated real estate investment platform (REIP) in the Middle East. We are regulated by the Dubai Financial Services Authority (DFSA)" = "[AppName] is the first regulated real estate investment platform (REIP) in the Middle East. We are regulated by the Dubai Financial Services Authority (DFSA)";
+"We handle the entire sales process, screen tenants and manage the property, saving you time and money!" = "We handle the entire sales process, screen tenants and manage the property, saving you time and money!";
+"Continue" = "Continue";
+
+//Login & Registration
+"Property Investment Made Easy" = "Property Investment Made Easy";
+"It's Time You Invest In Real Estate Your Own Way." = "It's Time You Invest In Real Estate Your Own Way.";
+"Sign in" = "Sign in";
+"Create account" = "Create account";
+"By logging in, you have agreed to the" = "By logging in, you have agreed to the";
+"Terms And Conditions" = "Terms And Conditions";
+"and" = "and";
+"Privacy Policy." = "Privacy Policy.";
+"Welcome back!" = "Welcome back!";
+"Login" = "Login";
+"Forget a password" = "Forget a password";
+"Don't have an account?" = "Don't have an account?";
+"Sign up" = "Sign up";
+
+
+"Email" = "Email";
+"Password" = "Password";
+"Sign in with Apple" = "Sign in with Apple";
+"Sign in with Google" = "Sign in with Google";
+"I'm employed" = "I'm employed";
+"I'm self-employed" = "I'm self-employed";
+
+//"""
+//• I have reviewed and understood the key risks and disclosures
+//
+//• I declare that I am acting on my own behalf.
+//
+//• I declare to the best of my belief and knowledge that all information provided to [AppName] is true and complete.
+//
+//• I understand that the statements made in this application will form the basis upon which I will become a client of [AppName] and that any material change may affect this.
+//
+//• I confirm at the time of this registration I'm not a citizen or resident of United States for tax purposes, if I'm, I'll not be investing more than $50,000.
+//
+//• I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].
+//
+//Further, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application.
+//""" = """
+//    • I have reviewed and understood the key risks and disclosures
+//    
+//    • I declare that I am acting on my own behalf.
+//
+//    • I declare to the best of my belief and knowledge that all information provided to [AppName] is true and complete.
+//
+//    • I understand that the statements made in this application will form the basis upon which I will become a client of [AppName] and that any material change may affect this.
+//
+//    • I confirm at the time of this registration I'm not a citizen or resident of United States for tax purposes, if I'm, I'll not be investing more than $50,000.
+//
+//    • I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].
+//
+//    Further, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application.
+//    """;
+//
+"Please review the key risks and disclosures" = "Please review the key risks and disclosures";
+"Agree to declaration and T&Cs" = "Agree to declaration and T&Cs";
+"Accept" = "Accept";
+
+//"""
+//16.1 This Agreement and any non-contractual obligations arising out of or in connection with the Site shall be governed by and interpreted in accordance with the laws of England and Wales.
+//
+//
+//16.2 Any dispute, controversy or claim arising out of or in connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by the ADGM courts and you agree to submit to the exclusive jurisdiction of the ADGM courts.
+//""" = """
+//    16.1 This Agreement and any non-contractual obligations arising out of or in connection with the Site shall be governed by and interpreted in accordance with the laws of England and Wales.
+//   
+//   
+//   16.2 Any dispute, controversy or claim arising out of or in connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by the ADGM courts and you agree to submit to the exclusive jurisdiction of the ADGM courts.
+// """;
+
+"Investor Terms and Conditions" = "Investor Terms and Conditions";
+"Please review the key risks and disclosures" = "Please review the key risks and disclosures";
+"Agree to Investor T&Cs" = "Agree to Investor T&Cs";
+
+"Start Investing Today." = "Start Investing Today.";
+"In Less Than 5 Minutes, You Can Start Growing Your Wealth." = "In Less Than 5 Minutes, You Can Start Growing Your Wealth.";
+"Next" = "Next";
+"Full Name" = "Full Name";
+"Date of Birth" = "Date of Birth";
+"Phone Number" = "Phone Number";
+"Promocode" = "Promocode";
+"Refferal Code" = "Refferal Code";
+"Done" = "Done";
+"In Less Than 5 Minutes, You Can Start Growing Your Wealth." = "In Less Than 5 Minutes, You Can Start Growing Your Wealth.";
+"Passwords must be at least 6 characters and contain at least one letter and one number." = "Passwords must be at least 6 characters and contain at least one letter and one number.";
+"Already have an account?" = "Already have an account?";
+"Sign in" = "Sign in";
+"Sign up with Apple" = "Sign up with Apple";
+"Sign up with Google" = "Sign up with Google";
+"[FirstName], where you from?" = "[FirstName], where you from?";
+"Before we begin, we'd like to get to know you better." = "Before we begin, we'd like to get to know you better.";
+"Why we ask" = "Why we ask";
+"Citizenship" = "Citizenship";
+"Select your country" = "Select your country";
+"Next" = "Next";
+"[FirstName], where do you currently live?" = "[FirstName], where do you currently live?";
+"Before we begin, we'd like to get to know you better." = "Before we begin, we'd like to get to know you better.";
+"Enter your address" = "Enter your address";
+"Addres" = "Addres";
+"If you are an expat living in the UAE, you will be asked to submit a proof of residency (Emirates ID and Passport Visa Page) upon completing your first investment." = "If you are an expat living in the UAE, you will be asked to submit a proof of residency (Emirates ID and Passport Visa Page) upon completing your first investment.";
+"Country" = "Country";
+"City" = "City";
+"Select your city" = "Select your city";
+"[First Name],  what is your employment status?" = "[First Name],  what is your employment status?";
+"You're just 3 steps away from gaining full access to our platform! Before you can join our growing community of [AppName] Investors, we need you to provide a little more information." = "You're just 3 steps away from gaining full access to our platform! Before you can join our growing community of [AppName] Investors, we need you to provide a little more information.";
+"Please select one" = "Please select one";
+"[First Name],  what is your annual income?" = "[First Name],  what is your annual income?";
+"To ensure we provide you with the most suitable investments for you, please select which annual income bracket best represents you currently:" = "To ensure we provide you with the most suitable investments for you, please select which annual income bracket best represents you currently:";
+"[First Name],  what is your net worth?" = "[First Name],  what is your net worth?";
+"To ensure we provide you with the most suitable investments for you, please select the value of your current net worth:" = "To ensure we provide you with the most suitable investments for you, please select the value of your current net worth:";
+"Your email hasn't been verified yet" = "Your email hasn't been verified yet";
+"We have sent you a link at email@example.com.\nPlease click on the link your inbox to reset your password." = "We have sent you a link at email@example.com.\nPlease click on the link your inbox to reset your password.";
+"We have sent you a link at" = "We have sent you a link at";
+"Please click on the link your inbox to reset your password." = "Please click on the link your inbox to reset your password.";
+"Open Inbox" = "Open Inbox";
+"Open mail app\nWhich app would you like to open?" = "Open mail app\nWhich app would you like to open?";
+"Mail" = "Mail";
+"Gmail" = "Gmail";
+
+// Tab Bar
+"Properties" = "Properties";
+"Portfolio" = "Portfolio";
+"Wallet" = "Wallet";
+"My Profile" = "My Profile";
+
+
+//Notifications
+"Notifications" = "Notifications";
+"Link Preview" = "Link Preview";
+
+
+//Profile
+"My Profile" = "My Profile";
+"Delete Account" = "Delete Account";
+"Personal Information" = "Personal Information";
+"Investor Type" = "Investor Type";
+"Retail" = "Retail";
+"Log Out" = "Log Out";
+"Preferences" = "Preferences";
+"Currency" = "Currency";
+"Language" = "Language";
+"English" = "English";
+"App notifications" = "App notifications";
+"Receive notifications when  you're paid rent, when new properties are launched, and more." = "Receive notifications when  you're paid rent, when new properties are launched, and more.";
+"Submit Feedback" = "Submit Feedback";
+"Privacy and Conditions" = "Privacy and Conditions";
+"Rate the App" = "Rate the App";
+
+ //Wallet
+"Available Balance" = "Available Balance";
+"Add Funds" = "Add Funds";
+"Withdraw" = "Withdraw";
+"Transactions" = "Transactions";
+"No transactions yet" = "No transactions yet";
+"Top Up" = "Top Up";
+"Withdraw" = "Withdraw";
+
+
+
+
+ //Portfolio
+"Total invested" = "Total invested";
+"Portfolio Value" = "Portfolio Value";
+"Total Profit to Date" = "Total Profit to Date";
+"Expected Profit after 1 Year" = "Expected Profit after 1 Year";
+"List of Investments" = "List of Investments";
+"No investments yet" = "No investments yet";
+"Transactions" = "Transactions";
+"Annual Investment Limit" = "Annual Investment Limit";
+
+
+
+//Favourites
+"Favourites" = "Favourites";
+"No properties in favorites" = "No properties in favorites";
+
+
+//Payment
+"Minimum amount is 500 AED" = "Minimum amount is 500 AED";
+"Chose Payment Method" = "Chose Payment Method";
+"Investment Amount" = "Investment Amount";
+"Fees" = "Fees";
+"Transaction fee (4%)" = "Transaction fee (4%)";
+"[App Name] fee (2%)" = "[App Name] fee (2%)";
+"Payment Method" = "Payment Method";
+"Total" = "Total";
+"Checkout" = "Checkout";
+"Pay via" = "Pay via";
+"Invest" = "Invest";
+"Annualised return" = "Annualised return";
+"Investment Period" = "Investment Period";
+"Year" = "Year";
+"Payment Methods" = "Payment Methods";
+"Low Balance" = "Low Balance";
+"Cards" = "Cards";
+"Retail investors can only use debit cards for payment" = "Retail investors can only use debit cards for payment";
+"Stripe" = "Stripe";
+"Other methods" = "Other methods";
+"Apple Pay" = "Apple Pay";
+"Crypto" = "Crypto";
+"Agreement" = "Agreement";
+"By confirming your investment you agree with our " = "By confirming your investment you agree with our ";
+"Key Risks" = "Key Risks";
+"I Agree" = "I Agree";
+"Receipt" = "Receipt";
+"Investment\nConfirmed!" = "Investment\nConfirmed!";
+"An email confirmation including information about your investment and the property will be sent to you shortly." = "An email confirmation including information about your investment and the property will be sent to you shortly.";
+"Total Investment amount" = "Total Investment amount";
+"View Portfolio" = "View Portfolio";
+"Wallet Deposit" = "Wallet Deposit";
+"Balance Top Up Amount" = "Balance Top Up Amount";
+"Retail investors can only use debit cards for payment" = "Retail investors can only use debit cards for payment";
+"Transaction ID" = "Transaction ID";
+"New Cash Balance" = "New Cash Balance";
+"Status" = "Status";
+"Completed" = "Completed";
+
+
+//Properties
+
+"Similar properties" = "Similar properties";
+"funded" = "funded";
+"needed" = "needed";
+"investors" = "investors";
+"Property Price" = "Property Price";
+"Bed in" = "Bed in";
+"Big Profits" =  "Big Profits";
+"Off-Plan investing is the best way to make big profits" = "Off-Plan investing is the best way to make big profits";
+"Safe Investing" = "Safe Investing";
+"Safe investing regulated by the DFSA" = "Safe investing regulated by the DFSA";
+"At least 10% growth" = "At least 10% growth";
+"10% Growth" = "10% Growth";
+"About the property" = "About the property";
+"This apartment is offered at a price of AED" = "This apartment is offered at a price of AED";
+"show more" = "show more";
+"Seller" = "Seller";
+"Developer" = "Developer";
+"Location" = "Location";
+"View on the Map" = "View on the Map";
+"Investment Calculator" = "Investment Calculator";
+"Projected Return On Investment in 1 year" = "Projected Return On Investment in 1 year";
+"Initial investment" = "Initial investment";
+"Property Value Growth (1 Year)" = "Property Value Growth (1 Year)";
+"Financials" = "Financials";
+"Acquisition" = "Acquisition";
+"Return on Investment" = "Return on Investment";
+"Transaction Costs" = "Transaction Costs";
+"Net Income" = "Net Income";
+"Outgoings" = "Outgoings";
+"Handover " = "Handover ";
+"Annual profit " = "Annual profit ";
+
+

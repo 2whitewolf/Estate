@@ -20,11 +20,10 @@ struct RegistrationStartView: View {
                 .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
             
             VStack(alignment: .leading){
-                Text("Property Investment Made Easy")
-//                    .multilineTextAlignment(.leading)
+                Text("Property Investment Made Easy".localized)
                     .font(.system(size: 34).weight(.bold))
                    
-                 Text("It's Time You Invest In Real Estate Your Own Way.")
+                Text("It's Time You Invest In Real Estate Your Own Way.".localized)
                     .multilineTextAlignment(.leading)
                 
                 
@@ -35,7 +34,7 @@ struct RegistrationStartView: View {
                     }
 
                 } label: {
-                    Text("Sign in")
+                    Text("Sign in".localized)
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                         .frame(height:60)
@@ -46,7 +45,7 @@ struct RegistrationStartView: View {
                         appVM.currentState = .registration
                     }
                 }label: {
-                    Text("Create account")
+                    Text("Create account".localized)
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity)
@@ -55,7 +54,7 @@ struct RegistrationStartView: View {
                         .cornerRadius(12)
                 }
                 
-                Text("By logging in, you have agreed to the") + Text(" Terms And Conditions")   .foregroundColor(.blue) + Text(" and ") + Text("Privacy Policy.")
+                Text("By logging in, you have agreed to the".localized)  + Text(" " + "Terms And Conditions".localized)   .foregroundColor(.blue) + Text(" " + "and".localized + " ") + Text("Privacy Policy.".localized)
                     .foregroundColor(.blue)
                    
             }

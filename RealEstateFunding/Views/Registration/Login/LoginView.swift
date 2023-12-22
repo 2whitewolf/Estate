@@ -15,7 +15,7 @@ struct LoginView: View {
                 Color.white.ignoresSafeArea()
                 VStack{
                     HStack{
-                        Text("Welcome back!")
+                        Text("Welcome back!".localized)
                             .font(.system(size: 28).weight(.bold))
                             .foregroundColor(.black)
                         
@@ -28,7 +28,7 @@ struct LoginView: View {
                     Button{
                         vm.login()
                     } label: {
-                        Text("Login")
+                        Text("Login".localized)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -38,7 +38,7 @@ struct LoginView: View {
                     }
                     .padding(.top,40)
                     
-                    Text("Forget a password")
+                    Text("Forget a password".localized)
                         .foregroundColor(.blue)
                         .font(.system(size: 12))
                         .onTapGesture {
@@ -50,8 +50,9 @@ struct LoginView: View {
                     
                     HStack{
                         Spacer()
-                        Text("Don't have an account?")
-                            .foregroundColor(.customGray) + Text(" Sign up")
+                        Text("Don't have an account?".localized)
+                            .foregroundColor(.customGray) +
+                        Text(" " + "Sign up".localized)
                             .foregroundColor(.blue)
                         Spacer()
                     }
@@ -62,7 +63,7 @@ struct LoginView: View {
                     
                     buttonsView
                     VStack{
-                        Text("By logging in, you have agreed to the") + Text(" Terms And Conditions")   .foregroundColor(.blue) + Text(" and ") + Text("Privacy Policy.")
+                        Text("By logging in, you have agreed to the".localized) + Text(" " + "Terms And Conditions".localized)   .foregroundColor(.blue) + Text(" " + "and".localized + " ") + Text("Privacy Policy.".localized)
                             .foregroundColor(.blue)
                     }
                     .multilineTextAlignment(.center)
@@ -93,10 +94,10 @@ extension LoginView {
     private var textFields: some View {
         VStack{
             TextField("email@example", text: $vm.email)
-                .textFieldStyle(ImageWithLineStroke(title: "Email", image: Image("email")))
+                .textFieldStyle(ImageWithLineStroke(title: "Email".localized, image: Image("email")))
             
-            SecureField("Password", text: $vm.password)
-                .textFieldStyle(ImageWithLineStroke(title: "Password", image: Image("password")))
+            SecureField("Password".localized, text: $vm.password)
+                .textFieldStyle(ImageWithLineStroke(title: "Password".localized, image: Image("password")))
             
             
         }
@@ -112,7 +113,7 @@ extension LoginView {
                     Image(systemName: "apple.logo")
                         .foregroundColor(.black)
                     
-                    Text("Sign in with Apple")
+                    Text("Sign in with Apple".localized)
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.black)
@@ -129,7 +130,7 @@ extension LoginView {
                 HStack{
                     Image("googleLogo")
                     
-                    Text("Sign in with Google")
+                    Text("Sign in with Google".localized)
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.black)

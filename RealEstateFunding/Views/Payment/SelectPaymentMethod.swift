@@ -16,7 +16,7 @@ struct SelectPaymentMethod: View {
                 Image(systemName: "xmark.circle.fill")
                     .opacity(0)
                 Spacer()
-                Text("Payment Methods")
+                Text("Payment Methods".localized)
                     .fontWeight(.bold)
                 Spacer()
                 Button{
@@ -33,7 +33,7 @@ struct SelectPaymentMethod: View {
             
             
             VStack(alignment: .leading, spacing: 16){
-                Text("Wallet")
+                Text("Wallet".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
                 if let walletBalance = vm.walletBalance {
@@ -49,7 +49,7 @@ struct SelectPaymentMethod: View {
                                     .fill(Color.red)
                                     .frame(width:8)
                                 
-                                Text("Low Balance")
+                                Text("Low Balance".localized)
                                     .font(.system(size: 11).weight(.semibold))
                                     .kerning(0.06)
                                     .foregroundColor(.black)
@@ -86,16 +86,16 @@ struct SelectPaymentMethod: View {
             
             
             VStack(alignment: .leading, spacing: 4){
-                Text("Cards")
+                Text("Cards".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
-                Text("Retail investors can only use debit cards for payment")
+                Text("Retail investors can only use debit cards for payment".localized)
                     .font(Font.custom("SF Pro Text", size: 13))
                     .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
                 HStack{
                     Image(systemName: vm.paymentMethod == .stripe ? "checkmark.circle.fill" : "circle" )
                         .foregroundColor(.blue)
-                    Text("Stripe")
+                    Text("Stripe".localized)
                         .font(.system(size: 15).weight(.semibold))
                     Spacer()
                     Image("stripe_icon")
@@ -115,13 +115,13 @@ struct SelectPaymentMethod: View {
             }
             
             VStack(alignment: .leading, spacing: 17){
-                Text("Other methods")
+                Text("Other methods".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 20).weight(.semibold))
                 HStack{
                     Image(systemName: vm.paymentMethod == .apple ? "checkmark.circle.fill" : "circle" )
                         .foregroundColor(.blue)
-                    Text("Apple Pay")
+                    Text("Apple Pay".localized)
                         .font(.system(size: 15).weight(.semibold))
                     Spacer()
                     Image("apple_pay_icon")
@@ -136,7 +136,7 @@ struct SelectPaymentMethod: View {
                 HStack{
                     Image(systemName: vm.paymentMethod == .crypto ? "checkmark.circle.fill" : "circle" )
                         .foregroundColor(.blue)
-                    Text("Crypto")
+                    Text("Crypto".localized)
                         .font(.system(size: 15).weight(.semibold))
                     Spacer()
                     Image("crypto_icon")
@@ -157,7 +157,7 @@ struct SelectPaymentMethod: View {
             Button{
                 onClose()
             } label: {
-                Text("Continue")
+                Text("Continue".localized)
                     .foregroundColor(.white)
                     .font(.system(size: 17).weight(.semibold))
                     .frame(maxWidth: .infinity)

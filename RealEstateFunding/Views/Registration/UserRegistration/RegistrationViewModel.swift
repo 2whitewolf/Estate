@@ -183,9 +183,9 @@ enum EmployedStatus:String,CaseIterable{
     var text: String{
         switch self {
         case .employed:
-            "I'm employed"
+            "I'm employed".localized
         case .selfEmployed:
-            "I'm self-employed"
+            "I'm self-employed".localized
         }
     }
 }

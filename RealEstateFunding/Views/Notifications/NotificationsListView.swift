@@ -27,7 +27,7 @@ struct NotificationsListView: View {
                     }
                  
                 HStack{
-                    Text("Notifications")
+                    Text("Notifications".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 34).weight(.bold))
                      Spacer()
@@ -82,7 +82,7 @@ private struct NotificationCell: View {
             
             if let url = URL(string: link ?? "") {
 //                Link(destination: url, : Text("Link Preview"))
-                 Link("Link Preview", destination: url)
+                Link("Link Preview".localized, destination: url)
             }
             }
            

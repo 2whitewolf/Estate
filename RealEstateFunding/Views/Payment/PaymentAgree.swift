@@ -25,17 +25,17 @@ struct PaymentAgree: View {
             }
             .padding(.horizontal,20)
             VStack(spacing:24){
-                Text("Agreement")
+                Text("Agreement".localized)
                     .foregroundColor(.black)
                     .font(.system(size: 28).weight(.bold))
                 Group {
-                    Text("By confirming your investment you agree with our ")
+                    Text("By confirming your investment you agree with our ".localized)
                     
-                    + Text("Terms & Conditions")
+                    + Text("Terms & Conditions".localized)
                         .foregroundColor(.blue)
                         .font(.system(size: 15).weight(.bold))
-                    + Text(" and ")
-                    + Text("Key Risks")
+                    + Text(" " + "and".localized + " ")
+                    + Text("Key Risks".localized)
                         .font(.system(size: 15).weight(.bold))
                         .foregroundColor(.blue)
                 }
@@ -45,7 +45,7 @@ struct PaymentAgree: View {
                 Button{
                     confirmation()
                 } label: {
-                    Text("I Agree")
+                    Text("I Agree".localized)
                         .foregroundColor(.white)
                 }
                 .frame(maxWidth: .infinity)

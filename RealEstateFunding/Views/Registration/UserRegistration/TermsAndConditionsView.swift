@@ -24,33 +24,13 @@ struct TermsAndConditionsView: View {
     • I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].
 
     Further, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application.
-    """
+    """.localized
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
             VStack{
-//                HStack{
-//                    Button{
-//                        
-//                    } label: {
-//                        Image(systemName: "arrow.left")
-//                            .foregroundColor(.black)
-////                            .padding()
-//                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
-//                            .frame(width:44, height:44)
-//                    }
-//                     Spacer()
-//                    Button{
-//                        
-//                    } label: {
-//                        Image(systemName: "rectangle.portrait.and.arrow.right")
-//                            .foregroundColor(.red)
-//                            .background(Circle().stroke(Color.gray, lineWidth: 0.5).frame(width:44, height:44))
-//                            .frame(width:44, height:44)
-//                    }
-//                }
                 HStack{
-                    Text("Terms and Conditions")
+                    Text("Terms and Conditions".localized)
                         .font(.system(size: 28).weight(.bold))
                         .foregroundColor(.black)
                     Spacer()
@@ -59,7 +39,7 @@ struct TermsAndConditionsView: View {
                     Text(text)
                         .foregroundColor(.black)
                 }
-                 Text("Please review the key risks and disclosures")
+                Text("Please review the key risks and disclosures".localized)
                     .foregroundColor(.black)
                
                 
@@ -80,7 +60,7 @@ struct TermsAndConditionsView: View {
                             agree.toggle()
                         }
                     }
-                    Text("Agree to declaration and T&Cs")
+                    Text("Agree to declaration and T&Cs".localized)
                         .font(.system(size: 15))
                      Spacer()
                 }
@@ -89,7 +69,7 @@ struct TermsAndConditionsView: View {
                         vm.currentState =  vm.currentState.next()
                     }
                 } label: {
-                    Text("Accept")
+                    Text("Accept".localized)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

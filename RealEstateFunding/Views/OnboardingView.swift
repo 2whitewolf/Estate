@@ -23,12 +23,12 @@ struct OnboardingView: View {
                     .padding(.top)
 
                 VStack{
-                    Text( onboardings[index].title)
+                    Text( onboardings[index].title.localized)
                         .multilineTextAlignment(.center)
                         .font(.system(size: 34).weight(.bold))
                         .frame(height: 82)
 
-                    Text( onboardings[index].message)
+                    Text( onboardings[index].message.localized)
                         .multilineTextAlignment(.center)
                         .font(.system(size: 16))
                         .frame(height: 84)
@@ -42,7 +42,7 @@ struct OnboardingView: View {
                             }
                         }
                     } label: {
-                        Text("Continue")
+                        Text("Continue".localized)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)

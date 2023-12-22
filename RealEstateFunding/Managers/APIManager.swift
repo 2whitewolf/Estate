@@ -123,7 +123,6 @@ class APIManager: APIProtocol{
             "user_id": "\(userId)",
             "property_id" : "\(propertyId)"
         ]
-         print(url)
         AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .response{ data in

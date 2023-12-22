@@ -24,10 +24,10 @@ struct FillUserDataView: View {
             Color.white.ignoresSafeArea()
             VStack(alignment: .leading){
                 
-                Text("Start Investing Today.")
+                Text("Start Investing Today.".localized)
                     .font(.system(size: 28).weight(.bold))
                     .foregroundColor(.black)
-                Text("In Less Than 5 Minutes, You Can Start Growing Your Wealth.")
+                Text("In Less Than 5 Minutes, You Can Start Growing Your Wealth.".localized)
                     .foregroundColor(.customGray)
             
                 
@@ -38,7 +38,7 @@ struct FillUserDataView: View {
                 Button {
                     vm.currentState =  vm.currentState.next()
                 } label: {
-                    Text("Next")
+                    Text("Next".localized)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
@@ -75,12 +75,12 @@ extension FillUserDataView {
     
     private var nameView : some View {
         TextField("John Smith", text: $vm.name)
-            .textFieldStyle(ImageWithLineStroke(title: "Full Name", image: Image("person")))
+            .textFieldStyle(ImageWithLineStroke(title: "Full Name".localized, image: Image("person")))
     }
     
     private var dateView: some View {
         VStack(alignment: .leading,spacing:4){
-            Text("Date of Birth")
+            Text("Date of Birth".localized)
                 .font(.system(size: 13))
             HStack{
                 Image("calendar")
@@ -107,7 +107,7 @@ extension FillUserDataView {
     
     private var phoneView: some View {
         VStack(alignment: .leading,spacing:4){
-            Text("Phone Number")
+            Text("Phone Number".localized)
                 .font(.system(size: 13))
             HStack{
                 Image("phone")
@@ -128,8 +128,8 @@ extension FillUserDataView {
     }
     
     private var referalView: some View {
-        TextField("Promocode", text: $vm.promocode)
-            .textFieldStyle(ImageWithLineStroke(title: "Refferal Code",image: Image("discount")))
+        TextField("Promocode".localized, text: $vm.promocode)
+            .textFieldStyle(ImageWithLineStroke(title: "Refferal Code".localized ,image: Image("discount")))
     }
     
     private var inputsView: some View {
@@ -154,7 +154,7 @@ extension FillUserDataView {
                         datePickerShow.toggle()
                     }
                 } label: {
-                    Text("Done")
+                    Text("Done".localized)
                         .foregroundColor(.blue)
                 }
                 .padding()

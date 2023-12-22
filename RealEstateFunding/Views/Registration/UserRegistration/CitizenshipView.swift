@@ -19,20 +19,20 @@ struct CitizenshipView: View {
             Color.white.ignoresSafeArea()
             VStack{
                 HStack{
-                    Text("[FirstName], where you from?")
+                    Text("[FirstName], where you from?".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 28).weight(.bold))
                     
                     Spacer()
                 }
                 HStack{
-                    Text("Before we begin, we'd like to get to know you better.")
+                    Text("Before we begin, we'd like to get to know you better.".localized)
                     Spacer()
                 }
                 Button {
                     
                 } label: {
-                    Label("Why we ask", systemImage: "info.circle")
+                    Label("Why we ask".localized, systemImage: "info.circle")
                         .foregroundColor(.black)
                         .font(.system(size: 13).weight(.semibold))
                         .frame(maxWidth: .infinity)
@@ -42,14 +42,14 @@ struct CitizenshipView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8){
-                    Text("Citizenship")
+                    Text("Citizenship".localized)
                     
                     if vm.countryCode.isEmpty {
                         HStack{
                             Image(systemName: "globe")
                                 .foregroundColor(.blue)
                             
-                            Text("Select your country")
+                            Text("Select your country".localized)
                                 .foregroundColor(.gray)
                             Spacer()
                             Image(systemName: "chevron.down")
@@ -88,7 +88,7 @@ struct CitizenshipView: View {
                     }
                   
                 } label: {
-                    Text("Next")
+                    Text("Next".localized)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)

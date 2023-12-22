@@ -214,31 +214,4 @@ class PropertiesViewModel: ObservableObject {
     }
     
 }
-enum PaymentMethod {
-    case stripe,wallet,apple,crypto
-    var name: String{
-        switch self {
-        case .stripe:
-            "Stripe"
-        case .wallet:
-            "Wallet"
-        case .apple:
-            "Apple pay"
-        case .crypto:
-            "Crypto"
-        }
-    }
-    
-    var image: String? {
-        switch self {
-        case .stripe:
-            "stripe_icon"
-        case .wallet:
-            nil
-        case .apple:
-            "apple_pay_icon"
-        case .crypto:
-            "crypto_icon"
-        }
-    }
-}
+

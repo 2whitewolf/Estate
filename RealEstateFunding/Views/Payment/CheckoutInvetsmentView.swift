@@ -30,7 +30,7 @@ struct CheckoutInvetsmentView: View {
                                 .foregroundColor(.black)
                                 .fontWeight(.bold)
                             HStack{
-                                Text("Investment Amount")
+                                Text("Investment Amount".localized)
                                 Spacer()
                                 Text("AED " + "\(vm.invest)")
                                     .foregroundColor(.black)
@@ -43,11 +43,11 @@ struct CheckoutInvetsmentView: View {
                     
                     VStack(alignment: .leading, spacing: 8){
                         if let cost = vm.invetsmentsCost {
-                            Text("Fees")
+                            Text("Fees".localized)
                                 .foregroundColor(.black)
                                 .fontWeight(.bold)
                             HStack{
-                                Text("Transaction fee (4%)")
+                                Text("Transaction fee (4%)".localized)
                                 Spacer()
                                 Text("AED " + (cost.dldFee?.rotate(0) ?? ""))
                                     .foregroundColor(.black)
@@ -55,7 +55,7 @@ struct CheckoutInvetsmentView: View {
                             }
                             .font(.system(size: 13))
                             HStack{
-                                Text("[App Name] fee (2%)")
+                                Text("[App Name] fee (2%)".localized)
                                 Spacer()
                                 Text("AED " + (cost.dubxFee?.rotate(0) ?? ""))
                                     .foregroundColor(.black)
@@ -79,7 +79,7 @@ struct CheckoutInvetsmentView: View {
                     .overlay(
                         VStack(spacing:24){
                             HStack{
-                                Text("Payment Method")
+                                Text("Payment Method".localized)
                                     .foregroundColor(.black)
                                     .font(.system(size: 16,weight: .semibold))
                                 Spacer()
@@ -97,10 +97,9 @@ struct CheckoutInvetsmentView: View {
                             .padding(12)
                             .background(RoundedRectangle(cornerRadius: 14)
                                 .stroke(Color.gray, lineWidth: 0.5))
-                            //                            .modifier(CornerBackground())
                             
                             HStack{
-                                Text("Total")
+                                Text("Total".localized)
                                     .foregroundColor(.black)
                                     .fontWeight(.semibold)
                                 
@@ -114,7 +113,7 @@ struct CheckoutInvetsmentView: View {
                             Button{
                                 vm.createInvoice()
                             } label: {
-                                Text("Pay via Stripe Checkout")
+                                Text("Pay via".localized +   vm.paymentMethod.name + " " + "Checkout".localized)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                     .padding(.vertical,14)
@@ -200,7 +199,7 @@ extension CheckoutInvetsmentView {
             }
             Spacer()
             
-            Text("Checkout")
+            Text("Checkout".localized)
                 .fontWeight(.bold)
             Spacer()
             Circle()

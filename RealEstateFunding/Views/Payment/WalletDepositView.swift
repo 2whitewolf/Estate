@@ -21,7 +21,7 @@ struct WalletDepositView: View {
                     
                     
                     Text(Date().dateWithTime)
-                        .font(Font.custom("SF Pro Text", size: 12))
+                        .font(.system(size: 12))
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.6))
                 }
@@ -43,7 +43,7 @@ struct WalletDepositView: View {
             VStack(spacing:24){
                 
                 HStack{
-                    Text("Transaction ID")
+                    Text("Transaction ID".localized)
                         .font(.system(size: 16))
                     .foregroundColor(.black)
                     
@@ -58,7 +58,7 @@ struct WalletDepositView: View {
                 }
                 
                 HStack{
-                    Text("New Cash Balance")
+                    Text("New Cash Balance".localized)
                         .font(.system(size: 16))
                     .foregroundColor(.black)
                     
@@ -70,7 +70,7 @@ struct WalletDepositView: View {
                 }
                 
                 HStack{
-                    Text("Status")
+                    Text("Status".localized)
                         .font(.system(size: 16))
                     .foregroundColor(.black)
                     
@@ -80,7 +80,7 @@ struct WalletDepositView: View {
                         Circle()
                             .fill(Color(red: 0.2, green: 0.78, blue: 0.35))
                             .frame(width:8)
-                        Text("Completed")
+                        Text("Completed".localized)
                         .font(.system(size: 11).weight(.semibold))
                         .foregroundColor(.black)
                     }

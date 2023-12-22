@@ -16,21 +16,21 @@ struct NetWorthView: View {
             Color.white.ignoresSafeArea()
             VStack{
                 HStack{
-                    Text("[First Name],  what is your employment status?")
+                    Text("[First Name],  what is your net worth?".localized)
                         .foregroundColor(.black)
                         .font(.system(size: 28).weight(.bold))
                     
                     Spacer()
                 }
                 HStack{
-                    Text("You're just 3 steps away from gaining full access to our platform! Before you can join our growing community of [AppName] Investors, we need you to provide a little more information.")
+                    Text("To ensure we provide you with the most suitable investments for you, please select the value of your current net worth:".localized)
                         .foregroundColor(.gray)
                     Spacer()
                 }
                 Button {
                     
                 } label: {
-                    Label("Why we ask", systemImage: "info.circle")
+                    Label("Why we ask".localized, systemImage: "info.circle")
                         .foregroundColor(.black)
                         .font(.system(size: 13).weight(.semibold))
                         .frame(maxWidth: .infinity)
@@ -40,7 +40,7 @@ struct NetWorthView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8){
-                    Text("Please select one")
+                    Text("Please select one".localized)
                         .font(.system(size: 13))
                     ScrollView(showsIndicators: false) {
                         ForEach(NetWorth.allCases, id: \.rawValue) { status in
@@ -71,7 +71,7 @@ struct NetWorthView: View {
                     }
                     
                 } label: {
-                    Text("Next")
+                    Text("Next".localized)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 60)
