@@ -13,9 +13,16 @@
 "Continue" = "Continue";
 
 //Login & Registration
+
+"• I have reviewed and understood the key risks and disclosures\n\n• I declare that I am acting on my own behalf.\n\n• I declare to the best of my belief and knowledge that all information provided to [AppName] is true and complete.\n\n• I understand that the statements made in this application will form the basis upon which I will become a client of [AppName] and that any material change may affect this.\n\n• I confirm at the time of this registration I'm not a citizen or resident of United States for tax purposes, if I'm, I'll not be investing more than $50,000.\n\n• I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].\n\nFurther, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application." =
+"• I have reviewed and understood the key risks and disclosures\n\n• I declare that I am acting on my own behalf.\n\n• I declare to the best of my belief and knowledge that all information provided to [AppName] is true and complete.\n\n• I understand that the statements made in this application will form the basis upon which I will become a client of [AppName] and that any material change may affect this.\n\n• I confirm at the time of this registration I'm not a citizen or resident of United States for tax purposes, if I'm, I'll not be investing more than $50,000.\n\n• I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].\n\nFurther, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application.";
+"16.1 This Agreement and any non-contractual obligations arising out of or in connection with the Site shall be governed by and interpreted in accordance with the laws of England and Wales.\n\n16.2 Any dispute, controversy or claim arising out of or in connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by the ADGM courts and you agree to submit to the exclusive jurisdiction of the ADGM courts." =
+"16.1 This Agreement and any non-contractual obligations arising out of or in connection with the Site shall be governed by and interpreted in accordance with the laws of England and Wales.\n\n16.2 Any dispute, controversy or claim arising out of or in connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by the ADGM courts and you agree to submit to the exclusive jurisdiction of the ADGM courts.\n";
+"Agree to declaration and T&Cs" = "Agree to declaration and T&Cs";
+"Accept" = "Accept";
+
 "Property Investment Made Easy" = "Property Investment Made Easy";
 "It's Time You Invest In Real Estate Your Own Way." = "It's Time You Invest In Real Estate Your Own Way.";
-"Sign in" = "Sign in";
 "Create account" = "Create account";
 "By logging in, you have agreed to the" = "By logging in, you have agreed to the";
 "Terms And Conditions" = "Terms And Conditions";
@@ -34,59 +41,14 @@
 "Sign in with Google" = "Sign in with Google";
 "I'm employed" = "I'm employed";
 "I'm self-employed" = "I'm self-employed";
+"[First Name], tell us more about the organization" = "[First Name], tell us more about the organization";
 
-//"""
-//• I have reviewed and understood the key risks and disclosures
-//
-//• I declare that I am acting on my own behalf.
-//
-//• I declare to the best of my belief and knowledge that all information provided to [AppName] is true and complete.
-//
-//• I understand that the statements made in this application will form the basis upon which I will become a client of [AppName] and that any material change may affect this.
-//
-//• I confirm at the time of this registration I'm not a citizen or resident of United States for tax purposes, if I'm, I'll not be investing more than $50,000.
-//
-//• I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].
-//
-//Further, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application.
-//""" = """
-//    • I have reviewed and understood the key risks and disclosures
-//    
-//    • I declare that I am acting on my own behalf.
-//
-//    • I declare to the best of my belief and knowledge that all information provided to [AppName] is true and complete.
-//
-//    • I understand that the statements made in this application will form the basis upon which I will become a client of [AppName] and that any material change may affect this.
-//
-//    • I confirm at the time of this registration I'm not a citizen or resident of United States for tax purposes, if I'm, I'll not be investing more than $50,000.
-//
-//    • I undertake to advise [AppName] in writing in the event of any material change to my circumstances from the date of this application until I cease to be client of [AppName].
-//
-//    Further, I consent to [AppName] using all the information provided during this registration process for internal and external verification of my application.
-//    """;
-//
-"Please review the key risks and disclosures" = "Please review the key risks and disclosures";
-"Agree to declaration and T&Cs" = "Agree to declaration and T&Cs";
-"Accept" = "Accept";
-
-//"""
-//16.1 This Agreement and any non-contractual obligations arising out of or in connection with the Site shall be governed by and interpreted in accordance with the laws of England and Wales.
-//
-//
-//16.2 Any dispute, controversy or claim arising out of or in connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by the ADGM courts and you agree to submit to the exclusive jurisdiction of the ADGM courts.
-//""" = """
-//    16.1 This Agreement and any non-contractual obligations arising out of or in connection with the Site shall be governed by and interpreted in accordance with the laws of England and Wales.
-//   
-//   
-//   16.2 Any dispute, controversy or claim arising out of or in connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by the ADGM courts and you agree to submit to the exclusive jurisdiction of the ADGM courts.
-// """;
 
 "Investor Terms and Conditions" = "Investor Terms and Conditions";
 "Please review the key risks and disclosures" = "Please review the key risks and disclosures";
 "Agree to Investor T&Cs" = "Agree to Investor T&Cs";
 
 "Start Investing Today." = "Start Investing Today.";
-"In Less Than 5 Minutes, You Can Start Growing Your Wealth." = "In Less Than 5 Minutes, You Can Start Growing Your Wealth.";
 "Next" = "Next";
 "Full Name" = "Full Name";
 "Date of Birth" = "Date of Birth";
@@ -105,9 +67,7 @@
 "Why we ask" = "Why we ask";
 "Citizenship" = "Citizenship";
 "Select your country" = "Select your country";
-"Next" = "Next";
 "[FirstName], where do you currently live?" = "[FirstName], where do you currently live?";
-"Before we begin, we'd like to get to know you better." = "Before we begin, we'd like to get to know you better.";
 "Enter your address" = "Enter your address";
 "Addres" = "Addres";
 "If you are an expat living in the UAE, you will be asked to submit a proof of residency (Emirates ID and Passport Visa Page) upon completing your first investment." = "If you are an expat living in the UAE, you will be asked to submit a proof of residency (Emirates ID and Passport Visa Page) upon completing your first investment.";
@@ -121,6 +81,8 @@
 "To ensure we provide you with the most suitable investments for you, please select which annual income bracket best represents you currently:" = "To ensure we provide you with the most suitable investments for you, please select which annual income bracket best represents you currently:";
 "[First Name],  what is your net worth?" = "[First Name],  what is your net worth?";
 "To ensure we provide you with the most suitable investments for you, please select the value of your current net worth:" = "To ensure we provide you with the most suitable investments for you, please select the value of your current net worth:";
+"You're just 3 steps away from gaining full access to our platform! Before you can join our growing community of [AppName] Investors, we need you to provide a little more information.";
+"Name of your organization" = "Name of your organization";
 "Your email hasn't been verified yet" = "Your email hasn't been verified yet";
 "We have sent you a link at email@example.com.\nPlease click on the link your inbox to reset your password." = "We have sent you a link at email@example.com.\nPlease click on the link your inbox to reset your password.";
 "We have sent you a link at" = "We have sent you a link at";
@@ -143,7 +105,6 @@
 
 
 //Profile
-"My Profile" = "My Profile";
 "Delete Account" = "Delete Account";
 "Personal Information" = "Personal Information";
 "Investor Type" = "Investor Type";
@@ -166,7 +127,6 @@
 "Transactions" = "Transactions";
 "No transactions yet" = "No transactions yet";
 "Top Up" = "Top Up";
-"Withdraw" = "Withdraw";
 
 
 
@@ -178,7 +138,6 @@
 "Expected Profit after 1 Year" = "Expected Profit after 1 Year";
 "List of Investments" = "List of Investments";
 "No investments yet" = "No investments yet";
-"Transactions" = "Transactions";
 "Annual Investment Limit" = "Annual Investment Limit";
 
 
@@ -206,7 +165,6 @@
 "Payment Methods" = "Payment Methods";
 "Low Balance" = "Low Balance";
 "Cards" = "Cards";
-"Retail investors can only use debit cards for payment" = "Retail investors can only use debit cards for payment";
 "Stripe" = "Stripe";
 "Other methods" = "Other methods";
 "Apple Pay" = "Apple Pay";
@@ -262,5 +220,3 @@
 "Outgoings" = "Outgoings";
 "Handover " = "Handover ";
 "Annual profit " = "Annual profit ";
-
-

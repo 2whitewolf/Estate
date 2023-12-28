@@ -31,21 +31,21 @@ class LoginViewModel: ObservableObject {
    
     func login() {
         networking.login(email: email, password: password)
-            .sink {[weak self] completion in
-                            guard let self = self else { return }
-                            switch completion {
-                            case .failure(let error):
-                                print(error)
-                            case .finished:
-                                break
-                            }
-                        } receiveValue: {[weak self] value in
-                            guard let self = self else { return }
-                            self.user = value.user
-                            keychain.set(value.token, forKey: "userToken")
-                            
-                        }
-            .store(in: &subscriptions)
+//            .sink {[weak self] completion in
+//                            guard let self = self else { return }
+//                            switch completion {
+//                            case .failure(let error):
+//                                print(error)
+//                            case .finished:
+//                                break
+//                            }
+//                        } receiveValue: {[weak self] value in
+//                            guard let self = self else { return }
+//                            self.user = value.user
+//                            keychain.set(value.token, forKey: "userToken")
+//                            
+//                        }
+//            .store(in: &subscriptions)
 
     }
 

@@ -35,7 +35,7 @@ class RegistrationViewModel: ObservableObject {
     @Published var verifyEmail: Bool = false {
         didSet{
             if !verifyEmail {
-                currentState = currentState.next()
+                currentState = .inputData
             }
         }
     }
@@ -93,7 +93,6 @@ class RegistrationViewModel: ObservableObject {
     
     func register(){
         networking.register(email: email, password: password)
-            
             .sink {[weak self] completion in
                             guard let self = self else { return }
                             switch completion {
@@ -104,8 +103,10 @@ class RegistrationViewModel: ObservableObject {
                             }
                         } receiveValue: {[weak self] value in
                             guard let self = self else { return }
-//                            user = value.user
-                            keychain.set(value.token, forKey: "userToken")
+                            if let token = value.token,let user = value.user  {
+                                self.user = user
+                                keychain.set(token, forKey: "userToken")
+                            }
 
                             verifyEmail = true
                         }

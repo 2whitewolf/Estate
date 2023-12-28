@@ -111,7 +111,8 @@ struct CheckoutInvetsmentView: View {
                             }
                             
                             Button{
-                                vm.createInvoice()
+                                vm.makeTransaction()
+//                                vm.createInvoice()
                             } label: {
                                 Text("Pay via".localized +   vm.paymentMethod.name + " " + "Checkout".localized)
                                     .fontWeight(.semibold)

@@ -15,7 +15,7 @@ struct RegistrationViewScreen: View {
             Color.white.ignoresSafeArea()
             VStack{
                  RegistrationHeaderView()
-                    .padding(.top,55)
+//                    .padding(.top,55)
                 switch vm.currentState {
                 case .signUp:
                     SignUpView()
@@ -37,6 +37,7 @@ struct RegistrationViewScreen: View {
                     InvestorTermsView()
               
                 }
+                 Spacer()
             }
         }
         .popup(isPresented: $vm.verifyEmail){
@@ -54,13 +55,13 @@ struct RegistrationViewScreen: View {
         .onChange(of: vm.registrationCompleted){ newValue in
             if newValue {
                 withAnimation {
-                    appVM.currentState = .app
+                    appVM.currentState = .login
                 }
             }
         }
         .onChange(of: vm.user) { value in
             if let user = value {
-                appVM.user = user
+//                appVM.user = user
                 vm.currentState = .inputData
             }
         }

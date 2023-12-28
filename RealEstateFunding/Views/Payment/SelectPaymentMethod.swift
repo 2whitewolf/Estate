@@ -70,7 +70,7 @@ struct SelectPaymentMethod: View {
                     
                 }
             }
-//            .disabled(!vm.canPayWithWallet())
+            .disabled(!vm.canPayWithWallet())
             .modifier(CornerBackground())
             .overlay(
                 RoundedRectangle(cornerRadius: 32)
@@ -170,6 +170,9 @@ struct SelectPaymentMethod: View {
         }
         .padding(.horizontal,8)
         .cornerRadius(20)
+        .onAppear{
+            print("Wallet : \(vm.walletBalance)")
+        }
     }
         
 }

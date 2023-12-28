@@ -54,7 +54,7 @@ struct FillUserDataView: View {
             .padding(.horizontal,24)
             
             if datePickerShow {
-                Color.black.opacity(0.7).ignoresSafeArea()
+//                Color.black.opacity(0.7).ignoresSafeArea()
                 datePickerView
                     .padding(.horizontal)
             }

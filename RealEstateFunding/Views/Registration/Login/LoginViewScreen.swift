@@ -17,8 +17,7 @@ struct LoginViewScreen: View {
                  LoginHeader()
                     .environmentObject(appVM)
                     .environmentObject(vm)
-                    .padding(.top,55)
-//                 RegistrationHeaderView()
+//                    .padding(.top,55)
                 switch vm.state {
                 case .login:
                     LoginView()

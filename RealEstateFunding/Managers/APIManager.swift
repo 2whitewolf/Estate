@@ -23,7 +23,7 @@ enum Provider{
 }
 
 protocol APIProtocol{
-     //MARK: Login and User data
+    //MARK: Login and User data
     func login(email: String, password: String) -> AnyPublisher<UserData, AFError>
     func register(email: String, password: String) -> AnyPublisher<UserData, AFError>
     func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?)
@@ -39,30 +39,31 @@ protocol APIProtocol{
     func getFavouriteProperties(userId: Int) -> AnyPublisher<PropertyData,AFError>
     func deletePropertyFromFavourites(userId: Int, propertyId:Int)
     
-     // MARK: Payment && Invoices
+    // MARK: Payment && Invoices
     func createInvoice(userId: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double) -> AnyPublisher<PaymentData,AFError>
     func getInvestmentCost(userId: Int, propertyId: Int, amount: Double)  -> AnyPublisher<PaymentAdditionalData,AFError>
     func addFunds(userId: Int, amount: Double) -> AnyPublisher<PaymentData,AFError>
+    func payWithFunds(userID: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double)
     
     // MARK: Portfolio
     func getPortfolio(userId: Int) -> AnyPublisher<InvestmentsData,AFError>
     func getInvestmentDetail(userId: Int, propertyId: Int) -> AnyPublisher<InvestmentDetailData,AFError>
     
-    //  MARK: Wallert
+    //  MARK: Wallet
     func getWalletTransactions(userId: Int) -> AnyPublisher<AccountInfoData,AFError>
     func getWalletBalance(userId:Int) -> AnyPublisher<WalletData,AFError>
     
-  
+    
 }
 
 
 class APIManager: APIProtocol{
-
+    
     let keychain = KeychainSwift()
     
     
     
- 
+    
     
     
     func deletePropertyFromFavourites(userId: Int, propertyId: Int) {
@@ -84,7 +85,6 @@ class APIManager: APIProtocol{
             .validate()
             .response{ data in
                 print(data)
-                
             }
     }
     
@@ -96,7 +96,7 @@ class APIManager: APIProtocol{
         let token = keychain.get("userToken") ?? ""
         
         let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)]
+            .authorization(bearerToken: token)]
         
         let parameters: [String: Int] = ["user_id": userId]
         
@@ -142,9 +142,9 @@ class APIManager: APIProtocol{
         
         let parameters: [String: String] = [
             "user_id": "\(userId)",
-           
+            
         ]
-      return  AF.request(url, method: method, parameters: parameters, headers: headers)
+        return  AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: WalletData.self)
             .value()
@@ -167,14 +167,42 @@ class APIManager: APIProtocol{
             "user_id": Double(userId),
             "amount" : amount
         ]
-       
-      
-       return AF.request(url, method: method, parameters: parameters, headers: headers)
+        
+        
+        return AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: PaymentData.self)
             .value()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+    
+    func payWithFunds(userID: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double) {
+        let url = makeUrl(make: .payWithFunds)
+        
+        let method = BackendAPIService.payWithFunds.method
+        let token = keychain.get("userToken") ?? ""
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: token)
+        ]
+        
+        let parameters: [String: Double] = [
+            "user_id": Double(userID),
+            "property_id": Double(propertyId),
+            "amount" : amount,
+            "transactionCosts" : transactionCosts,
+            "dubxFee":dubxFee,
+            "dldFee": dldFee,
+            "registrationFee" : registrationFee,
+            "investmentCost" : investmentCost
+        ]
+        
+        
+        AF.request(url, method: method, parameters: parameters, headers: headers)
+            .response{ respoonse in
+                
+            }
+        
     }
     
     func getInvestmentCost(userId: Int, propertyId: Int, amount: Double) -> AnyPublisher<PaymentAdditionalData,AFError> {
@@ -192,13 +220,13 @@ class APIManager: APIProtocol{
             "property_id" : "\(propertyId)" ,
             "amount" : "\(amount)"
         ]
-     
-       return AF.request(url, method: method, parameters: parameters, headers: headers)
-                    .validate()
-                    .publishDecodable(type: PaymentAdditionalData.self)
-                    .value()
-                    .receive(on: DispatchQueue.main)
-                    .eraseToAnyPublisher()
+        
+        return AF.request(url, method: method, parameters: parameters, headers: headers)
+            .validate()
+            .publishDecodable(type: PaymentAdditionalData.self)
+            .value()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
     
     func getWalletTransactions(userId: Int)  -> AnyPublisher<AccountInfoData,AFError> {
@@ -213,26 +241,13 @@ class APIManager: APIProtocol{
         let parameters: [String: String] = [
             "user_id": "\(userId)"
         ]
-      
-      return  AF.request(url, method: method, parameters: parameters, headers: headers)
+        
+        return  AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: AccountInfoData.self)
             .value()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-//        AF.request(url, method: method, parameters: parameters, headers: headers)
-//            .responseDecodable(of: AccountInfoData.self) {[weak self] response in
-//                           guard let self = self else {return}
-//           
-//                           switch response.result {
-//                           case .success(_):
-//                               let data = try? self.newJSONDecoder().decode(AccountInfoData.self, from: response.data!)
-//                               guard let data = data else {return}
-//                               print(data)
-//                           case .failure(let error):
-//                               print("Erorr: \(error)")
-//                           }
-//                       }
     }
     
     func getInvestmentDetail(userId: Int, propertyId: Int) -> AnyPublisher<InvestmentDetailData,AFError> {
@@ -248,19 +263,7 @@ class APIManager: APIProtocol{
         ]
         let method = BackendAPIService.getInvestmentDetail.method
         
-       return AF.request(url, method: method, parameters: parameters, headers: headers)
-//            .responseDecodable(of: InvestmentDetailData.self) {[weak self] response in
-//                           guard let self = self else {return}
-//           
-//                           switch response.result {
-//                           case .success(_):
-//                               let data = try? self.newJSONDecoder().decode(InvestmentDetailData.self, from: response.data!)
-//                               guard let data = data else {return}
-//                               print(data)
-//                           case .failure(let error):
-//                               print("Erorr: \(error)")
-//                           }
-//                       }
+        return AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: InvestmentDetailData.self)
             .value()
@@ -273,7 +276,7 @@ class APIManager: APIProtocol{
         let url = makeUrl(make: .getPortfolio)
         let token = keychain.get("userToken") ?? ""
         let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)
+            .authorization(bearerToken: token)
         ]
         
         let parameters: [String: String] = [
@@ -281,7 +284,7 @@ class APIManager: APIProtocol{
         ]
         let method = BackendAPIService.getPortfolio.method
         
-       return AF.request(url, method: method, parameters: parameters, headers: headers)
+        return AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: InvestmentsData.self)
             .value()
@@ -289,40 +292,15 @@ class APIManager: APIProtocol{
             .eraseToAnyPublisher()
     }
     
-    func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?) {
-        let url = makeUrl(make: .updateUser)
-        let token = keychain.get("userToken") ?? ""
-        let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)
-        ]
-        
-        let parameters: [String: String] = ["name": name ?? "",
-                                            "birth": birth ?? "",
-                                            "phone":  phone ?? "",
-                                            "citizenship": citizenship ?? "",
-                                            "country": country ?? "",
-                                            "city": city ?? "",
-                                            "address": address ?? "",
-                                            "employment": employment ?? "",
-                                            "organization": organization ?? "",
-                                            "org_role": org_role ?? "",
-                                            "working_period": working_period ?? "",
-                                            "industry": industry ?? "",
-                                            "income": income ?? "",
-                                            "net_worth":net_worth ?? ""
-        ]
-        let method = BackendAPIService.updateUser.method
-        
-        AF.request(url, method: method, parameters: parameters, headers: headers)
-    }
+    
     
     func newJSONDecoder() -> JSONDecoder {
-            let decoder = JSONDecoder()
-            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
-                decoder.dateDecodingStrategy = .iso8601
-            }
-            return decoder
+        let decoder = JSONDecoder()
+        if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+            decoder.dateDecodingStrategy = .iso8601
         }
+        return decoder
+    }
     
     func createInvoice(userId: Int, propertyId: Int, amount: Double, transactionCosts: Double, dubxFee: Double, dldFee: Double, registrationFee: Double, investmentCost: Double) -> AnyPublisher<PaymentData,AFError> {
         let url = makeUrl(make: .getInvoice)
@@ -330,7 +308,7 @@ class APIManager: APIProtocol{
         let method = BackendAPIService.getInvoice.method
         let token = keychain.get("userToken") ?? ""
         let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)
+            .authorization(bearerToken: token)
         ]
         
         let parameters: [String: Double] = [
@@ -344,9 +322,9 @@ class APIManager: APIProtocol{
             "investmentCost" : investmentCost,
             "fcm_id": 753243321182
         ]
-    
-    
-     return AF.request(url, method: method, parameters: parameters, headers: headers)
+        
+        
+        return AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: PaymentData.self)
             .value()
@@ -362,11 +340,11 @@ class APIManager: APIProtocol{
         let token = keychain.get("userToken") ?? ""
         
         let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)
+            .authorization(bearerToken: token)
         ]
         
         let parameters: [String: String] = ["id": "\(id)"]
-    
+        
         return  AF.request(url, method: method, parameters: parameters, headers: headers)
             .validate()
             .publishDecodable(type: PropertyDetailData.self)
@@ -383,7 +361,7 @@ class APIManager: APIProtocol{
         let token = keychain.get("userToken") ?? ""
         
         let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)]
+            .authorization(bearerToken: token)]
         
         let parameters: [String: Int] = ["user_id": id]
         
@@ -405,7 +383,7 @@ class APIManager: APIProtocol{
         let token = keychain.get("userToken") ?? ""
         
         let headers: HTTPHeaders = [
-               .authorization(bearerToken: token)]
+            .authorization(bearerToken: token)]
         
         let parameters: [String: Int] = ["user_id": userId]
         
@@ -423,7 +401,7 @@ class APIManager: APIProtocol{
         
         let newPathComponent = "/\(provider.path)"
         let updatedURL = url.appendingPathComponent(newPathComponent)
-         return updatedURL
+        return updatedURL
     }
     
     func login(email: String, password: String) -> AnyPublisher<UserData, Alamofire.AFError> {
@@ -443,8 +421,8 @@ class APIManager: APIProtocol{
         let url = makeUrl(make: .register)
         let method = BackendAPIService.register.method
         let parameters: [String: String] = [
-                                            "email": email,
-                                            "password": password,
+            "email": email,
+            "password": password,
         ]
         return  AF.request(url,method: method,parameters: parameters)
             .validate()
@@ -483,6 +461,33 @@ class APIManager: APIProtocol{
             .value()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+    
+    func updateUser(name: String?, birth: String?, phone: String?, citizenship: String?, country: String?, city: String?, address: String?, employment: String?, organization: String?, org_role: String?, working_period: String?, industry: String?, income: String?, net_worth: String?) {
+        let url = makeUrl(make: .updateUser)
+        let token = keychain.get("userToken") ?? ""
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: token)
+        ]
+        
+        let parameters: [String: String] = ["name": name ?? "",
+                                            "birth": birth ?? "",
+                                            "phone":  phone ?? "",
+                                            "citizenship": citizenship ?? "",
+                                            "country": country ?? "",
+                                            "city": city ?? "",
+                                            "address": address ?? "",
+                                            "employment": employment ?? "",
+                                            "organization": organization ?? "",
+                                            "org_role": org_role ?? "",
+                                            "working_period": working_period ?? "",
+                                            "industry": industry ?? "",
+                                            "income": income ?? "",
+                                            "net_worth":net_worth ?? ""
+        ]
+        let method = BackendAPIService.updateUser.method
+        
+        AF.request(url, method: method, parameters: parameters, headers: headers)
     }
     
 }

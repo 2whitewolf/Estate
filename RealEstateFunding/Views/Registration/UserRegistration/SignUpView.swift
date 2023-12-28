@@ -94,8 +94,8 @@ extension SignUpView {
         VStack{
             
             Button{
-//                vm.register()
-                vm.verifyEmail.toggle()
+                vm.register()
+//                vm.verifyEmail.toggle()
             } label: {
                 Text("Create account".localized)
                     .foregroundColor(.white)

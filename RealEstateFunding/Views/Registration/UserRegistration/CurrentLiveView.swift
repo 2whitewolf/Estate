@@ -130,8 +130,9 @@ struct CurrentLiveView: View {
 
 extension CurrentLiveView {
     private var selectCountry: some View {
-        VStack(alignment: .leading, spacing: 8){
+        VStack(alignment: .leading, spacing: 4){
             Text("Country".localized)
+                .font(.system(size: 13))
             
             if vm.currentCountryCode.isEmpty {
                 HStack{
@@ -173,8 +174,9 @@ extension CurrentLiveView {
     
     
     private var selectCity: some View {
-        VStack(alignment: .leading, spacing: 8){
+        VStack(alignment: .leading, spacing: 4){
             Text("City".localized)
+                .font(.system(size: 13))
             
             if vm.cityCode.isEmpty {
                 HStack{

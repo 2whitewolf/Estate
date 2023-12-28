@@ -9,8 +9,8 @@ import Foundation
 
 // MARK: - UserData
 struct UserData: Codable {
-    let token: String
-    let user: User
+    let token: String?
+    let user: User?
 }
 
 

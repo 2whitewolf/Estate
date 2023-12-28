@@ -14,13 +14,18 @@ enum BackendAPIService {
     case forget_password
     case change_password
     case login_provider
+    
+    
     case getAllProperties
     case getFundedProperties
     case getById
+    
+    
     case getInvoice
     case getPortfolio
     case getInvestmentDetail
     case addFunds
+    case payWithFunds
     case getWalletTransactions
     case getWalletBalance
     case getCostOfInvestment
@@ -79,12 +84,14 @@ enum BackendAPIService {
             return "/client/payment/countInvestments"
         case .getWalletBalance:
             return "/client/wallet/getBalance"
+        case .payWithFunds :
+            return "/client/payment/payFromFunds"
       
         }
     }
     var method: HTTPMethod {
         switch self {
-        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite, .getInvoice , .addFunds:
+        case .login, .register, .updateUser, .change_password, .forget_password, .login_provider, .addToFavourite, .getInvoice , .addFunds, .payWithFunds:
             return .post
         case .getAllProperties,.getFundedProperties , .getFavouriteProperties, .getById, .getPortfolio, .getInvestmentDetail,  .getWalletTransactions,.getWalletBalance, .getCostOfInvestment:
             return .get

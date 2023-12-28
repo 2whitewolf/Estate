@@ -172,6 +172,28 @@ class PaymentViewModel: ObservableObject {
             return walletBalance > transactionCosts
     }
     
+    func makeTransaction() {
+        switch paymentMethod {
+        case .stripe:
+            createInvoice()
+        case .wallet:
+            payWithFunds()
+        case .apple:
+            print()
+        case .crypto:
+            print()
+        }
+    }
+    
+    func payWithFunds () {
+        if let propertyDetail = propertyDetail, let investmentCost = invetsmentsCost {
+            isLoading = true
+            networking.payWithFunds(userID: self.userID, propertyId: propertyDetail.id ?? 0, amount: Double(invest), transactionCosts: investmentCost.transactionCosts ?? 0, dubxFee: investmentCost.dubxFee ?? 0, dldFee: investmentCost.dldFee ?? 0, registrationFee: investmentCost.registrationFee ?? 0, investmentCost: investmentCost.investmentCost ?? 0)
+            showSuccesView = true
+            isLoading = false
+        }
+    }
+    
     func createInvoice() {
             
             if let propertyDetail = propertyDetail, let investmentCost = invetsmentsCost {

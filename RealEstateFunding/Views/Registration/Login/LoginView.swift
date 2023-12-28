@@ -56,7 +56,6 @@ struct LoginView: View {
                             .foregroundColor(.blue)
                         Spacer()
                     }
-                    .padding(.top,40)
                     .font(.system(size: 12))
                     
                     

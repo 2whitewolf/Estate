@@ -81,7 +81,9 @@ struct WebView: UIViewRepresentable {
                     do {
                         let people = try decoder.decode(UserData.self, from: data)
                         parent.user = people.user
-                        KeychainSwift().set(people.token, forKey: "userToken")
+                        if let token = people.token {
+                            KeychainSwift().set(token, forKey: "userToken")
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }
